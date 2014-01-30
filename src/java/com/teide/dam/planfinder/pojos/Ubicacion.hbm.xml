@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 1:02:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.teide.dam.planfinder.pojos.Ubicacion" table="ubicacion" catalog="proyecto">
+        <id name="idubicacion" type="java.lang.Integer">
+            <column name="idubicacion" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="45" not-null="true" />
+        </property>
+        <property name="latitud" type="string">
+            <column name="latitud" length="45" />
+        </property>
+        <property name="longitud" type="string">
+            <column name="longitud" length="45" />
+        </property>
+        <set name="grupos" inverse="true">
+            <key>
+                <column name="ubicacion_idubicacion" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Grupo" />
+        </set>
+    </class>
+</hibernate-mapping>

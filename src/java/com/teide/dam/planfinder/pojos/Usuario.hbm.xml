@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 1:02:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.teide.dam.planfinder.pojos.Usuario" table="usuario" catalog="proyecto">
+        <id name="sim" type="string">
+            <column name="sim" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+        <property name="radioRecepcion" type="int">
+            <column name="radioRecepcion" not-null="true" />
+        </property>
+        <property name="latitud" type="double">
+            <column name="latitud" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="longitud" type="double">
+            <column name="longitud" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="ultimaConexion" type="timestamp">
+            <column name="ultimaConexion" length="19" not-null="true" />
+        </property>
+        <set name="grupos" inverse="true">
+            <key>
+                <column name="creador" length="20" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Grupo" />
+        </set>
+        <set name="mensajes" inverse="true">
+            <key>
+                <column name="usuario_sim" length="20" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Mensaje" />
+        </set>
+        <set name="perteneces" inverse="true">
+            <key>
+                <column name="usuario_sim" length="20" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Pertenece" />
+        </set>
+    </class>
+</hibernate-mapping>

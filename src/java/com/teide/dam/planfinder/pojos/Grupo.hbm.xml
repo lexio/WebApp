@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 1:02:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.teide.dam.planfinder.pojos.Grupo" table="grupo" catalog="proyecto">
+        <id name="idGrupo" type="java.lang.Integer">
+            <column name="idGrupo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ubicacion" class="com.teide.dam.planfinder.pojos.Ubicacion" fetch="select">
+            <column name="ubicacion_idubicacion" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.teide.dam.planfinder.pojos.Usuario" fetch="select">
+            <column name="creador" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipo" class="com.teide.dam.planfinder.pojos.Tipo" fetch="select">
+            <column name="tipo_idTipo" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="300" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="fechaFinalizacion" type="timestamp">
+            <column name="fechaFinalizacion" length="19" />
+        </property>
+        <property name="fechaInicioActividad" type="timestamp">
+            <column name="fechaInicioActividad" length="19" />
+        </property>
+        <property name="fechaFinActividad" type="timestamp">
+            <column name="fechaFinActividad" length="19" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+        <property name="radioEmision" type="int">
+            <column name="radioEmision" not-null="true" />
+        </property>
+        <set name="perteneces" inverse="true">
+            <key>
+                <column name="grupo_id_grupo" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Pertenece" />
+        </set>
+        <set name="mensajes" inverse="true">
+            <key>
+                <column name="grupo_id_grupo" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Mensaje" />
+        </set>
+    </class>
+</hibernate-mapping>

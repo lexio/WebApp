@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 1:02:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.teide.dam.planfinder.pojos.Tipo" table="tipo" catalog="proyecto">
+        <id name="idTipo" type="java.lang.Integer">
+            <column name="idTipo" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <set name="grupos" inverse="true">
+            <key>
+                <column name="tipo_idTipo" not-null="true" />
+            </key>
+            <one-to-many class="com.teide.dam.planfinder.pojos.Grupo" />
+        </set>
+    </class>
+</hibernate-mapping>

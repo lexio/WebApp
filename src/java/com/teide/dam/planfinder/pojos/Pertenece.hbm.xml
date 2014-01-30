@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 1:02:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.teide.dam.planfinder.pojos.Pertenece" table="pertenece" catalog="proyecto">
+        <composite-id name="id" class="com.teide.dam.planfinder.pojos.PerteneceId">
+            <key-property name="usuarioSim" type="string">
+                <column name="usuario_sim" length="20" />
+            </key-property>
+            <key-property name="grupoIdGrupo" type="int">
+                <column name="grupo_id_grupo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="grupo" class="com.teide.dam.planfinder.pojos.Grupo" update="false" insert="false" fetch="select">
+            <column name="grupo_id_grupo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.teide.dam.planfinder.pojos.Usuario" update="false" insert="false" fetch="select">
+            <column name="usuario_sim" length="20" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

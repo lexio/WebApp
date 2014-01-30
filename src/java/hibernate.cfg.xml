@@ -10,5 +10,11 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="com/teide/dam/planfinder/pojos/Usuario.hbm.xml"/>
+    <mapping resource="com/teide/dam/planfinder/pojos/Pertenece.hbm.xml"/>
+    <mapping resource="com/teide/dam/planfinder/pojos/Ubicacion.hbm.xml"/>
+    <mapping resource="com/teide/dam/planfinder/pojos/Tipo.hbm.xml"/>
+    <mapping resource="com/teide/dam/planfinder/pojos/Mensaje.hbm.xml"/>
+    <mapping resource="com/teide/dam/planfinder/pojos/Grupo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
