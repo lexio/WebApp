@@ -9,5 +9,7 @@ package com.teide.dam.planfinder.bbdd;
  * @author dam2
  */
 public class Queries {
+    public static final String BUSCAR_GRUPO_NOMBRE = "from Grupo as g where g.nombre=:nombre";
+    public static final String BUSCAR_GRUPO_TIPO = "from Grupo as g where g.tipo=:tipo";
     
 }
