@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 4, 2014 9:20:19 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Feb 4, 2014 10:15:51 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.teide.dam.planfinder.pojos.Ubicacion" table="ubicacion" catalog="proyecto">
         <id name="idubicacion" type="java.lang.Integer">
@@ -11,11 +11,11 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="45" not-null="true" />
         </property>
-        <property name="latitud" type="string">
-            <column name="latitud" length="45" />
+        <property name="latitud" type="java.lang.Double">
+            <column name="latitud" precision="22" scale="0" />
         </property>
-        <property name="longitud" type="string">
-            <column name="longitud" length="45" />
+        <property name="longitud" type="java.lang.Double">
+            <column name="longitud" precision="22" scale="0" />
         </property>
         <set name="grupos" inverse="true">
             <key>

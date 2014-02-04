@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 4, 2014 9:20:18 AM by Hibernate Tools 3.2.1.GA
+// Generated Feb 4, 2014 10:15:51 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -26,8 +26,8 @@ public class Ubicacion  implements java.io.Serializable {
 
      private Integer idubicacion;
      private String descripcion;
-     private String latitud;
-     private String longitud;
+     private Double latitud;
+     private Double longitud;
      private Set<Grupo> grupos = new HashSet<Grupo>(0);
 
     public Ubicacion() {
@@ -37,7 +37,7 @@ public class Ubicacion  implements java.io.Serializable {
     public Ubicacion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Ubicacion(String descripcion, String latitud, String longitud, Set<Grupo> grupos) {
+    public Ubicacion(String descripcion, Double latitud, Double longitud, Set<Grupo> grupos) {
        this.descripcion = descripcion;
        this.latitud = latitud;
        this.longitud = longitud;
@@ -64,21 +64,21 @@ public class Ubicacion  implements java.io.Serializable {
         this.descripcion = descripcion;
     }
     
-    @Column(name="latitud", length=45)
-    public String getLatitud() {
+    @Column(name="latitud", precision=22, scale=0)
+    public Double getLatitud() {
         return this.latitud;
     }
     
-    public void setLatitud(String latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
     
-    @Column(name="longitud", length=45)
-    public String getLongitud() {
+    @Column(name="longitud", precision=22, scale=0)
+    public Double getLongitud() {
         return this.longitud;
     }
     
-    public void setLongitud(String longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ubicacion")
