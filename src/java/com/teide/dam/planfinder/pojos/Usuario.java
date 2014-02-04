@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Jan 30, 2014 1:02:01 PM by Hibernate Tools 3.2.1.GA
+// Generated Feb 4, 2014 9:20:18 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -32,6 +32,7 @@ public class Usuario  implements java.io.Serializable {
      private double latitud;
      private double longitud;
      private Date ultimaConexion;
+     private String claveGcm;
      private Set<Grupo> grupos = new HashSet<Grupo>(0);
      private Set<Mensaje> mensajes = new HashSet<Mensaje>(0);
      private Set<Pertenece> perteneces = new HashSet<Pertenece>(0);
@@ -49,7 +50,7 @@ public class Usuario  implements java.io.Serializable {
         this.longitud = longitud;
         this.ultimaConexion = ultimaConexion;
     }
-    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, Set<Grupo> grupos, Set<Mensaje> mensajes, Set<Pertenece> perteneces) {
+    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, String claveGcm, Set<Grupo> grupos, Set<Mensaje> mensajes, Set<Pertenece> perteneces) {
        this.sim = sim;
        this.nombre = nombre;
        this.estado = estado;
@@ -57,6 +58,7 @@ public class Usuario  implements java.io.Serializable {
        this.latitud = latitud;
        this.longitud = longitud;
        this.ultimaConexion = ultimaConexion;
+       this.claveGcm = claveGcm;
        this.grupos = grupos;
        this.mensajes = mensajes;
        this.perteneces = perteneces;
@@ -125,6 +127,15 @@ public class Usuario  implements java.io.Serializable {
     
     public void setUltimaConexion(Date ultimaConexion) {
         this.ultimaConexion = ultimaConexion;
+    }
+    
+    @Column(name="claveGcm", length=200)
+    public String getClaveGcm() {
+        return this.claveGcm;
+    }
+    
+    public void setClaveGcm(String claveGcm) {
+        this.claveGcm = claveGcm;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="usuario")
     public Set<Grupo> getGrupos() {
