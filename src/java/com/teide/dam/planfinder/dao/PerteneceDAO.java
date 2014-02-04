@@ -4,6 +4,7 @@
  */
 package com.teide.dam.planfinder.dao;
 
+
 import org.hibernate.Session;
 
 /**
@@ -13,7 +14,7 @@ import org.hibernate.Session;
 public class PerteneceDAO extends GenericDAO{
 
     /*
-     
+     * enviar solicitud, aceptarla, o rechazarla.
      
      
      */
@@ -21,5 +22,17 @@ public class PerteneceDAO extends GenericDAO{
     public PerteneceDAO(Session session) {
         super(session);
     }
+ 
+    
+    
+    public void aceptarSolicitud(String nombreG , String sim){
+        
+    }
+    
+    public void rechazarSolicitud(String nombreG, String sim){
+        
+    }
+    
+    
     
 }
