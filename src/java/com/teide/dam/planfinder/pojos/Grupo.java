@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 4, 2014 9:20:18 AM by Hibernate Tools 3.2.1.GA
+// Generated Feb 4, 2014 10:15:51 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
