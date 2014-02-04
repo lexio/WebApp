@@ -46,10 +46,10 @@ public class GrupoDAO extends GenericDAO{
         return (Grupo)q.uniqueResult();
     }
     
-    public void eliminarGrupo (String nombre){
+    public Grupo eliminarGrupo (String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
         q.setParameter("nombre", nombre);
-        Grupo.setEstado=false;
+        return (Grupo) q.uniqueResult();
     }
     
     public void modificarGrupo(){
