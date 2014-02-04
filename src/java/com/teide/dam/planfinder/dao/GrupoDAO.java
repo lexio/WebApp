@@ -20,7 +20,7 @@ import org.hibernate.Transaction;
 public class GrupoDAO extends GenericDAO{
     
     /*
-     Grupo--> Añadir/Crear, modificar, borrar/salir,buscar...
+     Grupo--> Añadir, Comprobar, modificar, borrar/salir grupo, buscarGruposTodos...
      El crear es altagrupo, las dos busquedas por nombre y tipo, en borrar hay que cambiar el estado=false
      Preguntar por el modificar
      */
@@ -55,9 +55,5 @@ public class GrupoDAO extends GenericDAO{
         return (Grupo) q.uniqueResult();
     }
     
-    public void modificarGrupo(){
-    
         
-    }
-    
 }

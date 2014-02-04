@@ -12,9 +12,8 @@ import org.hibernate.Session;
  */
 public class MensajeDAO extends GenericDAO{
 
-    /*
-     
-     
+    /* enviar mensajes(gcm), devolver mensajes
+          
      
      */
     
