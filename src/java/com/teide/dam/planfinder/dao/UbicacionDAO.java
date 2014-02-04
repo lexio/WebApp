@@ -26,7 +26,7 @@ public class UbicacionDAO extends GenericDAO {
         super(session);
     }
     
-    public boolean AltaUbicacion(int idubicacion, String descripcion, String latitud, String longitud){
+    public boolean AltaUbicacion(int idubicacion, String descripcion, double latitud, double longitud){
     
         Ubicacion ub = new Ubicacion(descripcion, latitud, longitud, null);
         try {
@@ -45,7 +45,7 @@ public class UbicacionDAO extends GenericDAO {
         return (Ubicacion)q.uniqueResult();
     }
     //Cogemos la idubicación y, si existe (es decir, está vinculada a un grupo), reescribimos. 
-    public boolean EditarUbicacion(int idubicacion, String latitud, String longitud){
+    public boolean EditarUbicacion(int idubicacion, double latitud, double longitud){
         Ubicacion ub = comprobarUbicacion(idubicacion);
         if (ub!=null){
             ub.setLatitud(latitud);
