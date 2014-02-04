@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
+ *  
  * @author dam2
  */
 public class TipoDAO extends GenericDAO{
@@ -27,9 +27,9 @@ public class TipoDAO extends GenericDAO{
         tx.commit();
     }
     
-    public Tipo BuscarNombreTipo(String nombre){
+    public Tipo BuscarNombreTipo(int idTipo){
         Query q = getSession().createQuery(Queries.BUSCAR_TIPO_NOMBRE);
-        q.setParameter("nombre", nombre);
+        q.setParameter("idTipo", idTipo);
         return (Tipo)q.uniqueResult();       
     }
     
