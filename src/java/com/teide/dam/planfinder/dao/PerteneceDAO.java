@@ -23,16 +23,33 @@ public class PerteneceDAO extends GenericDAO{
         super(session);
     }
  
-    
-    
-    public void aceptarSolicitud(String nombreG , String sim){
+    public void enviarSolicitudAUsuario(String nombreCreador){
+        /*
+         
+         */
         
+        
+    }
+    
+    
+    public boolean comprobarEstado(String usuarioSim, Integer idGrupo){
+    /*comprobar estado de usuario (baneado, solicitado, aceptado, noSolicitado)
+     * si es baneado o solicitado, devuelve un false, si no es true
+     * (pongo el return, para que no de error).
+     */  
+        return false;
+    }
+    
+    public void aceptarSolicitud(String usuarioSim, Integer idGrupo){
+        /* se cambia el estado de ese usuario en ese grupo, a "solicitado"
+         
+         */
     }
     
     public void rechazarSolicitud(String nombreG, String sim){
         
     }
     
-    
+    //
     
 }
