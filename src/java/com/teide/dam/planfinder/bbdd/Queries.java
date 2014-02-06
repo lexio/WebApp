@@ -16,4 +16,6 @@ public class Queries {
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:IdTipo";
     //Queries de Usuario
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.Sim=:Sim";
+    //Queries de ubicacion
+    public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
 }
