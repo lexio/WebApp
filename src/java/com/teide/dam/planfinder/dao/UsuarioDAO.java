@@ -26,11 +26,11 @@ public class UsuarioDAO extends GenericDAO{
         super(session);
     }
     
-    public String insertarUsuario(String sim, String nombre, int radioRecepcion, double latitud, double longitud, Date ultimaConexion){
+    public String insertarUsuario(String sim, String nombre, int radioRecepcion, double latitud, double longitud, Date ultimaConexion,String gcm ){
    
         GregorianCalendar gc = new GregorianCalendar();
         ultimaConexion = gc.getTime();
-        Usuario u = new Usuario(sim, nombre, "disponible", radioRecepcion, latitud, longitud, ultimaConexion);
+        Usuario u = new Usuario(sim, nombre, "disponible", radioRecepcion, latitud, longitud, ultimaConexion,gcm);
         try {
             getSession().persist(u);
             return "OK";

@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 4, 2014 10:15:51 AM by Hibernate Tools 3.2.1.GA
+// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
 
 
 import javax.persistence.AttributeOverride;

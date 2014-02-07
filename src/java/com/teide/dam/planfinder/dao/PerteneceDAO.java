@@ -28,7 +28,7 @@ public class PerteneceDAO extends GenericDAO{
          
          */
         
-        
+         
     }
     
     
