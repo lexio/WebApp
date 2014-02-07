@@ -39,10 +39,9 @@ public class PerteneceDAO extends GenericDAO{
      * si es baneado o solicitado, devuelve un false, si no es true
      * (pongo el return, para que no de error).
      */  
-        Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
-        q.setParameter("estado", estado);
-        
-        return "OK";
+//        Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
+//               
+        return "hola" ;
     }
     
     public void aceptarSolicitud(String usuarioSim, Integer idGrupo){

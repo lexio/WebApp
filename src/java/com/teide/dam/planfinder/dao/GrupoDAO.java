@@ -61,6 +61,11 @@ public class GrupoDAO extends GenericDAO{
          * 
          * 
          */
-    
+    public ArrayList<Grupo> buscarGruposUsuario (String usuario_sim){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_USUARIO);
+        q.setParameter("usuario_sim", usuario_sim);
+        return (ArrayList<Grupo>) q.list();
+
+    }
         
 }
