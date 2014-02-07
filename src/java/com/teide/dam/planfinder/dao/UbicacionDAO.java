@@ -36,7 +36,6 @@ public class UbicacionDAO extends GenericDAO {
             return false;
         }  
         
-        
 }
     //Comprobamos que la idubicacion existe.
     public Ubicacion comprobarUbicacion(int idubicacion){

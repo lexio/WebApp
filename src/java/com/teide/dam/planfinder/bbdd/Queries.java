@@ -12,6 +12,10 @@ public class Queries {
     //Queries de grupo
     public static final String BUSCAR_GRUPO_NOMBRE = "from Grupo as g where g.nombre=:nombre";
     public static final String BUSCAR_GRUPO_TIPO = "from Grupo as g where g.tipo=:tipo";
+    
+    //Queries pertenece
+    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece as p where p.estado=:estado";
+    
     //Queries de tipo 
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:IdTipo";
     //Queries de Usuario

@@ -5,7 +5,11 @@
 package com.teide.dam.planfinder.dao;
 
 
+import com.teide.dam.planfinder.bbdd.Queries;
+import com.teide.dam.planfinder.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -27,17 +31,18 @@ public class PerteneceDAO extends GenericDAO{
         /*
          
          */
-        
-         
+                
     }
-    
-    
-    public boolean comprobarEstado(String usuarioSim, Integer idGrupo){
+        
+    public String comprobarEstadoUsuario(String estado){
     /*comprobar estado de usuario (baneado, solicitado, aceptado, noSolicitado)
      * si es baneado o solicitado, devuelve un false, si no es true
      * (pongo el return, para que no de error).
      */  
-        return false;
+        Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
+        q.setParameter("estado", estado);
+        
+        return "OK";
     }
     
     public void aceptarSolicitud(String usuarioSim, Integer idGrupo){
