@@ -7,6 +7,7 @@ package com.teide.dam.planfinder.dao;
 import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Tipo;
+import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Query;
@@ -66,6 +67,14 @@ public class GrupoDAO extends GenericDAO{
         q.setParameter("usuario_sim", usuario_sim);
         return (ArrayList<Grupo>) q.list();
 
+    }
+    
+    public String confirmarGrupo(int idGrupo, int numPersonas){
+        return "ok";
+    }
+    
+    public String denegarGrupo(int idGrupo, Usuario usuario){
+        return "ok";
     }
         
 }

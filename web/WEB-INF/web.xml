@@ -16,6 +16,26 @@
         <servlet-name>RechazarSolicitudGrupo</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.RechazarSolicitudGrupo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AltaGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.AltaGrupoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmarGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ConfirmarGrupoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DenegarGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverGruposServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverGruposServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BorrarGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.BorrarGrupoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -31,6 +51,26 @@
     <servlet-mapping>
         <servlet-name>RechazarSolicitudGrupo</servlet-name>
         <url-pattern>/rechazarsolicitudgrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaGrupoServlet</servlet-name>
+        <url-pattern>/altagrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmarGrupoServlet</servlet-name>
+        <url-pattern>/confirmargrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DenegarGrupoServlet</servlet-name>
+        <url-pattern>/denegargrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverGruposServlet</servlet-name>
+        <url-pattern>/devolvergrupos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrarGrupoServlet</servlet-name>
+        <url-pattern>/borrargrupo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
