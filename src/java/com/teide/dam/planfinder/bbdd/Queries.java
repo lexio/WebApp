@@ -15,7 +15,9 @@ public class Queries {
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario_sim=:usuario_sim order by g.nombre";
     
     //Queries pertenece
-    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario and p.grupo_id_grupo=: idgrupo";
+    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
+    public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p set p.estado:=estado where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
+        
     
     //Queries de tipo 
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:IdTipo";

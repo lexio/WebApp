@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>enviarSolicitudGrupo</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitudGrupo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AceptarSolicitudGrupo</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.AceptarSolicitudGrupo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ComprobarEstadoUsuario</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ComprobarEstadoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RechazarSolicitudGrupo</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.RechazarSolicitudGrupo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>enviarSolicitudGrupo</servlet-name>
+        <url-pattern>/enviarsolicitudgrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AceptarSolicitudGrupo</servlet-name>
+        <url-pattern>/aceptarsolicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComprobarEstadoUsuario</servlet-name>
+        <url-pattern>/comprobarestadousuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RechazarSolicitudGrupo</servlet-name>
+        <url-pattern>/rechazarsolicitudgrupo</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
