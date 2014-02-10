@@ -26,16 +26,13 @@ public class RechazarSolicitudGrupo extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idGrupo");
-        String estado = req.getParameter("estado");
+        //String estado = req.getParameter("estado");
         
-        if (usuarioSim == null && usuarioSim.trim().isEmpty()||idGrupo == null && idGrupo.trim().isEmpty()||
-                estado == null && estado.trim().isEmpty()){
-            
-        }else{
+        if (usuarioSim != null && usuarioSim.trim().isEmpty()||idGrupo != null && idGrupo.trim().isEmpty()){
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             PerteneceDAO pDAO = new PerteneceDAO(session);
-            pDAO.rechazarSolicitud(usuarioSim, idGrupo, estado);
+            pDAO.rechazarSolicitud(usuarioSim, idGrupo);
             tx.commit();
         }
     }

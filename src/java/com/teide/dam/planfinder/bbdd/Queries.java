@@ -16,7 +16,7 @@ public class Queries {
     
     //Queries pertenece
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
-    public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p set p.estado:=estado where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
+    //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
         
     
     //Queries de tipo 
@@ -24,5 +24,5 @@ public class Queries {
     //Queries de Usuario
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.Sim=:Sim";
     //Queries de ubicacion
-    public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
+    public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion=:idubicacion";
 }
