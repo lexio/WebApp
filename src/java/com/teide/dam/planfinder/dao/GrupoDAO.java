@@ -70,7 +70,10 @@ public class GrupoDAO extends GenericDAO{
     }
     
     public String confirmarGrupo(int idGrupo, int numPersonas){
-        return "ok";
+        Grupo g = new Grupo();
+        g.setEstado("habilitado");
+         return "ok";
+        
     }
     
     public String denegarGrupo(int idGrupo, Usuario usuario){

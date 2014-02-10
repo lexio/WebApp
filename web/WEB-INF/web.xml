@@ -37,8 +37,8 @@
         <servlet-class>com.teide.dam.planfinder.servlets.BorrarGrupoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverMensajesServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
+        <servlet-name>DevolverTipoGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoGrupoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
@@ -77,8 +77,8 @@
         <url-pattern>/borrargrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverMensajesServlet</servlet-name>
-        <url-pattern>/devolvermensajesservlet</url-pattern>
+        <servlet-name>DevolverTipoGrupoServlet</servlet-name>
+        <url-pattern>/DevolverTipoGrupoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
