@@ -40,6 +40,10 @@
         <servlet-name>DevolverTipoGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoGrupoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GuardarMensajesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>DevolverTipoGrupoServlet</servlet-name>
         <url-pattern>/DevolverTipoGrupoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GuardarMensajesServlet</servlet-name>
+        <url-pattern>/guardarmensajes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
