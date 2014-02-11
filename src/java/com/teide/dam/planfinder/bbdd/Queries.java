@@ -24,5 +24,8 @@ public class Queries {
     //Queries de Usuario
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.Sim=:Sim";
     //Queries de ubicacion
-    public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion=:idubicacion";
+    public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
+    
+    //Queries de mensaje 
+    public static final String BUSCAR_MENSAJES_GRUPO = "from mensaje as m where m.grupo_id_grupo=:idGrupo";
 }

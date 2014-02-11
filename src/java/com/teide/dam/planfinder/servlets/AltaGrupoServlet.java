@@ -6,6 +6,7 @@ package com.teide.dam.planfinder.servlets;
 
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
+import com.teide.dam.planfinder.pojos.Ubicacion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.GregorianCalendar;
@@ -24,6 +25,7 @@ public class AltaGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String ubicacion = req.getParameter("ubicacion");
+        Ubicacion ubicaciones = ubicacion;
         String usuario = req.getParameter("usuario");
         String tipo = req.getParameter("tipo");
         String nombre = req.getParameter("nombre");
@@ -45,8 +47,8 @@ public class AltaGrupoServlet extends HttpServlet {
             
         }
         else{
-            Grupo g = new Grupo(ubicacion, usuario, tipo, nombre, descripcion, new GregorianCalendar().getTime(), 
-                    fechaFinalizacion, fechaInicioActividad, fechaFinActividad, estado, radioEmision, perteneces, mensajes);
+            Grupo g = new Grupo(ubicaciones, usuario, tipo, nombre, descripcion, new GregorianCalendar().getTime(), 
+                    fechaFinalizacion, fechaInicioActividad, fechaFinActividad, "Deshabilitado", radioEmision, perteneces, mensajes);
             GrupoDAO.altaGrupo(g);
             out.println("grupo añadido");
             

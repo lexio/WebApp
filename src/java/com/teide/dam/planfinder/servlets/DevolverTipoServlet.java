@@ -11,6 +11,7 @@ import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
@@ -20,21 +21,30 @@ import org.hibernate.Transaction;
  *
  * @author Jose
  */
-public class DevolverTipoServlet {
+public class DevolverTipoServlet extends HttpServlet{
  //¿No se necesita el @overraid?
  //espero que la comparacion del idTipo sea así.
+        @Override
         protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        int idTipo = Integer.parseInt(req.getParameter("idTipo"));
-        if (idTipo == -1){ 
+        String idTipo = req.getParameter("idTipo");
+        if (idTipo != null && idTipo.trim().isEmpty()){ 
+            
+        
+
+            try {
+                int idTipo1 = Integer.parseInt(idTipo);
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                TipoDAO tDAO = new TipoDAO(session);
+                tDAO.BuscarNombreTipo(idTipo1);
+                
+            } catch (NumberFormatException e) {
+                
+            }
             
         }
-        else{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            TipoDAO tDAO = new TipoDAO(session);
-            tDAO.BuscarNombreTipo(idTipo);
-        }
+        
     }
     
     
