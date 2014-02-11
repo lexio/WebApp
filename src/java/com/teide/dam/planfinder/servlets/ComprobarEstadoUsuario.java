@@ -10,8 +10,7 @@ import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import com.teide.dam.planfinder.pojos.Pertenece;
-import com.teide.dam.planfinder.pojos.Usuario;
-import java.util.Set;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,26 +28,17 @@ public class ComprobarEstadoUsuario extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idGrupo");
+        PrintWriter out = resp.getWriter();
                
-        if (usuarioSim == null && usuarioSim.trim().isEmpty()||idGrupo == null && idGrupo.trim().isEmpty()){
-            
-        }
-        else{
+        if (usuarioSim != null || !usuarioSim.trim().isEmpty()||idGrupo != null || idGrupo.trim().isEmpty()){
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             PerteneceDAO pDAO = new PerteneceDAO(session);
             Pertenece p = pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
-            if(p.getEstado().equals("Baneado")){
-                //??¿¿
-            }else if(p.getEstado().equals("Aceptado")){
-                //??¿¿
-            }else if(p.getEstado().equals("Solicitado")){ 
-                //??¿¿ 
-            }else{
-                
-            }
-            //tx.commit();
+            String estado= p.getEstado();
+            out.println(estado);
         }
+        
     }
 
     

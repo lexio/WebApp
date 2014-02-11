@@ -7,6 +7,7 @@ package com.teide.dam.planfinder.dao;
 
 import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Pertenece;
+import com.teide.dam.planfinder.util.Estados;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,43 +37,30 @@ public class PerteneceDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
         q.setParameter("usuario_sim", usuarioSim);
         q.setParameter("id_grupo", idGrupo);
-        Pertenece p = (Pertenece) q.list();
+        Pertenece p = (Pertenece) q.uniqueResult();
         return p ;
     }
           
-    public void enviarSolicitudAUsuario(String usuarioSim,String idGrupo,String estado){
+    public void enviarSolicitudAUsuario(String usuarioSim,String idGrupo){
        /* se cambia el estado de ese usuario en ese grupo, a "solicitado"  */
-        Query q = getSession().createQuery(Queries.CAMBIAR_ESTADO_USUARIO_GRUPO);
-        q.setParameter("usuario_sim", usuarioSim);
-        q.setParameter("id_grupo", idGrupo);
-        q.setParameter("estado",estado);
+        Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
+        if (p!=null && !p.getEstado().equals(Estados.BANEADO)) p.setEstado(Estados.SOLICITADO);
         //q.setParameter("nombre_creador",nombreCreador);
         //getSession().persist();         
     }
             
-    public void aceptarSolicitud(String usuarioSim, String idGrupo,String estado){
+    public void aceptarSolicitud(String usuarioSim, String idGrupo){
         /* se cambia el estado de ese usuario en ese grupo, a "aceptado"  */
-        Query q = getSession().createQuery(Queries.CAMBIAR_ESTADO_USUARIO_GRUPO);
-        q.setParameter("usuario_sim", usuarioSim);
-        q.setParameter("id_grupo", idGrupo);
-        q.setParameter("estado",estado);
-        //getSession().persist();
-            }
+        Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
+        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)) p.setEstado(Estados.ACEPTADO);
+     }
     
-//    public void rechazarSolicitudEstado(String usuarioSim, String idGrupo){
-//         /* se cambia el estado de ese usuario en ese grupo, a "baneado"  */
-//        Query q = getSession().createQuery(Queries.CAMBIAR_ESTADO_USUARIO_GRUPO);
-//        q.setParameter("usuario_sim", usuarioSim);
-//        q.setParameter("id_grupo", idGrupo);
-//        //getSession().persist();
-//    }
+
     
-    public void rechazarSolicitud(String usuarioSim, String idGrupo,String estado){
+    public void rechazarSolicitud(String usuarioSim, String idGrupo){
         /* se cambia el estado de ese usuario en ese grupo, a "baneado"  */
-        Query q = getSession().createQuery(Queries.CAMBIAR_ESTADO_USUARIO_GRUPO);
-        q.setParameter("usuario_sim", usuarioSim);
-        q.setParameter("id_grupo", idGrupo);
-        q.setParameter("estado",estado);
+        Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
+        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)) p.setEstado(Estados.BANEADO);
         //getSession().persist();
     }
 }
