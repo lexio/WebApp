@@ -40,6 +40,22 @@
         <servlet-name>DevolverTipoGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoGrupoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertarUsuarioServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ComprobarUsuarioServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ComprobarUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarUsuarioServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.EditarUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ActualizarPosicionUsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -79,6 +95,22 @@
     <servlet-mapping>
         <servlet-name>DevolverTipoGrupoServlet</servlet-name>
         <url-pattern>/DevolverTipoGrupoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertarUsuarioServlet</servlet-name>
+        <url-pattern>/insertarusuarioservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComprobarUsuarioServlet</servlet-name>
+        <url-pattern>/ComprobarUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarUsuarioServlet</servlet-name>
+        <url-pattern>/editarusuarioservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
+        <url-pattern>/actualizarposicionusuarioservlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
