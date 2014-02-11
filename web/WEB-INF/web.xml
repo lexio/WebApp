@@ -50,7 +50,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AceptarSolicitudGrupo</servlet-name>
-        <url-pattern>/aceptarsolicitud</url-pattern>
+        <url-pattern>/aceptarsolicitudgrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ComprobarEstadoUsuario</servlet-name>
@@ -82,7 +82,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DevolverTipoGrupoServlet</servlet-name>
-        <url-pattern>/DevolverTipoGrupoServlet</url-pattern>
+        <url-pattern>/devolvertipogrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GuardarMensajesServlet</servlet-name>

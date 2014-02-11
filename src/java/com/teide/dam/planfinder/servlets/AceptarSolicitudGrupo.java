@@ -26,22 +26,19 @@ public class AceptarSolicitudGrupo extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        System.out.println("Entrooo en el servlet!!");
+        out.println("Entrooo en el servlet!!");
         String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idGrupo");
-        //String estado = req.getParameter("estado");
-        System.out.println(usuarioSim);
-        System.out.println(idGrupo);
-        if (usuarioSim != null || usuarioSim.trim().isEmpty()||idGrupo != null || idGrupo.trim().isEmpty()){
+        
+        if (usuarioSim != null || !usuarioSim.trim().isEmpty()||idGrupo != null || !idGrupo.trim().isEmpty()){
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             PerteneceDAO pDAO = new PerteneceDAO(session);
             pDAO.aceptarSolicitud(usuarioSim, idGrupo);
-            System.out.println("Entrooo en el if!!");
             tx.commit();
-        }else System.out.println("Algo pasa...");
-    }
+            out.println("OK");        
+        }else out.println("NOK"); 
     
         
-   
+    }
 }
