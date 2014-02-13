@@ -70,14 +70,20 @@ public class GrupoDAO extends GenericDAO{
     }
     
     public String confirmarGrupo(int idGrupo, int numPersonas){
-        Grupo g = new Grupo();
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
+        q.setParameter("idGrupo", idGrupo);
+        Grupo g = (Grupo)q.uniqueResult();
         g.setEstado("habilitado");
-         return "ok";
+        return "ok";
         
     }
     
     public String denegarGrupo(int idGrupo, Usuario usuario){
         return "ok";
+    }
+    
+    public void comprobarMiembrosGrupos (){
+        
     }
         
 }

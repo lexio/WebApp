@@ -5,6 +5,7 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.teide.dam.planfinder.dao.GrupoDAO;
+import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
@@ -26,17 +27,19 @@ public class DenegarGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String idGrupo = req.getParameter("idGrupo");
-        int idGrup = Integer.parseInt(idGrupo);
-        Usuario usuario = new Usuario();
+        String usuario = req.getParameter("usuario");
         if(idGrupo == null || idGrupo.trim().isEmpty() || 
                 usuario == null || usuario.trim().isEmpty()){
             
         }
         else{
+            int idGrup = Integer.parseInt(idGrupo);
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
+            UsuarioDAO uDAO = new UsuarioDAO(session);
+            Usuario usu = uDAO.comprobarUsuario(usuario);
             GrupoDAO gDAO = new GrupoDAO(session);
-            gDAO.denegarGrupo(idGrup, usuario);
+            gDAO.denegarGrupo(idGrup, usu);
         }
     }
 
