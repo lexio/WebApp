@@ -6,6 +6,7 @@ package com.teide.dam.planfinder.dao;
 
 import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Usuario;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import org.hibernate.Query;
@@ -43,6 +44,13 @@ public class UsuarioDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.BUSCAR_USUARIO_SIM);
         q.setParameter("sim", q);
         return (Usuario)q.uniqueResult();
+    }
+    
+    public ArrayList<Usuario> buscarUsuariosEstado (String estado){
+        Query q = getSession().createQuery(Queries.BUSCAR_ESTADO_USUARIO);
+        q.setParameter("estado",estado);
+        ArrayList<Usuario> usu = (ArrayList<Usuario>)q.list();
+        return usu;
     }
     
     public String editarUsuario(String sim, String nombre, String estado, int radioRecepcion){
