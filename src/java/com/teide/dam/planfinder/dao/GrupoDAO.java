@@ -86,4 +86,9 @@ public class GrupoDAO extends GenericDAO{
         
     }
         
+    public Grupo comprobarGrupo(String idGrupo){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
+        q.setParameter("idGrupo", idGrupo);
+        return (Grupo)q.uniqueResult();
+    }
 }

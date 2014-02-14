@@ -5,6 +5,10 @@
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitudGrupo</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GuardarMensajesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AceptarSolicitudGrupo</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.AceptarSolicitudGrupo</servlet-class>
     </servlet>
