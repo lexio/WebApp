@@ -39,7 +39,25 @@ public class TipoDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_USUARIO);
         q.setParameter("idTipo", idTipo);
         return (ArrayList<Grupo>) q.list();
-        
+          
+    }
+    
+    public Tipo ComprobarTipo(int idTipo, String nombre){
+        Query q = getSession().createQuery(Queries.BUSCAR_TIPO_Y_GRUPO);
+        q.setParameter("idTipo", q);
+        return (Tipo)q.uniqueResult();
+               
+    }
+    
+    public String CambiarTipo (int idTipo, String nombre, String descripcion){
+     Tipo t = ComprobarTipo(idTipo, nombre);
+        if (t!=null) {
+            t.setIdTipo(idTipo);
+            t.setNombre(nombre);
+            t.setDescripcion(descripcion);
+            return "OK";
+        }
+        else return "NOK";    
         
         
         

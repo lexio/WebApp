@@ -21,6 +21,7 @@ public class Queries {
             
     //Queries de tipo 
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:idtipo";
+    public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.IdTipo=:idtipo and t.nombre=:nombre";
     //Queries de Usuario
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.sim=:sim";
     public static final String BUSCAR_ESTADO_USUARIO = "from Usuario as u where u.estado=:estado";
