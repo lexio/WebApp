@@ -15,8 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 
 /**
  *
@@ -31,12 +32,16 @@ public class ComprobarEstadoUsuario extends HttpServlet {
         PrintWriter out = resp.getWriter();
                
         if (usuarioSim != null || !usuarioSim.trim().isEmpty()||idGrupo != null || idGrupo.trim().isEmpty()){
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            PerteneceDAO pDAO = new PerteneceDAO(session);
-            Pertenece p = pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
-            String estado= p.getEstado();
-            out.println(estado);
+            try {
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session.beginTransaction();
+                PerteneceDAO pDAO = new PerteneceDAO(session);
+                Pertenece p = pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
+                String estado = p.getEstado();
+                out.println(estado);
+            } catch (HibernateException e) {
+                out.println("NOK");
+            }
         }
         
     }

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -32,6 +33,8 @@ public class InsertarUsuarioServlet extends HttpServlet {
         String latitudString = req.getParameter("latitud");
         String longitudString = req.getParameter("longitud");
         String claveGcm = req.getParameter("claveGcm");
+        PrintWriter out = resp.getWriter();
+        
         System.out.println("Entro en el Service");
         System.out.println(sim);
         System.out.println(nombre);
@@ -41,20 +44,23 @@ public class InsertarUsuarioServlet extends HttpServlet {
         System.out.println(claveGcm);
         
         
-        if(sim == null && sim.trim().isEmpty() || nombre == null && nombre.trim().isEmpty() || radioRecepcionString == null || radioRecepcionString.trim().isEmpty() 
-                || latitudString == null && latitudString.trim().isEmpty() || longitudString == null && longitudString.trim().isEmpty()){
-                                   
-        }
-        else{
-            System.out.println("Entro en el else");
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            UsuarioDAO uDAO = new UsuarioDAO(session);
-            int radioRecepcion = Integer.parseInt(radioRecepcionString);
-            double latitud = Double.parseDouble(latitudString);
-            double longitud = Double.parseDouble(longitudString);
-            uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, null, claveGcm);
-            tx.commit();
+        if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null || !radioRecepcionString.trim().isEmpty() 
+                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
+            try {
+                System.out.println("Entro en el if");
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                UsuarioDAO uDAO = new UsuarioDAO(session);
+                int radioRecepcion = Integer.parseInt(radioRecepcionString);
+                double latitud = Double.parseDouble(latitudString);
+                double longitud = Double.parseDouble(longitudString);
+                String respuesta = uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, null, claveGcm);
+                tx.commit();
+                out.println(respuesta);
+            } catch (HibernateException e) {
+                out.println("NOK");
+            }
+                
         }
     }
     

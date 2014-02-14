@@ -42,7 +42,7 @@ public class UsuarioDAO extends GenericDAO{
     
     public Usuario comprobarUsuario(String sim){
         Query q = getSession().createQuery(Queries.BUSCAR_USUARIO_SIM);
-        q.setParameter("sim", q);
+        q.setParameter("sim", sim);
         return (Usuario)q.uniqueResult();
     }
     

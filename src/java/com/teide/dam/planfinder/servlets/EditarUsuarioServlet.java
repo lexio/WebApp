@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,18 +28,28 @@ public class EditarUsuarioServlet extends HttpServlet {
         String nombre = req.getParameter("nombre");
         String estado = req.getParameter("estado");
         String radioRecepcionString = req.getParameter("radioRecepcion");
-        if(sim == null && sim.trim().isEmpty() || estado == null && estado.trim().isEmpty() || radioRecepcionString == null && radioRecepcionString.trim().isEmpty()
-                || nombre == null && nombre.trim().isEmpty()){
-            
-        }
-        else{
-            int radioRecepcion = Integer.parseInt(radioRecepcionString);
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            UsuarioDAO uDAO = new UsuarioDAO(session);
-            uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
-            tx.commit();
-            
+        PrintWriter out = resp.getWriter();
+        
+        System.out.println("Entro en el Service");
+        System.out.println(sim);
+        System.out.println(nombre);
+        System.out.println(radioRecepcionString);
+        System.out.println(estado);
+                        
+        if(sim != null && !sim.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
+                || nombre != null && !nombre.trim().isEmpty()){
+            try {
+                System.out.println("Entro en el if");
+                int radioRecepcion = Integer.parseInt(radioRecepcionString);
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session.beginTransaction();
+                UsuarioDAO uDAO = new UsuarioDAO(session);
+                String respuesta = uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
+                out.println(respuesta);
+            } catch (HibernateException e) {
+                out.println("NOK");
+            }
+               
         }
     }
     

@@ -41,26 +41,34 @@ public class PerteneceDAO extends GenericDAO{
         return p ;
     }
           
-    public void enviarSolicitudAUsuario(String usuarioSim,String idGrupo){
+    public String enviarSolicitudAUsuario(String usuarioSim,String idGrupo){
        /* se cambia el estado de ese usuario en ese grupo, a "solicitado"  */
         Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
-        if (p!=null && !p.getEstado().equals(Estados.BANEADO)) p.setEstado(Estados.SOLICITADO);
-        //q.setParameter("nombre_creador",nombreCreador);
-        //getSession().persist();         
+        if (p!=null && !p.getEstado().equals(Estados.BANEADO)) {
+            p.setEstado(Estados.SOLICITADO);
+            return "OK";
+        }else return "NOK";
+           
     }
             
-    public void aceptarSolicitud(String usuarioSim, String idGrupo){
+    public String aceptarSolicitud(String usuarioSim, String idGrupo){
         /* se cambia el estado de ese usuario en ese grupo, a "aceptado"  */
         Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
-        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)) p.setEstado(Estados.ACEPTADO);
+        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)){
+            p.setEstado(Estados.ACEPTADO);
+            return "OK";
+        }else return "NOK";
      }
     
 
     
-    public void rechazarSolicitud(String usuarioSim, String idGrupo){
+    public String rechazarSolicitud(String usuarioSim, String idGrupo){
         /* se cambia el estado de ese usuario en ese grupo, a "baneado"  */
         Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
-        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)) p.setEstado(Estados.BANEADO);
+        if (p!=null && p.getEstado().equals(Estados.SOLICITADO)){
+            p.setEstado(Estados.BANEADO);
+            return "OK";
+        }else return "NOK";
         //getSession().persist();
     }
 }

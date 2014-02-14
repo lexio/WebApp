@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,17 +27,20 @@ public class ActualizarPosicionUsuarioServlet extends HttpServlet {
         String sim = req.getParameter("sim");
         String latitudString = req.getParameter("latitud");
         String longitudString = req.getParameter("longitud");
-        if(sim == null && sim.trim().isEmpty() || latitudString == null && latitudString.trim().isEmpty() || longitudString == null && longitudString.trim().isEmpty()){
-            
-        }
-        else{
-            double latitud = Double.parseDouble(latitudString);
-            double longitud = Double.parseDouble(longitudString);
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            UsuarioDAO uDAO = new UsuarioDAO(session);
-            uDAO.actualizarPosicionUsuario(sim, latitud, longitud);
-            tx.commit();
+        PrintWriter out = resp.getWriter();
+        if(sim != null && !sim.trim().isEmpty() || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
+            try {
+                double latitud = Double.parseDouble(latitudString);
+                double longitud = Double.parseDouble(longitudString);
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                UsuarioDAO uDAO = new UsuarioDAO(session);
+                String respuesta = uDAO.actualizarPosicionUsuario(sim, latitud, longitud);
+                tx.commit();
+                out.println(respuesta);
+            } catch (HibernateException e) {
+                out.println("NOK");
+            }
         }
     }
     

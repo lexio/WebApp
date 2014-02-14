@@ -7,9 +7,11 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.teide.dam.planfinder.dao.TipoDAO;
+import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,16 +31,14 @@ public class DevolverTipoServlet extends HttpServlet{
         PrintWriter out = resp.getWriter();
         String idTipo = req.getParameter("idTipo");
         if (idTipo != null && idTipo.trim().isEmpty()){ 
-            
-        
-
+            System.out.println(idTipo);
             try {
                 int idTipo1 = Integer.parseInt(idTipo);
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 TipoDAO tDAO = new TipoDAO(session);
                 tDAO.BuscarNombreTipo(idTipo1);
-                
+                out.println(idTipo1);
             } catch (NumberFormatException e) {
                 
             }
