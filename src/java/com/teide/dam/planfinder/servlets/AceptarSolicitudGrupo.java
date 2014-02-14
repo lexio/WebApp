@@ -26,7 +26,7 @@ public class AceptarSolicitudGrupo extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        out.println("Entrooo en el servlet!!");
+        //out.println("Entrooo en el servlet!!");
         String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idGrupo");
         

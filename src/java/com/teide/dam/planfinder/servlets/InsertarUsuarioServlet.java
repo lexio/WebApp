@@ -31,19 +31,29 @@ public class InsertarUsuarioServlet extends HttpServlet {
         String radioRecepcionString = req.getParameter("radioRecepcion");
         String latitudString = req.getParameter("latitud");
         String longitudString = req.getParameter("longitud");
+        String claveGcm = req.getParameter("claveGcm");
+        System.out.println("Entro en el Service");
+        System.out.println(sim);
+        System.out.println(nombre);
+        System.out.println(radioRecepcionString);
+        System.out.println(latitudString);
+        System.out.println(longitudString);
+        System.out.println(claveGcm);
+        
         
         if(sim == null && sim.trim().isEmpty() || nombre == null && nombre.trim().isEmpty() || radioRecepcionString == null || radioRecepcionString.trim().isEmpty() 
                 || latitudString == null && latitudString.trim().isEmpty() || longitudString == null && longitudString.trim().isEmpty()){
                                    
         }
         else{
+            System.out.println("Entro en el else");
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             UsuarioDAO uDAO = new UsuarioDAO(session);
             int radioRecepcion = Integer.parseInt(radioRecepcionString);
             double latitud = Double.parseDouble(latitudString);
             double longitud = Double.parseDouble(longitudString);
-            uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, null, sim);
+            uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, null, claveGcm);
             tx.commit();
         }
     }
