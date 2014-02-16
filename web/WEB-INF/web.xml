@@ -64,6 +64,14 @@
         <servlet-name>CambiarTipoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.CambiarTipoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DevolverTipoNombresServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoNombresServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoIdTipoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>CambiarTipoServlet</servlet-name>
         <url-pattern>/CambiarTipoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverTipoNombresServlet</servlet-name>
+        <url-pattern>/DevolverTipoNombresServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
+        <url-pattern>/DevolverTipoIdTipoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

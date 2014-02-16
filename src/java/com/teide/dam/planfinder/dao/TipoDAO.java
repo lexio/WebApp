@@ -49,18 +49,17 @@ public class TipoDAO extends GenericDAO{
                
     }
     
-    public String CambiarTipo (int idTipo, String nombre, String descripcion){
-     Tipo t = ComprobarTipo(idTipo, nombre);
-        if (t!=null) {
-            t.setIdTipo(idTipo);
-            t.setNombre(nombre);
-            t.setDescripcion(descripcion);
-            return "OK";
-        }
-        else return "NOK";    
-        
-        
-        
+    
+    
+    public int BuscarIdTipo(String nombre){
+       Query q = getSession().createQuery(Queries.BUSCAR_ID_TIPO_POR_NOMBRE);
+       q.setParameter("nombre", q);
+       int idTipo = new Integer(q.toString()) ;
+       return idTipo;
     }
     
+    public ArrayList<Tipo> BuscarNombresTipo (){
+        Query q = getSession().createQuery(Queries.BUSCAR_TIPO_TODOS_NOMBRE);
+        return (ArrayList<Tipo>) q.list();
+    }
 }
