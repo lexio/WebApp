@@ -81,14 +81,19 @@ public class GrupoDAO extends GenericDAO{
     public String denegarGrupo(int idGrupo, Usuario usuario){
         return "ok";
     }
-    
-    public void comprobarMiembrosGrupos (){
-        
-    }
+   
         
     public Grupo comprobarGrupo(String idGrupo){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
         q.setParameter("idGrupo", idGrupo);
         return (Grupo)q.uniqueResult();
     }
+    
+    public ArrayList<Grupo> devolverNombresGrupo (int tipo){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
+        q.setParameter("tipo", tipo);
+        ArrayList<Grupo> gruposTipo = (ArrayList<Grupo>)q.list();
+        return gruposTipo;
+    }
+
 }
