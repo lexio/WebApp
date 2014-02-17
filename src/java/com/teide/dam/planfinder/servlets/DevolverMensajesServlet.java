@@ -30,7 +30,7 @@ public class DevolverMensajesServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        PrintWriter out = resp.getWriter();
-        String usuarioSim = req.getParameter("sim");
+        String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idgrupo");
         
         if (usuarioSim == null && usuarioSim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
@@ -38,7 +38,6 @@ public class DevolverMensajesServlet extends HttpServlet {
         }
         else{
             
-            //Busco primero en pertenece si el usuario está en ese grupo. La query de comprobarEstadoUsuario vale para esto XD
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             PerteneceDAO pDAO = new PerteneceDAO(session);
@@ -55,7 +54,7 @@ public class DevolverMensajesServlet extends HttpServlet {
                 for (int i = 0; i<lista.size();i++){
                     Mensaje mensajes = lista.get(i);
                     
-                    out.println(mensajes.getMensaje());
+                    out.println(mensajes.getUsuario().getNombre()+": "+mensajes.getMensaje()+"  --------->   "+mensajes.getFecha());
                     //mensajes.getUsuario()+": "+
                 }
             }}}}
