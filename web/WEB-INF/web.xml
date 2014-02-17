@@ -61,10 +61,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.ActualizarPosicionUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CambiarTipoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.CambiarTipoServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DevolverTipoNombresServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoNombresServlet</servlet-class>
     </servlet>
@@ -131,10 +127,6 @@
     <servlet-mapping>
         <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
         <url-pattern>/actualizarposicionusuarioservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CambiarTipoServlet</servlet-name>
-        <url-pattern>/CambiarTipoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
