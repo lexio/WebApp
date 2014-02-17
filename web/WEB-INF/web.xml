@@ -61,7 +61,7 @@
         <servlet-class>com.teide.dam.planfinder.servlets.ActualizarPosicionUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverTipoNombresServlet</servlet-name>
+        <servlet-name>DevolverTipoNombres</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoNombresServlet</servlet-class>
     </servlet>
     <servlet>
@@ -113,28 +113,28 @@
         <url-pattern>/guardarmensajes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>InsertarUsuarioServlet</servlet-name>
-        <url-pattern>/insertarusuarioservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ComprobarUsuarioServlet</servlet-name>
-        <url-pattern>/ComprobarUsuarioServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditarUsuarioServlet</servlet-name>
-        <url-pattern>/editarusuarioservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
         <url-pattern>/actualizarposicionusuarioservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
-        <url-pattern>/devolvertipoIdtiposervlet</url-pattern>
+        <servlet-name>DevolverTipoNombres</servlet-name>
+        <url-pattern>/devolvertiponombresservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverTipoNombresServlet</servlet-name>
-        <url-pattern>/devolvertiponombresservlet</url-pattern>
+        <servlet-name>InsertarUsuarioServlet</servlet-name>
+        <url-pattern>/insertarusuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComprobarUsuarioServlet</servlet-name>
+        <url-pattern>/ComprobarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarUsuarioServlet</servlet-name>
+        <url-pattern>/editarusuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
+        <url-pattern>/devolvertipoIdtipo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
