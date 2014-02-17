@@ -8,6 +8,10 @@
         <servlet-name>GuardarMensajesServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>DevolverMensajesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>AceptarSolicitudGrupo</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.AceptarSolicitudGrupo</servlet-class>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>DevolverGruposServlet</servlet-name>
         <url-pattern>/devolvergrupos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverMensajesServlet</servlet-name>
+        <url-pattern>/devolvermensajesservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BorrarGrupoServlet</servlet-name>

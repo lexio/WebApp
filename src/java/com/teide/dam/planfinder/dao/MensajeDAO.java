@@ -37,12 +37,12 @@ public class MensajeDAO extends GenericDAO{
         tx.commit();
     }
     
-      public ArrayList<Grupo> devolverMensajes (String idgrupo) {
+      public ArrayList<Mensaje> devolverMensajes (String idGrupo) {
         
         Query q = getSession().createQuery(Queries.BUSCAR_MENSAJES_GRUPO);
-        q.setParameter("idgrupo", idgrupo);
-        ArrayList<Grupo> listado = (ArrayList<Grupo>) q.list();
-        return listado;
+        q.setParameter("idGrupo", idGrupo);
+        return (ArrayList<Mensaje>) q.list();
+     
     }
     
       

@@ -26,15 +26,14 @@ import org.hibernate.Transaction;
  */
 public class DevolverMensajesServlet extends HttpServlet {
 
-    //A MEDIO ACABAR
     
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        String usuariosim = req.getParameter("sim");
+       PrintWriter out = resp.getWriter();
+        String usuarioSim = req.getParameter("sim");
         String idGrupo = req.getParameter("idgrupo");
         
-        if (usuariosim == null && usuariosim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
+        if (usuarioSim == null && usuarioSim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
             
         }
         else{
@@ -43,17 +42,20 @@ public class DevolverMensajesServlet extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             PerteneceDAO pDAO = new PerteneceDAO(session);
-            pDAO.comprobarEstadoUsuario(usuariosim, idGrupo);
-            
+            pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
             if (pDAO== null){
                 
             }
             else{
                 MensajeDAO mDAO = new MensajeDAO(session);
-                //return mDAO.devolverMensajes(idGrupo);
-            }
-              
-        }
-        
-    }  
-}
+                
+                //UsuarioDAO uDAO = new UsuarioDAO(session);
+                //uDAO.comprobarUsuario(sim);
+                ArrayList<Mensaje> lista=mDAO.devolverMensajes(idGrupo);
+                for (int i = 0; i<lista.size();i++){
+                    Mensaje mensajes = lista.get(i);
+                    
+                    out.println(mensajes.getMensaje());
+                    //mensajes.getUsuario()+": "+
+                }
+            }}}}

@@ -31,5 +31,5 @@ public class Queries {
     public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
     
     //Queries de mensaje 
-    public static final String BUSCAR_MENSAJES_GRUPO = "from mensaje as m where m.grupo=:idgrupo";
+    public static final String BUSCAR_MENSAJES_GRUPO = "from Mensaje as m where m.grupo=:idGrupo";
 }
