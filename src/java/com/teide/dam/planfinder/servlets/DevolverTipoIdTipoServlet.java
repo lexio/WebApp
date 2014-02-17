@@ -33,7 +33,7 @@ public class DevolverTipoIdTipoServlet extends HttpServlet {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 TipoDAO tDAO = new TipoDAO(session);
-                tDAO.BuscarIdTipo("nombre");
+                tDAO.BuscarIdTipo(nombre);
                 
             } catch (Exception e) {
                 
