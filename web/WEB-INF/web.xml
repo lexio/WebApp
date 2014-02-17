@@ -137,12 +137,12 @@
         <url-pattern>/CambiarTipoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverTipoNombresServlet</servlet-name>
-        <url-pattern>/DevolverTipoNombresServlet</url-pattern>
+        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
+        <url-pattern>/devolvertipoIdtiposervlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
-        <url-pattern>/DevolverTipoIdTipoServlet</url-pattern>
+        <servlet-name>DevolverTipoNombresServlet</servlet-name>
+        <url-pattern>/devolvertiponombresservlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
