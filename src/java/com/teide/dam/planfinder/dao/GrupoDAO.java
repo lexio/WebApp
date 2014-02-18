@@ -53,10 +53,13 @@ public class GrupoDAO extends GenericDAO{
         return grupos;
     }
     
-    public Grupo eliminarGrupo (String nombre){
+    public String eliminarGrupo (String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
         q.setParameter("nombre", nombre);
-        return (Grupo) q.uniqueResult();
+        Grupo grupo = new Grupo();
+        String nombreGrupo = grupo.getNombre();
+        nombreGrupo=grupo.setEstado("Deshabilitado");
+        return "OK";
     }
         /*buscar grupo de usuario. + sql.
          * 
@@ -94,6 +97,12 @@ public class GrupoDAO extends GenericDAO{
         q.setParameter("tipo", tipo);
         ArrayList<Grupo> gruposTipo = (ArrayList<Grupo>)q.list();
         return gruposTipo;
+    }
+    
+    public Grupo comprobarCreador (Usuario usuario){
+        Query q = getSession().createQuery(Queries.COGER_CREADOR);
+        q.setParameter("usuario", usuario);
+        return (Grupo)q.uniqueResult();
     }
 
 }
