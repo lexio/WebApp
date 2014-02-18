@@ -72,7 +72,7 @@ public class AltaGrupoServlet extends HttpServlet {
             Usuario usu = uDAO.comprobarUsuario(usuario);
             
             TipoDAO tDAO = new TipoDAO(session);
-            int idTipo= tDAO.BuscarIdTipo(tipoo);
+            int idTipo= tDAO.BuscarIdTipo(tipoo).getIdTipo();
             Tipo tipo = tDAO.BuscarNombreTipo(idTipo);
             
             int radioEmision = Integer.parseInt(radioEmisio);
