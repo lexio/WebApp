@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -37,11 +38,14 @@ public class DevolverTipoNombresServlet extends HttpServlet {
                 tDAO.BuscarNombresTipo();
                 
                  ArrayList<Tipo> t = tDAO.BuscarNombresTipo();
+                 if ( t!= null) {
                 Gson json = new Gson();
                 String resultado = json.toJson(t);
                 out.println(resultado);
-                
-            } catch (Exception e) {
+                out.println("OK");
+                 }
+                 else{out.println("NOK");}
+            } catch (HibernateException e) {
                 
             }
         }
