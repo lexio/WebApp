@@ -10,7 +10,9 @@ import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Mensaje;
+import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -35,29 +38,31 @@ public class GuardarMensajesServlet extends HttpServlet {
        //?mensaje=Hola&grupo=Fiesta&usuario=Pepe
        String mensaje = req.getParameter("mensaje");
        String grupo = req.getParameter("grupo") ;
-       String sim = req.getParameter("usuariosim");
+       String usuariosim = req.getParameter("usuarioSim");
        //Buscar grupo y usuario en base a los datos que le enviamos (id_grupo y sim) y a partir de ahí añadir
        //Por ahora supondré que nos dan el nombre del grupo y no el id
-    
-           if (sim != null || !sim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
-           Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-           Transaction tx = session.beginTransaction();
-           GrupoDAO gDAO=new GrupoDAO(session);
-           Grupo grupos= gDAO.comprobarGrupo(grupo);
-           UsuarioDAO uDAO=new UsuarioDAO(session);
-           Usuario usuario= uDAO.comprobarUsuario(sim);
-           //new GregorianCalendar().getInstance().getTime()
-           
-           Mensaje m = new Mensaje(grupos, usuario, mensaje, new GregorianCalendar().getInstance().getTime(), "Enviado");
-           MensajeDAO.alta(m);
-           out.println("Mensaje Enviado");
-                //out.println("Entra en el if");
-       }
-       else {
-           out.println("Mensaje NO Enviado");
-       }
 
-    }
+       try {
+                if (usuariosim != null || !usuariosim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
+                    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                    Transaction tx = session.beginTransaction();
+                    GrupoDAO gDAO=new GrupoDAO(session);
+                    Grupo grupos= gDAO.comprobarGrupo(grupo);
+                    UsuarioDAO uDAO=new UsuarioDAO(session);
+                    Usuario usuario= uDAO.comprobarUsuario(usuariosim);
+                    PerteneceDAO pDAO=new PerteneceDAO(session);
+                    Pertenece p = pDAO.comprobarEstadoUsuario(usuariosim, grupo);
+                    if(p.getEstado().equals("ACEPTADO")){
+                        Mensaje m = new Mensaje(grupos, usuario, mensaje, new GregorianCalendar().getInstance().getTime(), "Enviado");
+                        MensajeDAO.alta(m);
+                        out.println("OK");}
+                    else out.println("NOK");   
+               }
+                
+         else {out.println("NOK"); }
+      
+      }catch (Exception e){};
 
-    
+
+  }  
 }
