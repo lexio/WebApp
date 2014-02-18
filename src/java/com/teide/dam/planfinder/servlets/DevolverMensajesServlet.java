@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -32,29 +33,34 @@ public class DevolverMensajesServlet extends HttpServlet {
        PrintWriter out = resp.getWriter();
         String usuarioSim = req.getParameter("usuarioSim");
         String idGrupo = req.getParameter("idgrupo");
-        
-        if (usuarioSim == null && usuarioSim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
+        try {
+            if (usuarioSim == null && usuarioSim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
             
-        }
-        else{
-            
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            PerteneceDAO pDAO = new PerteneceDAO(session);
-            pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
-            if (pDAO== null){
-                
             }
             else{
-                MensajeDAO mDAO = new MensajeDAO(session);
+            
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                PerteneceDAO pDAO = new PerteneceDAO(session);
+                pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
+                if (pDAO== null){
                 
-                //UsuarioDAO uDAO = new UsuarioDAO(session);
-                //uDAO.comprobarUsuario(sim);
-                ArrayList<Mensaje> lista=mDAO.devolverMensajes(idGrupo);
-                for (int i = 0; i<lista.size();i++){
-                    Mensaje mensajes = lista.get(i);
-                    
-                    out.println(mensajes.getUsuario().getNombre()+": "+mensajes.getMensaje()+"  --------->   "+mensajes.getFecha());
-                    //mensajes.getUsuario()+": "+
                 }
-            }}}}
+                else{
+                    MensajeDAO mDAO = new MensajeDAO(session);
+                
+                    //UsuarioDAO uDAO = new UsuarioDAO(session);
+                    //uDAO.comprobarUsuario(sim);
+                    ArrayList<Mensaje> lista=mDAO.devolverMensajes(idGrupo);
+                    for (int i = 0; i<lista.size();i++){
+                        Mensaje mensajes = lista.get(i);
+                        
+                        out.println(mensajes.getUsuario().getNombre()+": "+mensajes.getMensaje()+"  --------->   "+mensajes.getFecha());
+                        //mensajes.getUsuario()+": "+
+                    }
+                }
+            }
+        }
+         catch (HibernateException e) { };
+    }
+}
