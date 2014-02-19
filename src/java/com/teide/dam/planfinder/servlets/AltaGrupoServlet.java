@@ -124,6 +124,52 @@ public class AltaGrupoServlet extends HttpServlet {
                 }
                 grupo.setFechaInicioActividad(fFinActividad);
             }
+            
+            if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
+                UbicacionDAO ubiDAO = new UbicacionDAO(session);
+                double lat = Double.parseDouble(latitud);
+                double lon = Double.parseDouble(longitud);
+                
+                Ubicacion ubicacion = ubiDAO.altaUbicacion(idTipo, descripcionUbicacion, lat, lon);
+                grupo.setUbicacion(ubicacion);
+            }
+            
+            if (descripcion!=null ||descripcion.trim().isEmpty()){
+                grupo.setDescripcion(descripcion);
+            }
+            
+            if (fechaFinalizacion!=null || fechaFinalizacion.trim().isEmpty()){
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                Date fFinalizacion=null;
+                try {
+                    fFinalizacion = formatoDelTexto.parse(fechaFinalizacion);
+                }  catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                grupo.setFechaFinalizacion(fFinalizacion);
+            }
+            
+            if (fechaInicioActividad!=null || fechaInicioActividad.trim().isEmpty()){
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                Date fInicioActividad=null;
+                try {
+                    fInicioActividad = formatoDelTexto.parse(fechaInicioActividad);
+                }  catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                grupo.setFechaInicioActividad(fInicioActividad);
+            }
+            
+            if (fechaFinActividad!=null || fechaFinActividad.trim().isEmpty()){
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                Date fFinActividad=null;
+                try {
+                    fFinActividad = formatoDelTexto.parse(fechaFinActividad);
+                }  catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                grupo.setFechaInicioActividad(fFinActividad);
+            }
             out.println("OK");
         }
     }
