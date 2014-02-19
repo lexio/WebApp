@@ -31,7 +31,7 @@ public class DevolverMensajesServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        PrintWriter out = resp.getWriter();
-        String usuarioSim = req.getParameter("usuarioSim");
+        String usuarioSim = req.getParameter("usuariosim");
         String idGrupo = req.getParameter("idgrupo");
         try {
             if (usuarioSim == null && usuarioSim.trim().isEmpty()|| idGrupo == null && idGrupo.trim().isEmpty()){
@@ -61,6 +61,6 @@ public class DevolverMensajesServlet extends HttpServlet {
                 }
             }
         }
-         catch (HibernateException e) { };
+         catch (Exception e) {out.println(e.getMessage()); };
     }
 }
