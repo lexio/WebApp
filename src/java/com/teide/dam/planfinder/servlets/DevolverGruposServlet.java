@@ -33,6 +33,7 @@ public class DevolverGruposServlet extends HttpServlet {
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
             gDAO.buscarGruposUsuario(usuario_sim);
+            out.println("OK");
         }
     }
 

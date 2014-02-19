@@ -26,17 +26,20 @@ public class EliminarGrupoServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        String nombre = req.getParameter("nombre");
-        if (nombre !=null || !nombre.trim().isEmpty()){
-            UsuarioDAO uDAO = new UsuarioDAO(session);
+        PrintWriter out = resp.getWriter();
+        String idGrupo = req.getParameter("idgrupo");
+        if (idGrupo !=null || !idGrupo.trim().isEmpty()){
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
-            Grupo g = new Grupo();
-            Usuario u = g.getUsuario();
-            if (uDAO.comprobarUsuario(nombre) == gDAO.comprobarCreador(u)){
-                gDAO.eliminarGrupo(nombre);
-            }
+            String resultado= gDAO.eliminarGrupo(idGrupo);
+           if (resultado== "OK") {
+               out.println("OK");
+           }
+           else {
+               out.println(resultado);
+               
+           }
         
         }
         
