@@ -15,6 +15,7 @@ public class Queries {
     public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idGrupo";
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
     public static final String COGER_CREADOR = "from Grupo as g where g.usuario=:usuario";
+    public static final String COGER_SIM = "from Usuario as usu where usu.sim=:sim";
     
     //Queries pertenece
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:usuario_sim and p.grupo=:id_grupo";

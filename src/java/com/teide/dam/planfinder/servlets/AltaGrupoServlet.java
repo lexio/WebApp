@@ -45,24 +45,24 @@ public class AltaGrupoServlet extends HttpServlet {
         //String ubicacion = req.getParameter("ubicacion");
         String latitud = req.getParameter("latitud");
         String longitud = req.getParameter("longitud");
-        String descripcionUbicacion = req.getParameter("descripcionUbicacion");
+        String descripcionUbicacion = req.getParameter("descripcionubicacion");
         
         String usuario = req.getParameter("usuario");
         String tipoo = req.getParameter("tipo");
         String nombre = req.getParameter("nombre");
         String descripcion = req.getParameter("descripcion");
-        String fechaCreacion = req.getParameter("fechaCreacion");
-        String fechaFinalizacion = req.getParameter("fechaFinalizacion");
-        String fechaInicioActividad = req.getParameter("fechaInicioActividad");
-        String fechaFinActividad = req.getParameter("fechaFinActividad");
-        String radioEmisio = req.getParameter("radioEmision");
+        String fechaCreacion = req.getParameter("fechacreacion");
+        String fechaFinalizacion = req.getParameter("fechafinalizacion");
+        String fechaInicioActividad = req.getParameter("fechainicioactividad");
+        String fechaFinActividad = req.getParameter("fechafinactividad");
+        String radioEmisio = req.getParameter("radioemision");
         
         if(usuario == null || usuario.trim().isEmpty() || 
                 tipoo == null || tipoo.trim().isEmpty() || 
                 nombre == null || nombre.trim().isEmpty() || 
                 fechaCreacion == null || fechaCreacion.trim().isEmpty()||
                 radioEmisio == null || radioEmisio.trim().isEmpty() ){
-            
+            out.println("NOK");
         }
         else{
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -124,7 +124,7 @@ public class AltaGrupoServlet extends HttpServlet {
                 }
                 grupo.setFechaInicioActividad(fFinActividad);
             }
-            
+            out.println("OK");
         }
     }
 

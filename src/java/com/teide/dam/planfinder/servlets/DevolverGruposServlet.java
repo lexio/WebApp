@@ -5,9 +5,11 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.teide.dam.planfinder.dao.GrupoDAO;
+import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,16 +26,23 @@ public class DevolverGruposServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        String usuario_sim = req.getParameter("usuario_sim");
+        String usuario_sim = req.getParameter("sim");
         if (usuario_sim == null || usuario_sim.trim().isEmpty()){
-            
+            out.println("NOK");
         }
         else{
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
-            gDAO.buscarGruposUsuario(usuario_sim);
-            out.println("OK");
+            if(gDAO.recogerSim(usuario_sim)=="OK"){
+                ArrayList<Grupo> g= gDAO.buscarGruposUsuario(usuario_sim);
+                Gson json = new Gson();
+                String resultado = json.toJson(g);
+                out.println(resultado);
+                out.println("OK");
+            }
+            else out.println("NOK");
+            
         }
     }
 

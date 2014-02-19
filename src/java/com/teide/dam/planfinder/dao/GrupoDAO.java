@@ -74,16 +74,20 @@ public class GrupoDAO extends GenericDAO{
          */
     public ArrayList<Grupo> buscarGruposUsuario (String usuario_sim){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_USUARIO);
-        q.setParameter("usuario_sim", usuario_sim);
+        q.setParameter("sim", usuario_sim);
         return (ArrayList<Grupo>) q.list();
 
     }
     
     public String confirmarGrupo(int idGrupo, int numPersonas){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
         q.setParameter("idGrupo", idGrupo);
         Grupo g = (Grupo)q.uniqueResult();
-        g.setEstado("habilitado");
+        g.setEstado(Estados.HABILITADO);
+        session.persist(g);
+        tx.commit();
         return "ok";
         
     }
@@ -110,6 +114,13 @@ public class GrupoDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.COGER_CREADOR);
         q.setParameter("usuario", usuario);
         return (Usuario)q.uniqueResult();
+    }
+    
+    public String recogerSim (String usuario_Sim){
+        Query q = getSession().createQuery(Queries.COGER_SIM);
+        q.setParameter("sim", usuario_Sim);
+        if(q.uniqueResult()==true) return "OK";
+        else return "NOK";
     }
 
 }
