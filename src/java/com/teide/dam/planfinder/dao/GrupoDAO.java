@@ -122,5 +122,13 @@ public class GrupoDAO extends GenericDAO{
         if(q.uniqueResult()==true) return "OK";
         else return "NOK";
     }
+    
+    
+    public ArrayList<Grupo> devolverGruposalfabetico(){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_ALFABETICO);
+        ArrayList<Grupo> gruposAlfab = (ArrayList<Grupo>)q.list();
+        return gruposAlfab;
+        
+    }
 
 }

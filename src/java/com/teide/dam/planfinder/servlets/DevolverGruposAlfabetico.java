@@ -5,10 +5,9 @@
  */
 
 package com.teide.dam.planfinder.servlets;
-
 import com.google.gson.Gson;
-import com.teide.dam.planfinder.dao.TipoDAO;
-import com.teide.dam.planfinder.pojos.Tipo;
+import com.teide.dam.planfinder.dao.GrupoDAO;
+import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +24,7 @@ import org.hibernate.Transaction;
  *
  * @author Jose
  */
-public class DevolverTipoNombresServlet extends HttpServlet {
+public class DevolverGruposAlfabetico extends HttpServlet {
 
   @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,13 +33,13 @@ public class DevolverTipoNombresServlet extends HttpServlet {
                 
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
-                TipoDAO tDAO = new TipoDAO(session);
-                tDAO.BuscarNombresTipo();
+                GrupoDAO gDAO = new GrupoDAO(session);
+                gDAO.devolverGruposalfabetico();
                 
-                 ArrayList<Tipo> t = tDAO.BuscarNombresTipo();
-                 if ( t!= null) {
+                 ArrayList<Grupo> g = gDAO.devolverGruposalfabetico();
+                 if ( g!= null) {
                 Gson json = new Gson();
-                String resultado = json.toJson(t);
+                String resultado = json.toJson(g);
                 out.println(resultado);
                 out.println("OK");
                  }
@@ -49,9 +48,8 @@ public class DevolverTipoNombresServlet extends HttpServlet {
                 
             }
         }
-            
-            
-            
-        }
+    
+    
+    
 
-
+}

@@ -12,6 +12,7 @@ import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,34 +25,26 @@ import org.hibernate.Transaction;
  *
  * @author Jose
  */
-public class DevolverTipoIdTipoServlet extends HttpServlet {
+public class DevolverTipos extends HttpServlet {
 
-    @Override
+  @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       PrintWriter out = resp.getWriter();
-      String nombre = req.getParameter("nombre");
-        if (nombre != null && nombre.trim().isEmpty()){ 
             try {
                 
-                    
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 TipoDAO tDAO = new TipoDAO(session);
-                tDAO.BuscarIdTipo(nombre);
-                Tipo t = tDAO.BuscarIdTipo(nombre);
+                tDAO.buscartodotipos();
                 
-                if ( t!= null) {  
+                 ArrayList<Tipo> t = tDAO.buscartodotipos();
+                 if ( t!= null) {
                 Gson json = new Gson();
                 String resultado = json.toJson(t);
                 out.println(resultado);
                 out.println("OK");
-                
-                }
-                else{ out.println("NOK");}
-                
-                
-                
-                
+                 }
+                 else{out.println("NOK");}
             } catch (HibernateException e) {
                 
             }
@@ -61,4 +54,4 @@ public class DevolverTipoIdTipoServlet extends HttpServlet {
             
         }
 
-}
+

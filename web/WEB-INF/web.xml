@@ -62,11 +62,7 @@
     </servlet>
     <servlet>
         <servlet-name>DevolverTipoNombres</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoNombresServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoIdTipoServlet</servlet-class>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipos</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EliminarGrupoServlet</servlet-name>
@@ -79,6 +75,10 @@
     <servlet>
         <servlet-name>EnviarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarMensajes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverGruposAlfabetico</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverGruposAlfabetico</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
@@ -145,10 +145,6 @@
         <url-pattern>/editarusuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverTipoIdTipoServlet</servlet-name>
-        <url-pattern>/devolvertipoIdtipo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <url-pattern>/eliminargrupo</url-pattern>
     </servlet-mapping>
@@ -159,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>EnviarMensajes</servlet-name>
         <url-pattern>/enviarmensajes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverGruposAlfabetico</servlet-name>
+        <url-pattern>/DevolverGruposAlfabetico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

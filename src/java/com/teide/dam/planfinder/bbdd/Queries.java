@@ -16,6 +16,7 @@ public class Queries {
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
     public static final String COGER_CREADOR = "from Grupo as g where g.usuario=:usuario";
     public static final String COGER_SIM = "from Usuario as usu where usu.sim=:sim";
+    public static final String BUSCAR_GRUPOS_ALFABETICO = "from Grupo order by nombre";
     
     //Queries pertenece
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:usuario_sim and p.grupo=:id_grupo";
@@ -23,7 +24,7 @@ public class Queries {
             
     //Queries de tipo 
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:idtipo";
-    public static final String BUSCAR_TIPO_TODOS_NOMBRE = "from Tipo";
+    public static final String BUSCAR_TIPO_TODO = "from Tipo";
     public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.IdTipo=:idtipo and t.nombre=:nombre";
     public static final String BUSCAR_ID_TIPO_POR_NOMBRE = "from Tipo as t where t.nombre=:nombre";
     //Queries de Usuario

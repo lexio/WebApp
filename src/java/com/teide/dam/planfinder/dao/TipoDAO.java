@@ -47,14 +47,15 @@ public class TipoDAO extends GenericDAO{
     
     
     
-    public Tipo BuscarIdTipo(String nombre){
+    public Tipo buscaridtipo(String nombre){
        Query q = getSession().createQuery(Queries.BUSCAR_ID_TIPO_POR_NOMBRE);
        q.setParameter("nombre", q);
        return (Tipo)q.uniqueResult();
     }
     
-    public ArrayList<Tipo> BuscarNombresTipo (){
-        Query q = getSession().createQuery(Queries.BUSCAR_TIPO_TODOS_NOMBRE);
-        return (ArrayList<Tipo>) q.list();
+    public ArrayList<Tipo> buscartodotipos (){
+        Query q = getSession().createQuery(Queries.BUSCAR_TIPO_TODO);
+        ArrayList<Tipo> tipos = (ArrayList<Tipo>)q.list();
+        return tipos;
     }
 }
