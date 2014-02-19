@@ -54,7 +54,7 @@ public class InsertarUsuarioServlet extends HttpServlet {
                 int radioRecepcion = Integer.parseInt(radioRecepcionString);
                 double latitud = Double.parseDouble(latitudString);
                 double longitud = Double.parseDouble(longitudString);
-                String respuesta = uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, null, claveGcm);
+                String respuesta = uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);
                 tx.commit();
                 out.println(respuesta);
             } catch (HibernateException e) {

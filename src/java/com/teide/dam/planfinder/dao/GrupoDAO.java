@@ -8,6 +8,7 @@ import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Query;
@@ -53,10 +54,19 @@ public class GrupoDAO extends GenericDAO{
         return grupos;
     }
     
-    public Grupo eliminarGrupo (String nombre){
-        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
-        q.setParameter("nombre", nombre);
-        return (Grupo) q.uniqueResult();
+    public String eliminarGrupo (String idGrupo){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Grupo g = comprobarGrupo(idGrupo);
+        if (g.getEstado().equals(Estados.HABILITADO)) {
+            g.setEstado(Estados.NOHABILITADO);
+            session.persist(g);
+            tx.commit();
+            return "OK_"+g.getEstado();
+        }
+        else{
+            return "nok_"+g.getEstado();
+        }
     }
         /*buscar grupo de usuario. + sql.
          * 
@@ -94,6 +104,12 @@ public class GrupoDAO extends GenericDAO{
         q.setParameter("tipo", tipo);
         ArrayList<Grupo> gruposTipo = (ArrayList<Grupo>)q.list();
         return gruposTipo;
+    }
+    
+    public Usuario comprobarCreador (Usuario usuario){
+        Query q = getSession().createQuery(Queries.COGER_CREADOR);
+        q.setParameter("usuario", usuario);
+        return (Usuario)q.uniqueResult();
     }
 
 }

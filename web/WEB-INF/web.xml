@@ -45,10 +45,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.BorrarGrupoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverTipoGrupoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipoGrupoServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>InsertarUsuarioServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioServlet</servlet-class>
     </servlet>
@@ -115,10 +111,6 @@
     <servlet-mapping>
         <servlet-name>BorrarGrupoServlet</servlet-name>
         <url-pattern>/borrargrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DevolverTipoGrupoServlet</servlet-name>
-        <url-pattern>/devolvertipogrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GuardarMensajesServlet</servlet-name>
