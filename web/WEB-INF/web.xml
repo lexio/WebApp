@@ -5,11 +5,11 @@
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitudGrupo</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GuardarMensajesServlet</servlet-name>
+        <servlet-name>GuardarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverMensajesServlet</servlet-name>
+        <servlet-name>DevolverMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
     </servlet>
     <servlet>
@@ -113,15 +113,11 @@
         <url-pattern>/devolvergrupos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverMensajesServlet</servlet-name>
-        <url-pattern>/devolvermensajesservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>BorrarGrupoServlet</servlet-name>
         <url-pattern>/borrargrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GuardarMensajesServlet</servlet-name>
+        <servlet-name>GuardarMensajes</servlet-name>
         <url-pattern>/guardarmensajes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -159,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>DevolverGruposAlfabetico</servlet-name>
         <url-pattern>/DevolverGruposAlfabetico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverMensajes</servlet-name>
+        <url-pattern>/devolvermensajes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
