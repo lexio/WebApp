@@ -76,6 +76,10 @@
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EliminarGrupoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogearUsuario</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.LoguearUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <url-pattern>/eliminargrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogearUsuario</servlet-name>
+        <url-pattern>/logearusuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

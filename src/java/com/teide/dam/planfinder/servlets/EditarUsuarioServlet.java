@@ -44,8 +44,7 @@ public class EditarUsuarioServlet extends HttpServlet {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
                 UsuarioDAO uDAO = new UsuarioDAO(session);
-                String respuesta = uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
-                out.println(respuesta);
+                uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
             } catch (HibernateException e) {
                 out.println("NOK");
             }

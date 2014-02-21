@@ -20,7 +20,8 @@ public class Queries {
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:usuario_sim and p.grupo=:id_grupo";
     //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
             
-    //Queries de tipo 
+    //Queries de tipo
+    public static final String ACTUALIZAR_POS = "UPDATE Usuario as u SET u.latitud=:lat, u.longitud:=log  WHERE u.sim=:sim";
     public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.IdTipo=:idtipo";
     public static final String BUSCAR_TIPO_TODOS_NOMBRE = "from Tipo";
     public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.IdTipo=:idtipo and t.nombre=:nombre";
