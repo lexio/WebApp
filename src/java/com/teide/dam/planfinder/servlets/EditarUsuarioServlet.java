@@ -27,7 +27,7 @@ public class EditarUsuarioServlet extends HttpServlet {
         String sim = req.getParameter("sim");
         String nombre = req.getParameter("nombre");
         String estado = req.getParameter("estado");
-        String radioRecepcionString = req.getParameter("radioRecepcion");
+        String radioRecepcionString = req.getParameter("radiorecepcion");
         PrintWriter out = resp.getWriter();
         
         System.out.println("Entro en el Service");

@@ -29,10 +29,10 @@ public class InsertarUsuarioServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sim = req.getParameter("sim");
         String nombre = req.getParameter("nombre");
-        String radioRecepcionString = req.getParameter("radioRecepcion");
+        String radioRecepcionString = req.getParameter("radiorecepcion");
         String latitudString = req.getParameter("latitud");
         String longitudString = req.getParameter("longitud");
-        String claveGcm = req.getParameter("claveGcm");
+        String claveGcm = req.getParameter("clavegcm");
         PrintWriter out = resp.getWriter();
         
         System.out.println("Entro en el Service");

@@ -27,8 +27,8 @@ public class ComprobarEstadoUsuario extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String usuarioSim = req.getParameter("usuarioSim");
-        String idGrupo = req.getParameter("idGrupo");
+        String usuarioSim = req.getParameter("sim");
+        String idGrupo = req.getParameter("idgrupo");
         PrintWriter out = resp.getWriter();
                
         if (usuarioSim != null || !usuarioSim.trim().isEmpty()||idGrupo != null || idGrupo.trim().isEmpty()){

@@ -29,29 +29,31 @@ public class ComprobarUsuarioServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sim = req.getParameter("sim");
         PrintWriter out = resp.getWriter();
-        if(sim == null || sim.trim().isEmpty()){
-            out.println("NOK");
-        }
-        else{
-            try{
+        if (sim != null && !sim.trim().isEmpty()) {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
+            session.beginTransaction();
             UsuarioDAO uDAO = new UsuarioDAO(session);
             Usuario u = uDAO.comprobarUsuario(sim);
-            Set<Pertenece> per = u.getPerteneces();
-            
-            for (Pertenece pertenece : per) {
-                session.evict(pertenece);
-                pertenece.setUsuario(null);
-            }
-            Gson json = new Gson();
-            String resultado = json.toJson(per);
-            out.println(resultado);
-            }
-            catch(Exception e){
+            if (u != null) {
+                Set<Pertenece> grupos = u.getPerteneces();
+                System.out.println("Num perteneces: "+grupos.size());
+                session.evict(u);
+                u.setGrupos(null);
+                u.setMensajes(null);
+               
+                for (Pertenece pertenece : grupos) {
+                    //session.evict(pertenece);
+                    pertenece.setGrupo(null);
+                    pertenece.setUsuario(null);
+                    
+                }
+                
+                Gson json = new Gson();
+                String resultado = json.toJson(u);
+                out.println(resultado);
+            } else {
                 out.println("NOK");
             }
         }
     }
-    
 }
