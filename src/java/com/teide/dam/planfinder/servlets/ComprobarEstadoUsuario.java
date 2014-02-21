@@ -43,6 +43,7 @@ public class ComprobarEstadoUsuario extends HttpServlet {
                 out.println("NOK");
             }
         }
+        else out.println("NOK");
         
     }
 
