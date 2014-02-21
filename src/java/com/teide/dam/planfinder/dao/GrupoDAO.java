@@ -8,6 +8,7 @@ import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Query;
@@ -53,10 +54,19 @@ public class GrupoDAO extends GenericDAO{
         return grupos;
     }
     
-    public Grupo eliminarGrupo (String nombre){
-        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
-        q.setParameter("nombre", nombre);
-        return (Grupo) q.uniqueResult();
+    public String eliminarGrupo (String idGrupo){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Grupo g = comprobarGrupo(idGrupo);
+        if (g.getEstado().equals(Estados.HABILITADO)) {
+            g.setEstado(Estados.NOHABILITADO);
+            session.persist(g);
+            tx.commit();
+            return "OK_"+g.getEstado();
+        }
+        else{
+            return "nok_"+g.getEstado();
+        }
     }
         /*buscar grupo de usuario. + sql.
          * 
@@ -64,16 +74,20 @@ public class GrupoDAO extends GenericDAO{
          */
     public ArrayList<Grupo> buscarGruposUsuario (String usuario_sim){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_USUARIO);
-        q.setParameter("usuario_sim", usuario_sim);
+        q.setParameter("sim", usuario_sim);
         return (ArrayList<Grupo>) q.list();
 
     }
     
     public String confirmarGrupo(int idGrupo, int numPersonas){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
         q.setParameter("idGrupo", idGrupo);
         Grupo g = (Grupo)q.uniqueResult();
-        g.setEstado("habilitado");
+        g.setEstado(Estados.HABILITADO);
+        session.persist(g);
+        tx.commit();
         return "ok";
         
     }
@@ -94,6 +108,27 @@ public class GrupoDAO extends GenericDAO{
         q.setParameter("tipo", tipo);
         ArrayList<Grupo> gruposTipo = (ArrayList<Grupo>)q.list();
         return gruposTipo;
+    }
+    
+    public Usuario comprobarCreador (Usuario usuario){
+        Query q = getSession().createQuery(Queries.COGER_CREADOR);
+        q.setParameter("usuario", usuario);
+        return (Usuario)q.uniqueResult();
+    }
+    
+    public String recogerSim (String usuario_Sim){
+        Query q = getSession().createQuery(Queries.COGER_SIM);
+        q.setParameter("sim", usuario_Sim);
+        if(q.uniqueResult()==true) return "OK";
+        else return "NOK";
+    }
+    
+    
+    public ArrayList<Grupo> devolverGruposalfabetico(){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_ALFABETICO);
+        ArrayList<Grupo> gruposAlfab = (ArrayList<Grupo>)q.list();
+        return gruposAlfab;
+        
     }
 
 }

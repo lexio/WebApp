@@ -38,7 +38,7 @@ public class GuardarMensajesServlet extends HttpServlet {
        //?mensaje=Hola&grupo=Fiesta&usuario=Pepe
        String mensaje = req.getParameter("mensaje");
        String grupo = req.getParameter("grupo") ;
-       String usuariosim = req.getParameter("usuarioSim");
+       String usuariosim = req.getParameter("usuariosim");
        //Buscar grupo y usuario en base a los datos que le enviamos (id_grupo y sim) y a partir de ahí añadir
        //Por ahora supondré que nos dan el nombre del grupo y no el id
 
@@ -61,7 +61,9 @@ public class GuardarMensajesServlet extends HttpServlet {
                 
          else {out.println("NOK"); }
       
-      }catch (Exception e){};
+      }catch (Exception e){out.println("Error: "+e.getMessage()); {
+        
+    }}
 
 
   }  

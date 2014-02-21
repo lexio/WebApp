@@ -24,19 +24,20 @@ public class ConfirmarGrupoServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        String idGrupo = req.getParameter("idGrupo");
-        int idGrup = Integer.parseInt(idGrupo);
+        String idGrupo = req.getParameter("idgrupo");
         String personas = req.getParameter("personas");
-        int numPersonas =Integer.parseInt(personas);
         if(idGrupo == null || idGrupo.trim().isEmpty() || 
                 personas == null || personas.trim().isEmpty()){
-            
+            out.println("NOK");
         }
         else{
+            int idGrup = Integer.parseInt(idGrupo);
+            int numPersonas =Integer.parseInt(personas);
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
             gDAO.confirmarGrupo(idGrup, numPersonas);
+            out.println("OK");
         }
     }
 
