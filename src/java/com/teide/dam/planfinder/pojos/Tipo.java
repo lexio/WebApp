@@ -1,10 +1,9 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,6 +42,7 @@ public class Tipo  implements java.io.Serializable {
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
     @Column(name="idTipo", unique=true, nullable=false)
     public Integer getIdTipo() {
@@ -52,6 +52,7 @@ public class Tipo  implements java.io.Serializable {
     public void setIdTipo(Integer idTipo) {
         this.idTipo = idTipo;
     }
+
     
     @Column(name="nombre", nullable=false, length=45)
     public String getNombre() {
@@ -61,6 +62,7 @@ public class Tipo  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     
     @Column(name="descripcion", length=100)
     public String getDescripcion() {
@@ -70,7 +72,8 @@ public class Tipo  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="tipo")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="tipo")
     public Set<Grupo> getGrupos() {
         return this.grupos;
     }

@@ -1,11 +1,10 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,7 +40,7 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, String claveGcm) {
+    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion) {
         this.sim = sim;
         this.nombre = nombre;
         this.estado = estado;
@@ -49,7 +48,6 @@ public class Usuario  implements java.io.Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.ultimaConexion = ultimaConexion;
-        this.claveGcm = claveGcm;
     }
     public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, String claveGcm, Set<Grupo> grupos, Set<Mensaje> mensajes, Set<Pertenece> perteneces) {
        this.sim = sim;
@@ -66,6 +64,7 @@ public class Usuario  implements java.io.Serializable {
     }
    
      @Id 
+
     
     @Column(name="sim", unique=true, nullable=false, length=20)
     public String getSim() {
@@ -75,6 +74,7 @@ public class Usuario  implements java.io.Serializable {
     public void setSim(String sim) {
         this.sim = sim;
     }
+
     
     @Column(name="nombre", nullable=false, length=45)
     public String getNombre() {
@@ -84,6 +84,7 @@ public class Usuario  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     
     @Column(name="estado", nullable=false, length=45)
     public String getEstado() {
@@ -93,6 +94,7 @@ public class Usuario  implements java.io.Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
     
     @Column(name="radioRecepcion", nullable=false)
     public int getRadioRecepcion() {
@@ -102,6 +104,7 @@ public class Usuario  implements java.io.Serializable {
     public void setRadioRecepcion(int radioRecepcion) {
         this.radioRecepcion = radioRecepcion;
     }
+
     
     @Column(name="latitud", nullable=false, precision=22, scale=0)
     public double getLatitud() {
@@ -111,6 +114,7 @@ public class Usuario  implements java.io.Serializable {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
+
     
     @Column(name="longitud", nullable=false, precision=22, scale=0)
     public double getLongitud() {
@@ -120,6 +124,7 @@ public class Usuario  implements java.io.Serializable {
     public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="ultimaConexion", nullable=false, length=19)
     public Date getUltimaConexion() {
@@ -129,8 +134,9 @@ public class Usuario  implements java.io.Serializable {
     public void setUltimaConexion(Date ultimaConexion) {
         this.ultimaConexion = ultimaConexion;
     }
+
     
-    @Column(name="claveGcm", nullable=false, length=200)
+    @Column(name="claveGcm", length=200)
     public String getClaveGcm() {
         return this.claveGcm;
     }
@@ -138,7 +144,8 @@ public class Usuario  implements java.io.Serializable {
     public void setClaveGcm(String claveGcm) {
         this.claveGcm = claveGcm;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="usuario")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
     public Set<Grupo> getGrupos() {
         return this.grupos;
     }
@@ -146,7 +153,8 @@ public class Usuario  implements java.io.Serializable {
     public void setGrupos(Set<Grupo> grupos) {
         this.grupos = grupos;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="usuario")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
     public Set<Mensaje> getMensajes() {
         return this.mensajes;
     }
@@ -154,7 +162,8 @@ public class Usuario  implements java.io.Serializable {
     public void setMensajes(Set<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="usuario")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
     public Set<Pertenece> getPerteneces() {
         return this.perteneces;
     }

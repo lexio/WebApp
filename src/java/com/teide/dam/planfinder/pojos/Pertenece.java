@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import javax.persistence.AttributeOverride;
@@ -38,6 +38,7 @@ public class Pertenece  implements java.io.Serializable {
     }
    
      @EmbeddedId
+
     
     @AttributeOverrides( {
         @AttributeOverride(name="usuarioSim", column=@Column(name="usuario_sim", nullable=false, length=20) ), 
@@ -49,6 +50,7 @@ public class Pertenece  implements java.io.Serializable {
     public void setId(PerteneceId id) {
         this.id = id;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="grupo_id_grupo", nullable=false, insertable=false, updatable=false)
     public Grupo getGrupo() {
@@ -58,6 +60,7 @@ public class Pertenece  implements java.io.Serializable {
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="usuario_sim", nullable=false, insertable=false, updatable=false)
     public Usuario getUsuario() {
@@ -67,6 +70,7 @@ public class Pertenece  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     
     @Column(name="estado", nullable=false, length=45)
     public String getEstado() {

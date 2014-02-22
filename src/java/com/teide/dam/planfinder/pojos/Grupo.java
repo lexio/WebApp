@@ -1,11 +1,10 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -73,6 +72,7 @@ public class Grupo  implements java.io.Serializable {
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
     @Column(name="idGrupo", unique=true, nullable=false)
     public Integer getIdGrupo() {
@@ -82,6 +82,7 @@ public class Grupo  implements java.io.Serializable {
     public void setIdGrupo(Integer idGrupo) {
         this.idGrupo = idGrupo;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ubicacion_idubicacion")
     public Ubicacion getUbicacion() {
@@ -91,6 +92,7 @@ public class Grupo  implements java.io.Serializable {
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="creador", nullable=false)
     public Usuario getUsuario() {
@@ -100,6 +102,7 @@ public class Grupo  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="tipo_idTipo", nullable=false)
     public Tipo getTipo() {
@@ -109,6 +112,7 @@ public class Grupo  implements java.io.Serializable {
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
+
     
     @Column(name="nombre", nullable=false, length=100)
     public String getNombre() {
@@ -118,6 +122,7 @@ public class Grupo  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     
     @Column(name="descripcion", length=300)
     public String getDescripcion() {
@@ -127,6 +132,7 @@ public class Grupo  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="fechaCreacion", nullable=false, length=19)
     public Date getFechaCreacion() {
@@ -136,6 +142,7 @@ public class Grupo  implements java.io.Serializable {
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="fechaFinalizacion", length=19)
     public Date getFechaFinalizacion() {
@@ -145,6 +152,7 @@ public class Grupo  implements java.io.Serializable {
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="fechaInicioActividad", length=19)
     public Date getFechaInicioActividad() {
@@ -154,6 +162,7 @@ public class Grupo  implements java.io.Serializable {
     public void setFechaInicioActividad(Date fechaInicioActividad) {
         this.fechaInicioActividad = fechaInicioActividad;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="fechaFinActividad", length=19)
     public Date getFechaFinActividad() {
@@ -163,6 +172,7 @@ public class Grupo  implements java.io.Serializable {
     public void setFechaFinActividad(Date fechaFinActividad) {
         this.fechaFinActividad = fechaFinActividad;
     }
+
     
     @Column(name="estado", nullable=false, length=45)
     public String getEstado() {
@@ -172,6 +182,7 @@ public class Grupo  implements java.io.Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
     
     @Column(name="radioEmision", nullable=false)
     public int getRadioEmision() {
@@ -181,7 +192,8 @@ public class Grupo  implements java.io.Serializable {
     public void setRadioEmision(int radioEmision) {
         this.radioEmision = radioEmision;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="grupo")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="grupo")
     public Set<Pertenece> getPerteneces() {
         return this.perteneces;
     }
@@ -189,7 +201,8 @@ public class Grupo  implements java.io.Serializable {
     public void setPerteneces(Set<Pertenece> perteneces) {
         this.perteneces = perteneces;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="grupo")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="grupo")
     public Set<Mensaje> getMensajes() {
         return this.mensajes;
     }

@@ -1,10 +1,9 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,6 +44,7 @@ public class Ubicacion  implements java.io.Serializable {
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
     @Column(name="idubicacion", unique=true, nullable=false)
     public Integer getIdubicacion() {
@@ -54,6 +54,7 @@ public class Ubicacion  implements java.io.Serializable {
     public void setIdubicacion(Integer idubicacion) {
         this.idubicacion = idubicacion;
     }
+
     
     @Column(name="descripcion", nullable=false, length=45)
     public String getDescripcion() {
@@ -63,6 +64,7 @@ public class Ubicacion  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
     
     @Column(name="latitud", precision=22, scale=0)
     public Double getLatitud() {
@@ -72,6 +74,7 @@ public class Ubicacion  implements java.io.Serializable {
     public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
+
     
     @Column(name="longitud", precision=22, scale=0)
     public Double getLongitud() {
@@ -81,7 +84,8 @@ public class Ubicacion  implements java.io.Serializable {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ubicacion")
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="ubicacion")
     public Set<Grupo> getGrupos() {
         return this.grupos;
     }

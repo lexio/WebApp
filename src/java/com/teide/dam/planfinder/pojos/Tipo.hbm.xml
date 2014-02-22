@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 7, 2014 12:10:04 PM by Hibernate Tools 3.2.1.GA -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.teide.dam.planfinder.pojos.Tipo" table="tipo" catalog="proyecto">
         <id name="idTipo" type="java.lang.Integer">
@@ -14,7 +14,7 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="100" />
         </property>
-        <set name="grupos" inverse="true">
+        <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="tipo_idTipo" not-null="true" />
             </key>

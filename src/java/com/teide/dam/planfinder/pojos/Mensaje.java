@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated Feb 7, 2014 12:10:03 PM by Hibernate Tools 3.2.1.GA
+// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -44,6 +44,7 @@ public class Mensaje  implements java.io.Serializable {
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
+
     
     @Column(name="idMensaje", unique=true, nullable=false)
     public Integer getIdMensaje() {
@@ -53,6 +54,7 @@ public class Mensaje  implements java.io.Serializable {
     public void setIdMensaje(Integer idMensaje) {
         this.idMensaje = idMensaje;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="grupo_id_grupo", nullable=false)
     public Grupo getGrupo() {
@@ -62,6 +64,7 @@ public class Mensaje  implements java.io.Serializable {
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
     }
+
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="usuario_sim", nullable=false)
     public Usuario getUsuario() {
@@ -71,6 +74,7 @@ public class Mensaje  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
     
     @Column(name="mensaje", nullable=false, length=3000)
     public String getMensaje() {
@@ -80,6 +84,7 @@ public class Mensaje  implements java.io.Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="fecha", nullable=false, length=19)
     public Date getFecha() {
@@ -89,6 +94,7 @@ public class Mensaje  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
     
     @Column(name="estado", nullable=false, length=45)
     public String getEstado() {

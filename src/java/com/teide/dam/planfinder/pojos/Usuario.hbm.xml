@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 7, 2014 12:10:04 PM by Hibernate Tools 3.2.1.GA -->
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.teide.dam.planfinder.pojos.Usuario" table="usuario" catalog="proyecto">
         <id name="sim" type="string">
@@ -27,21 +27,21 @@
             <column name="ultimaConexion" length="19" not-null="true" />
         </property>
         <property name="claveGcm" type="string">
-            <column name="claveGcm" length="200" not-null="true" />
+            <column name="claveGcm" length="200" />
         </property>
-        <set name="grupos" inverse="true">
+        <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="creador" length="20" not-null="true" />
             </key>
             <one-to-many class="com.teide.dam.planfinder.pojos.Grupo" />
         </set>
-        <set name="mensajes" inverse="true">
+        <set name="mensajes" table="mensaje" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="usuario_sim" length="20" not-null="true" />
             </key>
             <one-to-many class="com.teide.dam.planfinder.pojos.Mensaje" />
         </set>
-        <set name="perteneces" inverse="true">
+        <set name="perteneces" table="pertenece" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="usuario_sim" length="20" not-null="true" />
             </key>
