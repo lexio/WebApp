@@ -48,36 +48,38 @@ public class AltaGrupoServlet extends HttpServlet {
         String descripcionUbicacion = req.getParameter("descripcionubicacion");
         
         String usuario = req.getParameter("usuario");
-        String tipoo = req.getParameter("tipo");
+        String tipoString = req.getParameter("tipo");
         String nombre = req.getParameter("nombre");
         String descripcion = req.getParameter("descripcion");
         String fechaCreacion = req.getParameter("fechacreacion");
         String fechaFinalizacion = req.getParameter("fechafinalizacion");
         String fechaInicioActividad = req.getParameter("fechainicioactividad");
         String fechaFinActividad = req.getParameter("fechafinactividad");
-        String radioEmisio = req.getParameter("radioemision");
+        String radioEmisionString = req.getParameter("radioemision");
         
-        if(usuario == null || usuario.trim().isEmpty() || 
-                tipoo == null || tipoo.trim().isEmpty() || 
-                nombre == null || nombre.trim().isEmpty() || 
-                fechaCreacion == null || fechaCreacion.trim().isEmpty()||
-                radioEmisio == null || radioEmisio.trim().isEmpty() ){
-            out.println("NOK");
-        }
-        else{
+        if(usuario != null || !usuario.trim().isEmpty() ||
+                tipoString != null || !tipoString.trim().isEmpty() ||
+                nombre != null || !nombre.trim().isEmpty() ||
+                fechaCreacion != null || !fechaCreacion.trim().isEmpty()||
+                radioEmisionString != null || !radioEmisionString.trim().isEmpty() ){
+            
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
+            
+            //RECIBIMOS LA SESION Y ALMACENAMOS UN USUARIO QUE SERÁ EL CREADOR
             
             UsuarioDAO uDAO = new UsuarioDAO(session);
             Usuario usu = uDAO.comprobarUsuario(usuario);
             
+            //RECIBIMOS LOS DATOS DEL TIPO
+            
             TipoDAO tDAO = new TipoDAO(session);
-            int idTipo= tDAO.BuscarIdTipo(tipoo).getIdTipo();
+            int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
             Tipo tipo = tDAO.BuscarNombreTipo(idTipo);
             
-            int radioEmision = Integer.parseInt(radioEmisio);
+            int radioEmision = Integer.parseInt(radioEmisionString);
             
-            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), usuario, radioEmision);
+            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), "STRING DE ESTADO", radioEmision);
             
             if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
                 UbicacionDAO ubiDAO = new UbicacionDAO(session);
@@ -175,3 +177,4 @@ public class AltaGrupoServlet extends HttpServlet {
     }
 
 }
+    

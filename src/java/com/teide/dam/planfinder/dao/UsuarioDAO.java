@@ -46,6 +46,12 @@ public class UsuarioDAO extends GenericDAO{
         return (Usuario)q.uniqueResult();
     }
     
+    public ArrayList<Usuario> allUser(){
+        Query q = getSession().createQuery(Queries.BUSCAR_TODOS_LOS_USUARIOS);
+        ArrayList<Usuario> usu = (ArrayList<Usuario>)q.list();
+        return usu;
+    }
+    
     public ArrayList<Usuario> buscarUsuariosEstado (String estado){
         Query q = getSession().createQuery(Queries.BUSCAR_ESTADO_USUARIO);
         q.setParameter("estado",estado);

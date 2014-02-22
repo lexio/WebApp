@@ -5,7 +5,9 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.google.gson.Gson;
+import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
+import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
@@ -35,19 +37,24 @@ public class ComprobarUsuarioServlet extends HttpServlet {
             UsuarioDAO uDAO = new UsuarioDAO(session);
             Usuario u = uDAO.comprobarUsuario(sim);
             if (u != null) {
-                Set<Pertenece> grupos = u.getPerteneces();
-                System.out.println("Num perteneces: "+grupos.size());
+                Set<Pertenece> perteneces = u.getPerteneces();
+                System.out.println("Num perteneces: " + perteneces.size());
                 session.evict(u);
                 u.setGrupos(null);
                 u.setMensajes(null);
-               
-                for (Pertenece pertenece : grupos) {
-                    //session.evict(pertenece);
-                    pertenece.setGrupo(null);
+
+                for (Pertenece pertenece : perteneces) {
                     pertenece.setUsuario(null);
-                    
+                    Grupo grupo = pertenece.getGrupo();
+                    //session.evict(grupo);
+                    grupo.setUbicacion(null);
+                    System.out.println("Nombre: "+grupo.getNombre());
+                    grupo.setTipo(null);
+                    grupo.setMensajes(null);
+                    grupo.setUsuario(null);
+                    grupo.setPerteneces(null);
                 }
-                
+
                 Gson json = new Gson();
                 String resultado = json.toJson(u);
                 out.println(resultado);
@@ -55,5 +62,8 @@ public class ComprobarUsuarioServlet extends HttpServlet {
                 out.println("NOK");
             }
         }
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        GrupoDAO gDAO = new GrupoDAO(session);
+        
     }
 }
