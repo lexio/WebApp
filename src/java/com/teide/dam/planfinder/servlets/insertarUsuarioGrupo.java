@@ -4,7 +4,10 @@
  */
 package com.teide.dam.planfinder.servlets;
 
+import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
+import com.teide.dam.planfinder.pojos.Grupo;
+import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
@@ -25,7 +28,7 @@ public class insertarUsuarioGrupo extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        int idGrupo = Integer.parseInt(req.getParameter("idGrupo"));
+        String idGrupo = req.getParameter("idGrupo");
         double latC = Double.parseDouble(req.getParameter("latitud"));
         double longC = Double.parseDouble(req.getParameter("longitud"));
         int radioRecepcionC = Integer.parseInt(req.getParameter("radioRecepcion"));
@@ -33,6 +36,8 @@ public class insertarUsuarioGrupo extends HttpServlet {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         UsuarioDAO uDAO = new UsuarioDAO(session);
         ArrayList<Usuario> usu = uDAO.allUser();
+        GrupoDAO gDAO = new GrupoDAO(session);
+        Grupo g = gDAO.comprobarGrupo(idGrupo);
         
         
         
@@ -60,7 +65,7 @@ public class insertarUsuarioGrupo extends HttpServlet {
             dd = Math.acos(dvalue)*radtodeg;
             km = (dd*111.302);
             if (km <= radioRecepcionU){
-                
+                Pertenece p = new Pertenece(null, g, usuario, simU);
             }
             else usu.remove(usuario);
             }
