@@ -84,6 +84,10 @@
         <servlet-name>LogearUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.LoguearUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarNombeGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombeGrupoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>DevolverMensajes</servlet-name>
         <url-pattern>/devolvermensajes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarNombeGrupoServlet</servlet-name>
+        <url-pattern>/buscarnombregrupo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
