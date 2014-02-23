@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0 -->
+<!-- Generated 23-feb-2014 17:19:47 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.teide.dam.planfinder.pojos.Usuario" table="usuario" catalog="proyecto">
         <id name="sim" type="string">
@@ -27,7 +27,7 @@
             <column name="ultimaConexion" length="19" not-null="true" />
         </property>
         <property name="claveGcm" type="string">
-            <column name="claveGcm" length="200" />
+            <column name="claveGcm" length="200" not-null="true" />
         </property>
         <set name="grupos" table="grupo" inverse="true" lazy="true" fetch="select">
             <key>

@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
+// Generated 23-feb-2014 17:19:47 by Hibernate Tools 3.6.0
 
 
 import javax.persistence.Column;

@@ -1,5 +1,5 @@
 package com.teide.dam.planfinder.pojos;
-// Generated 22-feb-2014 18:34:35 by Hibernate Tools 3.6.0
+// Generated 23-feb-2014 17:19:47 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -40,7 +40,7 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion) {
+    public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, String claveGcm) {
         this.sim = sim;
         this.nombre = nombre;
         this.estado = estado;
@@ -48,6 +48,7 @@ public class Usuario  implements java.io.Serializable {
         this.latitud = latitud;
         this.longitud = longitud;
         this.ultimaConexion = ultimaConexion;
+        this.claveGcm = claveGcm;
     }
     public Usuario(String sim, String nombre, String estado, int radioRecepcion, double latitud, double longitud, Date ultimaConexion, String claveGcm, Set<Grupo> grupos, Set<Mensaje> mensajes, Set<Pertenece> perteneces) {
        this.sim = sim;
@@ -136,7 +137,7 @@ public class Usuario  implements java.io.Serializable {
     }
 
     
-    @Column(name="claveGcm", length=200)
+    @Column(name="claveGcm", nullable=false, length=200)
     public String getClaveGcm() {
         return this.claveGcm;
     }

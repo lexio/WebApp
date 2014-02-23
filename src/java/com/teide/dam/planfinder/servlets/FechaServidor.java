@@ -29,7 +29,7 @@ public class FechaServidor extends HttpServlet {
        Date fecha2= new GregorianCalendar().getInstance().getTime();
        SimpleDateFormat sdf=new java.text.SimpleDateFormat("dd/MM/yyyy");
        String fecha = sdf.format(fecha2);
-       out.println("Hola_"+fecha);
+       out.println(fecha);
     }
 
 }
