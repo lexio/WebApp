@@ -15,6 +15,7 @@ import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.pojos.Ubicacion;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,7 +80,7 @@ public class AltaGrupoServlet extends HttpServlet {
             
             int radioEmision = Integer.parseInt(radioEmisionString);
             
-            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), "STRING DE ESTADO", radioEmision);
+            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
             
             if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
                 UbicacionDAO ubiDAO = new UbicacionDAO(session);
