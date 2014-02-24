@@ -4,6 +4,8 @@
  */
 package com.teide.dam.planfinder.servlets;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.util.HibernateUtil;
@@ -34,10 +36,22 @@ public class BuscarNombeGrupoServlet extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
+            
             ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
+            
+            for (Grupo grupo : g) {
+                grupo.setUbicacion(null);
+                grupo.setTipo(null);
+                grupo.setMensajes(null);
+                grupo.setUsuario(null);
+                grupo.setPerteneces(null);
+//                g.remove(grupo);
+            }
+            session.evict(g);
+
             Gson json = new Gson();
             String resultado = json.toJson(g);
-            out.println(resultado);
+            out.println(resultado);            
         }
     }
 

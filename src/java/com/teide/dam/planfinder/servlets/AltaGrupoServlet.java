@@ -15,6 +15,7 @@ import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.pojos.Ubicacion;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,7 +80,7 @@ public class AltaGrupoServlet extends HttpServlet {
             
             int radioEmision = Integer.parseInt(radioEmisionString);
             
-            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), "STRING DE ESTADO", radioEmision);
+            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
             
             if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
                 UbicacionDAO ubiDAO = new UbicacionDAO(session);
@@ -124,55 +125,11 @@ public class AltaGrupoServlet extends HttpServlet {
                 }  catch (ParseException ex) {
                     ex.printStackTrace();
                 }
-                grupo.setFechaInicioActividad(fFinActividad);
+                grupo.setFechaFinActividad(fFinActividad);
             }
             
-            if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
-                UbicacionDAO ubiDAO = new UbicacionDAO(session);
-                double lat = Double.parseDouble(latitud);
-                double lon = Double.parseDouble(longitud);
-                
-                Ubicacion ubicacion = ubiDAO.altaUbicacion(idTipo, descripcionUbicacion, lat, lon);
-                grupo.setUbicacion(ubicacion);
-            }
             
-            if (descripcion!=null ||descripcion.trim().isEmpty()){
-                grupo.setDescripcion(descripcion);
-            }
-            
-            if (fechaFinalizacion!=null || fechaFinalizacion.trim().isEmpty()){
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fFinalizacion=null;
-                try {
-                    fFinalizacion = formatoDelTexto.parse(fechaFinalizacion);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
-                }
-                grupo.setFechaFinalizacion(fFinalizacion);
-            }
-            
-            if (fechaInicioActividad!=null || fechaInicioActividad.trim().isEmpty()){
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fInicioActividad=null;
-                try {
-                    fInicioActividad = formatoDelTexto.parse(fechaInicioActividad);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
-                }
-                grupo.setFechaInicioActividad(fInicioActividad);
-            }
-            
-            if (fechaFinActividad!=null || fechaFinActividad.trim().isEmpty()){
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fFinActividad=null;
-                try {
-                    fFinActividad = formatoDelTexto.parse(fechaFinActividad);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
-                }
-                grupo.setFechaInicioActividad(fFinActividad);
-            }
-            out.println("OK");
+            out.println(grupo.getIdGrupo());
         }
     }
 
