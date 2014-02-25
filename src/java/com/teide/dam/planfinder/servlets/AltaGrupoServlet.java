@@ -52,8 +52,8 @@ public class AltaGrupoServlet extends HttpServlet {
         String tipoString = req.getParameter("tipo");
         String nombre = req.getParameter("nombre");
         String descripcion = req.getParameter("descripcion");
-        String fechaCreacion = req.getParameter("fechacreacion");
-        String fechaFinalizacion = req.getParameter("fechafinalizacion");
+        String fechaCreacion = req.getParameter("fechacreacion"); //no es necesario recibirlo, se coge del servidor
+        String fechaFinalizacion = req.getParameter("fechafinalizacion");//lo mismo que arriba
         String fechaInicioActividad = req.getParameter("fechainicioactividad");
         String fechaFinActividad = req.getParameter("fechafinactividad");
         String radioEmisionString = req.getParameter("radioemision");
@@ -134,4 +134,3 @@ public class AltaGrupoServlet extends HttpServlet {
     }
 
 }
-    

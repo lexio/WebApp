@@ -1,7 +1,7 @@
 /*
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.teide.dam.planfinder.servlets;
 
 import com.google.gson.Gson;
@@ -22,9 +22,9 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 /**
-*
-* @author dam2
-*/
+ *
+ * @author dam2
+ */
 public class ComprobarUsuario extends HttpServlet {
 
     @Override
