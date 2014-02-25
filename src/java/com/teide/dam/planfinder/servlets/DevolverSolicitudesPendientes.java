@@ -20,13 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
- 
+
 
 public class DevolverSolicitudesPendientes extends HttpServlet {
-     @Override
+
+    @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String usuarioSim = req.getParameter("sim");
-            PrintWriter out = resp.getWriter();
+        String usuarioSim = req.getParameter("sim");
+        PrintWriter out = resp.getWriter();
             if (usuarioSim != null || !usuarioSim.trim().isEmpty()){
 //                try {
 //                    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -50,10 +51,12 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
 //                } catch (HibernateException e) {
 //                    out.println("NOK");
 //                }
-                System.out.println("PRUEBA");
+            System.out.println("PRUEBA");
             }
     }
+
+
     
-    
-    
+        }
+    }
 }
