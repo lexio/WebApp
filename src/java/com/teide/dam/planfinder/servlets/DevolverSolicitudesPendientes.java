@@ -14,6 +14,7 @@ import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,13 +35,16 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
                     //PerteneceDAO pDAO = new PerteneceDAO(session);
                     UsuarioDAO uDAO = new UsuarioDAO(session);
                     GrupoDAO gDAO = new GrupoDAO(session);
+                    //compruebo el usuario y lo meto en un Usuario u
                     Usuario u = uDAO.comprobarUsuario(usuarioSim);
-                    Grupo g = gDAO.comprobarCreador(u);
-                    String creador = g.getCreador();
-                    if(!usuarioSim.equals(creador)){
+                    /*con el usuario anterior lo cojo del grupo en el que coincida ese usuario
+                        y lo llamo creador */
+                    Usuario creador = gDAO.comprobarCreador(u);
+                    if(creador.getSim().equals(usuarioSim)){
                         Gson json = new Gson();
+                                               
                         String nombreUsu = u.getNombre();
-                        String nombreGru = g.getNombre();
+                        String nombreGru = creador.getNombre();
                         String[] values =new String[2];
                         values[0]= nombreUsu;
                         values[1]= nombreGru;
