@@ -13,10 +13,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AceptarSolicitudGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.AceptarSolicitudGrupo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ComprobarEstadoUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.ComprobarEstadoUsuario</servlet-class>
     </servlet>
@@ -86,7 +82,7 @@
     </servlet>
     <servlet>
         <servlet-name>insertarUsuarioGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.insertarUsuarioGrupo</servlet-class>
+        <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioGrupo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ComprobarUsuario</servlet-name>
@@ -95,10 +91,6 @@
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AceptarSolicitudGrupo</servlet-name>
-        <url-pattern>/aceptarsolicitudgrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ComprobarEstadoUsuario</servlet-name>
