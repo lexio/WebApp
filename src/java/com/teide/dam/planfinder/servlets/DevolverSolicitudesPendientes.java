@@ -50,6 +50,7 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
 //                } catch (HibernateException e) {
 //                    out.println("NOK");
 //                }
+                System.out.println("PRUEBA");
             }
     }
     
