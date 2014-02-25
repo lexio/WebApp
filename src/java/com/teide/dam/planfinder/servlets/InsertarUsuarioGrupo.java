@@ -25,7 +25,7 @@ import org.hibernate.Session;
  *
  * @author mike
  */
-public class insertarUsuarioGrupo extends HttpServlet {
+public class InsertarUsuarioGrupo extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
