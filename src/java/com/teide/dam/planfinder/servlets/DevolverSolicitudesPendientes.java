@@ -35,17 +35,17 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
 //                    UsuarioDAO uDAO = new UsuarioDAO(session);
 //                    GrupoDAO gDAO = new GrupoDAO(session);
 //                    Usuario u = uDAO.comprobarUsuario(usuarioSim);
-////                    Grupo g = gDAO.comprobarCreador(u);
-////                    String creador = g.getCreador();
-////                    if(!usuarioSim.equals(creador)){
-////                        Gson json = new Gson();
-////                        String nombreUsu = u.getNombre();
-////                        String nombreGru = g.getNombre();
-////                        String[] values =new String[2];
-////                        values[0]= nombreUsu;
-////                        values[1]= nombreGru;
-////                        String valores = json.toJson(values);
-////                        System.out.println(valores);
+//                    Grupo g = gDAO.comprobarCreador(u);
+//                    String creador = g.getCreador();
+//                    if(!usuarioSim.equals(creador)){
+//                        Gson json = new Gson();
+//                        String nombreUsu = u.getNombre();
+//                        String nombreGru = g.getNombre();
+//                        String[] values =new String[2];
+//                        values[0]= nombreUsu;
+//                        values[1]= nombreGru;
+//                        String valores = json.toJson(values);
+//                        System.out.println(valores);
 //                    }
 //                } catch (HibernateException e) {
 //                    out.println("NOK");
