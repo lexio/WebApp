@@ -1,48 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>enviarSolicitudGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitudGrupo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GuardarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverMensajes</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AceptarSolicitudGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.AceptarSolicitudGrupo</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ComprobarEstadoUsuario</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.ComprobarEstadoUsuario</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RechazarSolicitudGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.RechazarSolicitudGrupo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.AltaGrupoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ConfirmarGrupoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.ConfirmarGrupoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DenegarGrupoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DevolverGruposServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverGruposServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BorrarGrupoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.BorrarGrupoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InsertarUsuarioServlet</servlet-name>
@@ -57,10 +21,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.ActualizarPosicionUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverTipoNombres</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverTipos</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EliminarGrupoServlet</servlet-class>
     </servlet>
@@ -71,14 +31,6 @@
     <servlet>
         <servlet-name>EnviarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarMensajes</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DevolverGruposAlfabetico</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverGruposAlfabetico</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LogearUsuario</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.LoguearUsuario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BuscarNombeGrupoServlet</servlet-name>
@@ -92,41 +44,17 @@
         <servlet-name>ComprobarUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.ComprobarUsuario</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>enviarSolicitudGrupo</servlet-name>
-        <url-pattern>/enviarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AceptarSolicitudGrupo</servlet-name>
-        <url-pattern>/aceptarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ComprobarEstadoUsuario</servlet-name>
-        <url-pattern>/comprobarestadousuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RechazarSolicitudGrupo</servlet-name>
-        <url-pattern>/rechazarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EnviarSolicitud</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitud</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ConfirmarGrupoServlet</servlet-name>
-        <url-pattern>/confirmargrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DenegarGrupoServlet</servlet-name>
-        <url-pattern>/denegargrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DevolverGruposServlet</servlet-name>
-        <url-pattern>/devolvergrupos</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BorrarGrupoServlet</servlet-name>
-        <url-pattern>/borrargrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GuardarMensajes</servlet-name>
@@ -135,10 +63,6 @@
     <servlet-mapping>
         <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
         <url-pattern>/actualizarposicionusuarioservlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DevolverTipoNombres</servlet-name>
-        <url-pattern>/devolvertiponombresservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InsertarUsuarioServlet</servlet-name>
@@ -161,14 +85,6 @@
         <url-pattern>/enviarmensajes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DevolverGruposAlfabetico</servlet-name>
-        <url-pattern>/DevolverGruposAlfabetico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DevolverMensajes</servlet-name>
-        <url-pattern>/devolvermensajes</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>BuscarNombeGrupoServlet</servlet-name>
         <url-pattern>/buscarnombregrupo</url-pattern>
     </servlet-mapping>
@@ -179,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>ComprobarUsuario</servlet-name>
         <url-pattern>/comprobarusuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
+        <url-pattern>/devolversolicitudespendientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnviarSolicitud</servlet-name>
+        <url-pattern>/enviarsolicitud</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
