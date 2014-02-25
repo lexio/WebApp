@@ -23,7 +23,6 @@ import org.hibernate.Session;
 
 
 public class DevolverSolicitudesPendientes extends HttpServlet {
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String usuarioSim = req.getParameter("sim");
@@ -58,5 +57,3 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
 
     
         }
-    }
-}
