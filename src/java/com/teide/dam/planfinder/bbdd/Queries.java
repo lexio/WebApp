@@ -28,6 +28,7 @@ public class Queries {
     public static final String BUSCAR_TIPO_TODO = "from Tipo";
     public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.IdTipo=:idtipo and t.nombre=:nombre";
     public static final String BUSCAR_ID_TIPO_POR_NOMBRE = "from Tipo as t where t.nombre=:nombre";
+    public static final String BUSCAR_NOMBRE_POR_ID = "from Tipo as t where t.idTipo=:idTipo";
     //Queries de Usuario
     public static final String BUSCAR_TODOS_LOS_USUARIOS = "from Usuario u where u.estado=:'VISIBLE'";
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.sim=:sim";

@@ -56,6 +56,10 @@
         <servlet-name>ComprobarUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.ComprobarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarNombreTipo</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreTipo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>enviarSolicitudGrupo</servlet-name>
         <url-pattern>/enviarsolicitudgrupo</url-pattern>
@@ -120,10 +124,12 @@
         <servlet-name>EnviarSolicitud</servlet-name>
         <url-pattern>/enviarsolicitud</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarNombreTipo</servlet-name>
+        <url-pattern>/buscarnombretipo</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
