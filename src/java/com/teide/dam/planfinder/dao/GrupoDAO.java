@@ -37,7 +37,7 @@ public class GrupoDAO extends GenericDAO{
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         session.persist(g);
-        tx.commit();
+        
     }
     
     public ArrayList<Grupo> buscarGrupoNombre (String nombre){
