@@ -37,7 +37,8 @@ public class TipoDAO extends GenericDAO{
     
     public Tipo ComprobarTipo(int idTipo, String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_TIPO_Y_GRUPO);
-        q.setParameter("idTipo", q);
+        q.setParameter("idTipo", idTipo);
+        q.setParameter("nombre", nombre);
         return (Tipo)q.uniqueResult();
                
     }
@@ -49,7 +50,7 @@ public class TipoDAO extends GenericDAO{
     
     public Tipo buscaridtipo(String nombre){
        Query q = getSession().createQuery(Queries.BUSCAR_ID_TIPO_POR_NOMBRE);
-       q.setParameter("nombre", q);
+       q.setParameter("nombre", nombre);
        return (Tipo)q.uniqueResult();
     }
     

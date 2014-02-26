@@ -61,7 +61,6 @@ public class AltaGrupoServlet extends HttpServlet {
         if(usuario != null || !usuario.trim().isEmpty() ||
                 tipoString != null || !tipoString.trim().isEmpty() ||
                 nombre != null || !nombre.trim().isEmpty() ||
-                fechaCreacion != null || !fechaCreacion.trim().isEmpty()||
                 radioEmisionString != null || !radioEmisionString.trim().isEmpty() ){
             
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();

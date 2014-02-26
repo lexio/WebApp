@@ -5,18 +5,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverMensajes</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverMensajesServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ComprobarEstadoUsuario</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.ComprobarEstadoUsuario</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RechazarSolicitudGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.RechazarSolicitudGrupo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.AltaGrupoServlet</servlet-class>
     </servlet>
@@ -53,6 +41,10 @@
         <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioGrupo</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ComprobarUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.ComprobarUsuario</servlet-class>
     </servlet>
@@ -60,18 +52,10 @@
         <servlet-name>BuscarNombreTipo</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreTipo</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>enviarSolicitudGrupo</servlet-name>
-        <url-pattern>/enviarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ComprobarEstadoUsuario</servlet-name>
-        <url-pattern>/comprobarestadousuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RechazarSolicitudGrupo</servlet-name>
-        <url-pattern>/rechazarsolicitudgrupo</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>EnviarSolicitud</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitud</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
