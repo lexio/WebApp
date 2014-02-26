@@ -34,7 +34,7 @@ public class BuscarNombreTipo extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             TipoDAO tdao = new TipoDAO(session);
-             Tipo t = tdao.buscarNombreTipo(idtipo);
+            Tipo t = tdao.buscarNombreTipo(idtipo);
             Gson json = new Gson();
             String resultado = json.toJson(t);
             out.println(resultado);

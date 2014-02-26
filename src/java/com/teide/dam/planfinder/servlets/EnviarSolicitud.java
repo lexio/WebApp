@@ -54,7 +54,7 @@ public class EnviarSolicitud extends HttpServlet {
                     values[2] = idGrupo;
                     values[3] = nombreGru;
                     String valores = json.toJson(values);
-                    System.out.println(valores);
+                    out.println(valores);
                 }
             } catch (HibernateException e) {
                 out.println("NOK");
