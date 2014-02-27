@@ -69,6 +69,7 @@
         <servlet-name>DenegarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
@@ -128,6 +129,10 @@
     <servlet-mapping>
         <servlet-name>DenegarGrupoServlet</servlet-name>
         <url-pattern>/denegargrupo</url-pattern>
+=======
+        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
+        <url-pattern>/devolversolicitudespendientes</url-pattern>
+>>>>>>> branch 'master' of https://github.com/lexio/WebApp.git
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
