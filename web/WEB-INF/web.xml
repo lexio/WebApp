@@ -54,10 +54,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreTipo</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EnviarSolicitud</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitud</servlet-class>
     </servlet>
