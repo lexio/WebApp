@@ -61,7 +61,6 @@ public class AltaGrupoServlet extends HttpServlet {
         if(usuario != null || !usuario.trim().isEmpty() ||
                 tipoString != null || !tipoString.trim().isEmpty() ||
                 nombre != null || !nombre.trim().isEmpty() ||
-                fechaCreacion != null || !fechaCreacion.trim().isEmpty()||
                 radioEmisionString != null || !radioEmisionString.trim().isEmpty() ){
             
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -75,14 +74,17 @@ public class AltaGrupoServlet extends HttpServlet {
             //RECIBIMOS LOS DATOS DEL TIPO
             
             TipoDAO tDAO = new TipoDAO(session);
+            System.out.println(tipoString);
             int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
+            System.out.println(idTipo);
             Tipo tipo = tDAO.BuscarNombreTipo(idTipo);
             
             int radioEmision = Integer.parseInt(radioEmisionString);
             
             Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
             
-            if (latitud!=null || !latitud.trim().isEmpty() || latitud!=""){
+            if (latitud==null || latitud.trim().isEmpty() || latitud==""){}
+            else {
                 UbicacionDAO ubiDAO = new UbicacionDAO(session);
                 double lat = Double.parseDouble(latitud);
                 double lon = Double.parseDouble(longitud);
@@ -91,11 +93,13 @@ public class AltaGrupoServlet extends HttpServlet {
                 grupo.setUbicacion(ubicacion);
             }
             
-            if (descripcion!=null ||descripcion.trim().isEmpty()){
+            if (descripcion==null || descripcion.trim().isEmpty()){}
+            else {
                 grupo.setDescripcion(descripcion);
             }
             
-            if (fechaFinalizacion!=null || fechaFinalizacion.trim().isEmpty()){
+            if (fechaFinalizacion==null || fechaFinalizacion.trim().isEmpty()){}
+            else {
                 SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
                 Date fFinalizacion=null;
                 try {
@@ -106,7 +110,8 @@ public class AltaGrupoServlet extends HttpServlet {
                 grupo.setFechaFinalizacion(fFinalizacion);
             }
             
-            if (fechaInicioActividad!=null || fechaInicioActividad.trim().isEmpty()){
+            if (fechaInicioActividad==null || fechaInicioActividad.trim().isEmpty()){}
+            else {
                 SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
                 Date fInicioActividad=null;
                 try {
@@ -117,7 +122,8 @@ public class AltaGrupoServlet extends HttpServlet {
                 grupo.setFechaInicioActividad(fInicioActividad);
             }
             
-            if (fechaFinActividad!=null || fechaFinActividad.trim().isEmpty()){
+            if (fechaFinActividad==null || fechaFinActividad.trim().isEmpty()){}
+            else {
                 SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
                 Date fFinActividad=null;
                 try {
@@ -127,9 +133,13 @@ public class AltaGrupoServlet extends HttpServlet {
                 }
                 grupo.setFechaFinActividad(fFinActividad);
             }
-            
-            
+            GrupoDAO gdao= new GrupoDAO(session);
+            gdao.altaGrupo(grupo);
+            tx.commit();
             out.println(grupo.getIdGrupo());
+            out.println(grupo.getNombre());
+            out.println(grupo.getFechaCreacion());
+            
         }
     }
 

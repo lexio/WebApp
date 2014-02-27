@@ -39,15 +39,16 @@ public class BuscarNombeGrupoServlet extends HttpServlet {
             
             ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
             
+            session.evict(g);
+            
             for (Grupo grupo : g) {
                 grupo.setUbicacion(null);
                 grupo.setTipo(null);
                 grupo.setMensajes(null);
                 grupo.setUsuario(null);
                 grupo.setPerteneces(null);
-//                g.remove(grupo);
             }
-            session.evict(g);
+            
 
             Gson json = new Gson();
             String resultado = json.toJson(g);
