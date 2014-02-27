@@ -4,6 +4,7 @@
         <servlet-name>GuardarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.GuardarMensajesServlet</servlet-class>
     </servlet>
+        
     <servlet>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.AltaGrupoServlet</servlet-class>
@@ -51,6 +52,10 @@
     <servlet>
         <servlet-name>BuscarNombreTipo</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreTipo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EnviarSolicitud</servlet-name>
@@ -107,10 +112,6 @@
     <servlet-mapping>
         <servlet-name>ComprobarUsuario</servlet-name>
         <url-pattern>/comprobarusuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
-        <url-pattern>/devolversolicitudespendientes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EnviarSolicitud</servlet-name>

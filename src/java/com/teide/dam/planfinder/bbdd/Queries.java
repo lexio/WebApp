@@ -15,6 +15,7 @@ public class Queries {
     public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idGrupo";
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
     public static final String COGER_CREADOR = "from Grupo as g where g.usuario=:usuario";
+    public static final String BUSCAR_GRUPOS_CREADOR = "from Grupo as g where g.usuario.sim=:usuariosim and g.estado=:estado";
     public static final String COGER_SIM = "from Usuario as usu where usu.sim=:sim";
     public static final String BUSCAR_GRUPOS_ALFABETICO = "from Grupo order by nombre";
     
@@ -26,9 +27,9 @@ public class Queries {
             
     //Queries de tipo
     //public static final String ACTUALIZAR_POS = "UPDATE Usuario as u SET u.latitud=:lat, u.longitud:=log  WHERE u.sim=:sim";
-    public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.idTipo=:idTipo";
+    public static final String BUSCAR_TIPO_NOMBRE = "from Tipo as t where t.idTipo=:idtipo";
     public static final String BUSCAR_TIPO_TODO = "from Tipo";
-    public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.idTipo=:idTipo and t.nombre=:nombre";
+    public static final String BUSCAR_TIPO_Y_GRUPO = "from Tipo as t where t.idTipo=:idtipo and t.nombre=:nombre";
     public static final String BUSCAR_ID_TIPO_POR_NOMBRE = "from Tipo as t where t.nombre=:nombre";
     public static final String BUSCAR_NOMBRE_POR_ID = "from Tipo as t where t.idTipo=:idTipo";
     //Queries de Usuario

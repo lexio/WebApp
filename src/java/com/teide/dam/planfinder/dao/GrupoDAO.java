@@ -115,6 +115,15 @@ public class GrupoDAO extends GenericDAO{
         return (Usuario)q.uniqueResult();
     }
     
+    public ArrayList<Grupo> devolverGruposCreador(String sim){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_CREADOR);
+        q.setParameter("usuariosim", sim);
+        q.setParameter("estado", Estados.HABILITADO);
+        ArrayList<Grupo> grupoCreador = (ArrayList<Grupo>) q.list();       
+        return grupoCreador;
+    }
+    
+    
     public String recogerSim (String usuario_Sim){
         Query q = getSession().createQuery(Queries.COGER_SIM);
         q.setParameter("sim", usuario_Sim);
