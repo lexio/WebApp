@@ -34,28 +34,30 @@ public class EliminarGrupoServlet extends HttpServlet {
         String idGrupo = req.getParameter("idgrupo");
         String sim = req.getParameter("sim");
         if (idGrupo != null || !idGrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()) {
-            try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                Transaction tx = session.beginTransaction();
-                GrupoDAO gDAO = new GrupoDAO(session);
-                PerteneceDAO pDAO = new PerteneceDAO(session);
-                ArrayList<Pertenece> personas = pDAO.devolverPersonasGrupo(idGrupo);
-                if (personas.size() == 0) {
-                    
-                } else {
-                    for (Pertenece p : personas) {
-                        p.setEstado(Estados.BANEADO);
-                    }
-                    out.println("OK");
-                }
-                String resultado = gDAO.eliminarGrupo(idGrupo);
-                if (resultado == "OK") {
-                    tx.commit();
-                    out.println("OK");
-                }
 
-            } catch (Exception e) {
-                out.println("Error "+ e.getMessage());
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            GrupoDAO gDAO = new GrupoDAO(session);
+            PerteneceDAO pDAO = new PerteneceDAO(session);
+
+            Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
+            if (g != null) {
+                //Es propietario
+                if (sim.equals(g.getUsuario().getSim())) {
+                    for (Pertenece p : g.getPerteneces()) {
+                        p.setEstado(Estados.BANEADO);
+                        out.println("Entro para borrar el grupo entero");
+                        //Enviar notificación GCM
+                    }
+                    g.setEstado(Estados.NOHABILITADO);
+                } else {
+                    //Obtener el pertenece del usuario en ese grupo
+                    //cambiar el estado a ESE pertenece
+                    Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
+                    p.setEstado(Estados.BANEADO);
+                    out.println("cambio estado usuario.");
+                }
+                tx.commit();
             }
 
 

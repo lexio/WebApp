@@ -77,7 +77,7 @@ public class AltaGrupoServlet extends HttpServlet {
             System.out.println(tipoString);
             int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
             System.out.println(idTipo);
-            Tipo tipo = tDAO.BuscarNombreTipo(idTipo);
+            Tipo tipo = tDAO.buscarNombreTipo(idTipo);
             
             int radioEmision = Integer.parseInt(radioEmisionString);
             
@@ -136,8 +136,8 @@ public class AltaGrupoServlet extends HttpServlet {
             GrupoDAO gdao= new GrupoDAO(session);
             gdao.altaGrupo(grupo);
             tx.commit();
-            out.println(grupo.getIdGrupo());
-            out.println(grupo.getUsuario());
+            int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario);
+            out.println(componentesGrupo+"/"+grupo.getIdGrupo());
             
             
             

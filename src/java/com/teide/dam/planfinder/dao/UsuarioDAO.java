@@ -37,7 +37,7 @@ public class UsuarioDAO extends GenericDAO{
    
         GregorianCalendar gc = new GregorianCalendar();
         Date ultimaConexion = gc.getTime();
-        Usuario u = new Usuario(sim, nombre, "disponible", radioRecepcion, latitud, longitud, ultimaConexion,gcm);
+        Usuario u = new Usuario(sim, nombre, "visible", radioRecepcion, latitud, longitud, ultimaConexion,gcm);
         try {
             getSession().persist(u);
             return "OK";

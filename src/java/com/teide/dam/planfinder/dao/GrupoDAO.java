@@ -102,6 +102,12 @@ public class GrupoDAO extends GenericDAO{
         return (Grupo)q.uniqueResult();
     }
     
+    public Grupo comprobarGrupoyEstado(String idGrupo, String estado){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS);
+        q.setParameter("idgrupo", idGrupo);
+        q.setParameter("estado", estado);
+        return (Grupo)q.uniqueResult();
+    }
     public ArrayList<Grupo> devolverNombresGrupo (int tipo){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
         q.setParameter("tipo", tipo);
