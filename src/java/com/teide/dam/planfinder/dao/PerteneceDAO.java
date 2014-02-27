@@ -8,6 +8,7 @@ package com.teide.dam.planfinder.dao;
 import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.util.Estados;
+import java.util.ArrayList;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -70,5 +71,11 @@ public class PerteneceDAO extends GenericDAO{
             return "OK";
         }else return "NOK";
         //getSession().persist();
+    }
+    
+    public ArrayList<Pertenece> devolverPersonasGrupo (String idGrupo){
+        Query q = getSession().createQuery(Queries.DEVOLVER_PERSONAS_GRUPO);
+        q.setParameter("idGrupo", idGrupo);
+        return (ArrayList<Pertenece>) q.list();
     }
 }

@@ -20,6 +20,8 @@ public class Queries {
     
     //Queries pertenece
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:usuario_sim and p.grupo=:id_grupo";
+    public static final String DEVOLVER_PERSONAS_GRUPO = "from Pertenece p where p.grupo=:idGrupo";
+    
     //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
             
     //Queries de tipo

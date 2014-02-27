@@ -61,11 +61,10 @@ public class GrupoDAO extends GenericDAO{
         if (g.getEstado().equals(Estados.HABILITADO)) {
             g.setEstado(Estados.NOHABILITADO);
             session.persist(g);
-            tx.commit();
-            return "OK_"+g.getEstado();
+            return "OK";
         }
         else{
-            return "nok_"+g.getEstado();
+            return "NOK";
         }
     }
         /*buscar grupo de usuario. + sql.
