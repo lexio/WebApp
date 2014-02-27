@@ -77,7 +77,7 @@ public class AltaGrupoServlet extends HttpServlet {
             System.out.println(tipoString);
             int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
             System.out.println(idTipo);
-            Tipo tipo = tDAO.BuscarNombreTipo(idTipo);
+            Tipo tipo = tDAO.buscarNombreTipo(idTipo);
             
             int radioEmision = Integer.parseInt(radioEmisionString);
             
