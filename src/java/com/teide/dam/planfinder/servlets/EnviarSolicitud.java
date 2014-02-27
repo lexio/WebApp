@@ -5,6 +5,7 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.google.gson.Gson;
+import com.teide.dam.planfinder.bean.GruposSolicitadosBean;
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
@@ -15,6 +16,7 @@ import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -29,27 +29,25 @@ public class TipoDAO extends GenericDAO{
         tx.commit();
     }
     
-    public Tipo BuscarNombreTipo(int idTipo){
+    public ArrayList<Tipo> BuscarNombreTipo(int idtipo){
         Query q = getSession().createQuery(Queries.BUSCAR_TIPO_NOMBRE);
-        q.setParameter("idTipo", idTipo);
-        return (Tipo)q.uniqueResult();       
+        q.setParameter("idtipo", idtipo);
+        ArrayList<Tipo> tipos = (ArrayList<Tipo>)q.list();
+        return tipos;
     }
     
-    public Tipo ComprobarTipo(int idTipo, String nombre){
+    public Tipo ComprobarTipo(int idtipo, String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_TIPO_Y_GRUPO);
-        q.setParameter("idTipo", q);
+        q.setParameter("idtipo", idtipo);
+        q.setParameter("nombre", nombre);
         return (Tipo)q.uniqueResult();
                
     }
-    
-    
-    
-    
-    
+      
     
     public Tipo buscaridtipo(String nombre){
        Query q = getSession().createQuery(Queries.BUSCAR_ID_TIPO_POR_NOMBRE);
-       q.setParameter("nombre", q);
+       q.setParameter("nombre", nombre);
        return (Tipo)q.uniqueResult();
     }
     
@@ -59,11 +57,11 @@ public class TipoDAO extends GenericDAO{
         return tipos;
     }
     
-    public Tipo buscarNombreTipo(String idtipo){
-       Query q = getSession().createQuery(Queries.BUSCAR_NOMBRE_POR_ID);
-       q.setParameter("idtipo", q);
-       return (Tipo)q.uniqueResult();
-    }
+//    public Tipo buscarNombreTipo(int idtipo){
+//       Query q = getSession().createQuery(Queries.BUSCAR_NOMBRE_POR_ID);
+//       q.setParameter("idtipo", idtipo);
+//       return (Tipo)q.uniqueResult();
+//    }
 
 
 }
