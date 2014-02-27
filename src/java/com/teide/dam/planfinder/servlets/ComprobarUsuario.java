@@ -5,6 +5,8 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.google.gson.Gson;
+import com.teide.dam.planfinder.bean.GrupoBean;
+import com.teide.dam.planfinder.bean.UsuarioBean;
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
@@ -13,6 +15,7 @@ import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,26 +40,25 @@ public class ComprobarUsuario extends HttpServlet {
             UsuarioDAO uDAO = new UsuarioDAO(session);
             Usuario u = uDAO.comprobarUsuario(sim);
             if (u != null) {
+                UsuarioBean ub = new UsuarioBean();
                 Set<Pertenece> perteneces = u.getPerteneces();
-                System.out.println("Num perteneces: " + perteneces.size());
-                session.evict(u);
-                u.setGrupos(null);
-                u.setMensajes(null);
-
+                ub.setClaveGCM(u.getClaveGcm());
+                ub.setEstado(u.getEstado());
+                ub.setRadioRecepcion(u.getRadioRecepcion());
+                ArrayList<GrupoBean> grupos = new ArrayList<>();
+              
                 for (Pertenece pertenece : perteneces) {
-                    pertenece.setUsuario(null);
-                    Grupo grupo = pertenece.getGrupo();
-                    //session.evict(grupo);
-                    grupo.setUbicacion(null);
-                    System.out.println("Nombre: "+grupo.getNombre());
-                    grupo.setTipo(null);
-                    grupo.setMensajes(null);
-                    grupo.setUsuario(null);
-                    grupo.setPerteneces(null);
+                    GrupoBean gb = new GrupoBean();
+                    gb.setDescripcion(pertenece.getGrupo().getDescripcion());
+                    gb.setNombreGrupo(pertenece.getGrupo().getNombre());
+                    gb.setIdGrupo(pertenece.getGrupo().getIdGrupo());
+                    grupos.add(gb);
+                                    
                 }
-
+                ub.setGrupos(grupos);
+                
                 Gson json = new Gson();
-                String resultado = json.toJson(u);
+                String resultado = json.toJson(ub);
                 out.println(resultado);
             } else {
                 out.println("NOK");
