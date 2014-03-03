@@ -140,7 +140,6 @@
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <url-pattern>/eliminargrupo</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -159,4 +158,4 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    </web-app>
+</web-app>
