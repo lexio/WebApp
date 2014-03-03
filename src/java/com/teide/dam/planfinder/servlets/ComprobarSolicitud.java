@@ -28,11 +28,11 @@ public class ComprobarSolicitud extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String estado = req.getParameter("estado");
         String idgrupo = req.getParameter("idgrupo");
-        String creador = req.getParameter("creador");
+        //String creador = req.getParameter("creador");
         String sim = req.getParameter("sim");
 
 
-        if (sim != null && !sim.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || creador != null && !creador.trim().isEmpty()) {
+        if (sim != null && !sim.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null || !estado.trim().isEmpty()) {
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();

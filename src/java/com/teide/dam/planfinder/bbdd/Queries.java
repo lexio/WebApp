@@ -21,7 +21,7 @@ public class Queries {
     public static final String BUSCAR_GRUPOS_ALFABETICO = "from Grupo order by nombre";
     
     //Queries pertenece
-    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:sim and p.grupo=:id_grupo";
+    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:sim and p.grupo=:idgrupo";
     public static final String DEVOLVER_PERSONAS_GRUPO = "from Pertenece p where p.grupo=:idGrupo";
     
     //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";

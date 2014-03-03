@@ -43,8 +43,10 @@ public class EditarUsuarioServlet extends HttpServlet {
                 int radioRecepcion = Integer.parseInt(radioRecepcionString);
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
+                Transaction tx = session.beginTransaction();
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 out.println(uDAO.editarUsuario(sim, nombre, estado, radioRecepcion));
+                tx.commit();
             } catch (HibernateException e) {
                 out.println("NOK");
             }
