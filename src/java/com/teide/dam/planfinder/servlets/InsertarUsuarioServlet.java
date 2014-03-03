@@ -45,7 +45,7 @@ public class InsertarUsuarioServlet extends HttpServlet {
         
         
         if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null || !radioRecepcionString.trim().isEmpty() 
-                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
+                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty() || claveGcm != null && !claveGcm.trim().isEmpty()){
             try {
                 System.out.println("Entro en el if");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();

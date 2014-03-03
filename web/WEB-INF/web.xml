@@ -64,7 +64,7 @@
         <servlet-name>DenegarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.gcm.RegisterServlet</servlet-class>
     </servlet>
