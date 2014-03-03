@@ -64,6 +64,22 @@
         <servlet-name>DenegarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendAllMessagesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.SendAllMessagesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendAllMessagesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.SendAllMessagesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
@@ -123,6 +139,14 @@
     <servlet-mapping>
         <servlet-name>DevolverSolicitudesPendientes</servlet-name>
         <url-pattern>/devolversolicitudespendientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/registerservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendAllMessagesServlet</servlet-name>
+        <url-pattern>/sendallmessagesservlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EliminarGrupoServlet</servlet-name>
