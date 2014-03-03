@@ -72,6 +72,10 @@
         <servlet-name>SendAllMessagesServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.gcm.SendAllMessagesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ComprobarSolicitud</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ComprobarSolicitud</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
@@ -145,11 +149,14 @@
         <servlet-name>SendAllMessagesServlet</servlet-name>
         <url-pattern>/sendallmessages</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComprobarSolicitud</servlet-name>
+        <url-pattern>/comprobarsolicitud</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
-.
+    </welcome-file-list>.
     </web-app>

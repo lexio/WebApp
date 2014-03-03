@@ -90,4 +90,12 @@ public class PerteneceDAO extends GenericDAO{
         q.setParameter("idGrupo", idGrupo);
         return (ArrayList<Pertenece>) q.list();
     }
+    
+    public Pertenece comprobarSolicitud(String sim, String idgrupo){
+        Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
+        q.setParameter("sim", sim);
+        q.setParameter("idgrupo", idgrupo);
+        return (Pertenece) q.uniqueResult();
+      
+     }
 }
