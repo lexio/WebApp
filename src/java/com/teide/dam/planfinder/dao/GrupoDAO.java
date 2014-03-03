@@ -42,7 +42,7 @@ public class GrupoDAO extends GenericDAO{
     
     public ArrayList<Grupo> buscarGrupoNombre (String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
-        q.setParameter("nombre", nombre);
+        q.setParameter("nombre", "%"+nombre+"%");
         ArrayList<Grupo> grupos = (ArrayList<Grupo>) q.list();
         return grupos;
     }

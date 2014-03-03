@@ -64,7 +64,7 @@
         <servlet-name>DenegarGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.gcm.RegisterServlet</servlet-class>
     </servlet>
@@ -140,7 +140,6 @@
         <servlet-name>EliminarGrupoServlet</servlet-name>
         <url-pattern>/eliminargrupo</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -158,5 +157,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-    </welcome-file-list>.
-    </web-app>
+    </welcome-file-list>
+</web-app>
