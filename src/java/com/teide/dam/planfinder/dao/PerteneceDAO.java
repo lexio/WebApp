@@ -7,7 +7,9 @@ package com.teide.dam.planfinder.dao;
 
 import com.teide.dam.planfinder.bbdd.Queries;
 import com.teide.dam.planfinder.pojos.Pertenece;
+import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.Estados;
+import java.util.ArrayList;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -35,12 +37,23 @@ public class PerteneceDAO extends GenericDAO{
      * (pongo el return, para que no de error).
      */  
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
-        q.setParameter("usuario_sim", usuarioSim);
+        q.setParameter("sim", usuarioSim);
         q.setParameter("id_grupo", idGrupo);
         Pertenece p = (Pertenece) q.uniqueResult();
         return p ;
     }
           
+     public Pertenece devolverUsuario(String sim,String idgrupo){
+        Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
+        q.setParameter("sim", sim);
+        q.setParameter("id_grupo", idgrupo);
+        Pertenece p = (Pertenece) q.uniqueResult();
+        return p;
+     }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
     public String enviarSolicitudAUsuario(String usuarioSim,String idGrupo){
        /* se cambia el estado de ese usuario en ese grupo, a "solicitado"  */
         Pertenece p = comprobarEstadoUsuario(usuarioSim, idGrupo);
@@ -70,5 +83,11 @@ public class PerteneceDAO extends GenericDAO{
             return "OK";
         }else return "NOK";
         //getSession().persist();
+    }
+    
+    public ArrayList<Pertenece> devolverPersonasGrupo (String idGrupo){
+        Query q = getSession().createQuery(Queries.DEVOLVER_PERSONAS_GRUPO);
+        q.setParameter("idGrupo", idGrupo);
+        return (ArrayList<Pertenece>) q.list();
     }
 }

@@ -5,12 +5,16 @@
 package com.teide.dam.planfinder.servlets;
 
 import com.teide.dam.planfinder.dao.GrupoDAO;
+import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
+import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,21 +32,36 @@ public class EliminarGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String idGrupo = req.getParameter("idgrupo");
-        if (idGrupo !=null || !idGrupo.trim().isEmpty()){
+        String sim = req.getParameter("sim");
+        if (idGrupo != null || !idGrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()) {
+
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
-            String resultado= gDAO.eliminarGrupo(idGrupo);
-           if (resultado== "OK") {
-               out.println("OK");
-           }
-           else {
-               out.println(resultado);
-               
-           }
-        
-        }
-        
-    }
+            PerteneceDAO pDAO = new PerteneceDAO(session);
 
+            Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
+            if (g != null) {
+                //Es propietario
+                if (sim.equals(g.getUsuario().getSim())) {
+                    for (Pertenece p : g.getPerteneces()) {
+                        p.setEstado(Estados.BANEADO);
+                        out.println("Entro para borrar el grupo entero");
+                        //Enviar notificación GCM
+                    }
+                    g.setEstado(Estados.NOHABILITADO);
+                } else {
+                    //Obtener el pertenece del usuario en ese grupo
+                    //cambiar el estado a ESE pertenece
+                    Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
+                    p.setEstado(Estados.BANEADO);
+                    out.println("cambio estado usuario.");
+                }
+                tx.commit();
+            }
+
+
+        }
+
+    }
 }

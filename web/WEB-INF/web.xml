@@ -53,12 +53,24 @@
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreTipo</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DevolverSolicitudesPendientes</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EnviarSolicitud</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarSolicitud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmarGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.ConfirmarGrupoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DenegarGrupoServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.DenegarGrupoServlet</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendAllMessagesServlet</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.gcm.SendAllMessagesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
@@ -70,7 +82,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
-        <url-pattern>/actualizarposicionusuarioservlet</url-pattern>
+        <url-pattern>/actualizarposicionusuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InsertarUsuarioServlet</servlet-name>
@@ -79,10 +91,6 @@
     <servlet-mapping>
         <servlet-name>EditarUsuarioServlet</servlet-name>
         <url-pattern>/editarusuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EliminarGrupoServlet</servlet-name>
-        <url-pattern>/eliminargrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FechaServidor</servlet-name>
@@ -113,8 +121,29 @@
         <url-pattern>/buscarnombretipo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ConfirmarGrupoServlet</servlet-name>
+        <url-pattern>/confirmargrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DenegarGrupoServlet</servlet-name>
+        <url-pattern>/denegargrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DevolverSolicitudesPendientes</servlet-name>
         <url-pattern>/devolversolicitudespendientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarGrupoServlet</servlet-name>
+        <url-pattern>/eliminargrupo</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendAllMessagesServlet</servlet-name>
+        <url-pattern>/sendallmessages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
@@ -122,4 +151,5 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-</web-app>
+.
+    </web-app>

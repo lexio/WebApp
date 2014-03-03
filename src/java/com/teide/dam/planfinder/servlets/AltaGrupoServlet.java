@@ -104,8 +104,8 @@ public class AltaGrupoServlet extends HttpServlet {
                 Date fFinalizacion=null;
                 try {
                     fFinalizacion = formatoDelTexto.parse(fechaFinalizacion);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
+                }  catch (Exception e) {
+                    e.getMessage();
                 }
                 grupo.setFechaFinalizacion(fFinalizacion);
             }
@@ -116,8 +116,8 @@ public class AltaGrupoServlet extends HttpServlet {
                 Date fInicioActividad=null;
                 try {
                     fInicioActividad = formatoDelTexto.parse(fechaInicioActividad);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
+                }  catch (Exception e) {
+                    e.getMessage();
                 }
                 grupo.setFechaInicioActividad(fInicioActividad);
             }
@@ -128,17 +128,19 @@ public class AltaGrupoServlet extends HttpServlet {
                 Date fFinActividad=null;
                 try {
                     fFinActividad = formatoDelTexto.parse(fechaFinActividad);
-                }  catch (ParseException ex) {
-                    ex.printStackTrace();
+                }  catch (Exception e) {
+                    e.getMessage();
                 }
                 grupo.setFechaFinActividad(fFinActividad);
             }
             GrupoDAO gdao= new GrupoDAO(session);
             gdao.altaGrupo(grupo);
             tx.commit();
-            out.println(grupo.getIdGrupo());
-            out.println(grupo.getNombre());
-            out.println(grupo.getFechaCreacion());
+            int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario);
+            out.println(componentesGrupo+"/"+grupo.getIdGrupo());
+            
+            
+            
             
         }
     }

@@ -61,11 +61,10 @@ public class GrupoDAO extends GenericDAO{
         if (g.getEstado().equals(Estados.HABILITADO)) {
             g.setEstado(Estados.NOHABILITADO);
             session.persist(g);
-            tx.commit();
-            return "OK_"+g.getEstado();
+            return "OK";
         }
         else{
-            return "nok_"+g.getEstado();
+            return "NOK";
         }
     }
         /*buscar grupo de usuario. + sql.
@@ -103,6 +102,12 @@ public class GrupoDAO extends GenericDAO{
         return (Grupo)q.uniqueResult();
     }
     
+    public Grupo comprobarGrupoyEstado(String idGrupo, String estado){
+        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS);
+        q.setParameter("idgrupo", idGrupo);
+        q.setParameter("estado", estado);
+        return (Grupo)q.uniqueResult();
+    }
     public ArrayList<Grupo> devolverNombresGrupo (int tipo){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
         q.setParameter("tipo", tipo);

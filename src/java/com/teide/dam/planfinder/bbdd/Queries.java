@@ -16,11 +16,14 @@ public class Queries {
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
     public static final String COGER_CREADOR = "from Grupo as g where g.usuario=:usuario";
     public static final String BUSCAR_GRUPOS_CREADOR = "from Grupo as g where g.usuario.sim=:usuariosim and g.estado=:estado";
+    public static final String BUSCAR_GRUPOS = "from Grupo as g where g.idGrupo=:idgrupo and g.estado=:estado";
     public static final String COGER_SIM = "from Usuario as usu where usu.sim=:sim";
     public static final String BUSCAR_GRUPOS_ALFABETICO = "from Grupo order by nombre";
     
     //Queries pertenece
-    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:usuario_sim and p.grupo=:id_grupo";
+    public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:sim and p.grupo=:id_grupo";
+    public static final String DEVOLVER_PERSONAS_GRUPO = "from Pertenece p where p.grupo=:idGrupo";
+    
     //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
             
     //Queries de tipo
