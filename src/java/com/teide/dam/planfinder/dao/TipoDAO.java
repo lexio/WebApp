@@ -57,15 +57,11 @@ public class TipoDAO extends GenericDAO{
         return tipos;
     }
     
-
     public Tipo buscarNombreTipo(int idtipo){
-       Query q = getSession().createQuery(Queries.BUSCAR_NOMBRE_POR_ID);
+       Query q = getSession().createQuery(Queries.BUSCAR_TIPO_NOMBRE);
        q.setParameter("idtipo", idtipo);
        return (Tipo)q.uniqueResult();
     }
 
    
-
-
-
 }
