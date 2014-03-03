@@ -45,7 +45,7 @@ public class InsertarUsuarioServlet extends HttpServlet {
         
         
         if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null || !radioRecepcionString.trim().isEmpty() 
-                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty() || claveGcm != null && !claveGcm.trim().isEmpty()){
+                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
             try {
                 System.out.println("Entro en el if");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -56,6 +56,7 @@ public class InsertarUsuarioServlet extends HttpServlet {
                 double longitud = Double.parseDouble(longitudString);
                 out.println(uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm));
                 tx.commit();
+                
             } catch (HibernateException e) {
                 out.println("NOK");
             }
