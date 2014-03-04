@@ -21,10 +21,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.EliminarGrupoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FechaServidor</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.FechaServidor</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EnviarMensajes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarMensajes</servlet-class>
     </servlet>
@@ -87,10 +83,6 @@
     <servlet-mapping>
         <servlet-name>EditarUsuarioServlet</servlet-name>
         <url-pattern>/editarusuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FechaServidor</servlet-name>
-        <url-pattern>/fechaservidor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EnviarMensajes</servlet-name>

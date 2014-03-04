@@ -38,7 +38,7 @@ public class ActualizarPosicionUsuarioServlet extends HttpServlet {
                 String respuesta = uDAO.actualizarPosicionUsuario(sim, latitud, longitud);
                 tx.commit();
                 out.println(respuesta);
-            } catch (HibernateException e) {
+            } catch (NumberFormatException | HibernateException e) {
                 out.println("NOK");
             }
         }

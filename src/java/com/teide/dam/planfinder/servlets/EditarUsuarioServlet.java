@@ -47,7 +47,8 @@ public class EditarUsuarioServlet extends HttpServlet {
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 out.println(uDAO.editarUsuario(sim, nombre, estado, radioRecepcion));
                 tx.commit();
-            } catch (HibernateException e) {
+                
+            } catch (NumberFormatException | HibernateException e) {
                 out.println("NOK");
             }
                

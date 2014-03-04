@@ -43,21 +43,23 @@ public class EnviarSolicitud extends HttpServlet {
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 GrupoDAO gDAO = new GrupoDAO(session);
                 Pertenece p = pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
-                String estado = p.getEstado();
-                if (!estado.equals(Estados.BANEADO)) {
-                    Gson json = new Gson();
-                    Usuario u = uDAO.comprobarUsuario(usuarioSim);
-                    String nombreUsu = u.getNombre();
-                    Grupo g = gDAO.comprobarGrupo(idGrupo);
-                    String nombreGru = g.getNombre();
-                    String[] values = new String[4];
-                    values[0] = usuarioSim;
-                    values[1] = nombreUsu;
-                    values[2] = idGrupo;
-                    values[3] = nombreGru;
-                    String valores = json.toJson(values);
-                    out.println(valores);
-                }
+                if(p!=null){
+                    String estado = p.getEstado();
+                    if (!estado.equals(Estados.BANEADO)) {
+                        Gson json = new Gson();
+                        Usuario u = uDAO.comprobarUsuario(usuarioSim);
+                        String nombreUsu = u.getNombre();
+                        Grupo g = gDAO.comprobarGrupo(idGrupo);
+                        String nombreGru = g.getNombre();
+                        String[] values = new String[4];
+                        values[0] = usuarioSim;
+                        values[1] = nombreUsu;
+                        values[2] = idGrupo;
+                        values[3] = nombreGru;
+                        String valores = json.toJson(values);
+                        out.println(valores);
+                    }
+                  }else out.println("NOK");
             } catch (HibernateException e) {
                 out.println("NOK");
             }
