@@ -33,10 +33,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombeGrupoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>insertarUsuarioGrupo</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioGrupo</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DevolverSolicitudesPendientes</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.DevolverSolicitudesPendientes</servlet-class>
     </servlet>
@@ -72,6 +68,10 @@
         <servlet-name>ComprobarSolicitud</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.ComprobarSolicitud</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertarUsuario</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
@@ -99,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>BuscarNombeGrupoServlet</servlet-name>
         <url-pattern>/buscarnombregrupo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>insertarUsuarioGrupo</servlet-name>
-        <url-pattern>/insertarusuariogrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ComprobarUsuario</servlet-name>
@@ -143,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>ComprobarSolicitud</servlet-name>
         <url-pattern>/comprobarsolicitud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertarUsuario</servlet-name>
+        <url-pattern>/insertarusuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
