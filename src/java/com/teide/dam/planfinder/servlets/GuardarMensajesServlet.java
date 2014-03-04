@@ -38,23 +38,25 @@ public class GuardarMensajesServlet extends HttpServlet {
        //?mensaje=Hola&grupo=Fiesta&usuario=Pepe
        String mensaje = req.getParameter("mensaje");
        String grupo = req.getParameter("grupo") ;
-       String usuariosim = req.getParameter("usuariosim");
+       String sim = req.getParameter("sim");
        //Buscar grupo y usuario en base a los datos que le enviamos (id_grupo y sim) y a partir de ahí añadir
        //Por ahora supondré que nos dan el nombre del grupo y no el id
 
        try {
-                if (usuariosim != null || !usuariosim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
+                if (sim != null || !sim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
                     Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                     Transaction tx = session.beginTransaction();
                     GrupoDAO gDAO=new GrupoDAO(session);
                     Grupo grupos= gDAO.comprobarGrupo(grupo);
                     UsuarioDAO uDAO=new UsuarioDAO(session);
-                    Usuario usuario= uDAO.comprobarUsuario(usuariosim);
+                    Usuario usuario= uDAO.comprobarUsuario(sim);
                     PerteneceDAO pDAO=new PerteneceDAO(session);
-                    Pertenece p = pDAO.comprobarEstadoUsuario(usuariosim, grupo);
+                    Pertenece p = pDAO.comprobarEstadoUsuario(sim, grupo);
                     if(p.getEstado().equals("ACEPTADO")){
                         Mensaje m = new Mensaje(grupos, usuario, mensaje, new GregorianCalendar().getInstance().getTime(), "Enviado");
                         MensajeDAO.alta(m);
+                        session.persist(m);
+                        tx.commit();
                         out.println("OK");}
                     else out.println("NOK");   
                }

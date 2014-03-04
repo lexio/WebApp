@@ -31,14 +31,14 @@ public class PerteneceDAO extends GenericDAO{
         super(session);
     }
  
-     public Pertenece comprobarEstadoUsuario(String usuarioSim,String idGrupo){
+     public Pertenece comprobarEstadoUsuario(String sim,String idgrupo){
     /*comprobar estado de usuario (baneado, solicitado, aceptado, noSolicitado)
      * si es baneado o solicitado, devuelve un false, si no es true
      * (pongo el return, para que no de error).
      */  
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
-        q.setParameter("sim", usuarioSim);
-        q.setParameter("id_grupo", idGrupo);
+        q.setParameter("sim", sim);
+        q.setParameter("idgrupo", idgrupo);
         Pertenece p = (Pertenece) q.uniqueResult();
         return p ;
     }
