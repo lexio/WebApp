@@ -9,10 +9,6 @@
         <servlet-class>com.teide.dam.planfinder.servlets.AltaGrupoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>InsertarUsuarioServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuarioServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditarUsuarioServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.EditarUsuarioServlet</servlet-class>
     </servlet>
@@ -87,10 +83,6 @@
     <servlet-mapping>
         <servlet-name>ActualizarPosicionUsuarioServlet</servlet-name>
         <url-pattern>/actualizarposicionusuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InsertarUsuarioServlet</servlet-name>
-        <url-pattern>/insertarusuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditarUsuarioServlet</servlet-name>

@@ -33,8 +33,7 @@ public class MensajeDAO extends GenericDAO{
     public static void alta (Mensaje m) {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
-        sesion.persist(m);
-        tx.commit();
+        
     }
     
       public ArrayList<Mensaje> devolverMensajes (String idGrupo) {
