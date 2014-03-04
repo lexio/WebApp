@@ -46,7 +46,7 @@ public class PerteneceDAO extends GenericDAO{
      public Pertenece devolverUsuario(String sim,String idgrupo){
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
         q.setParameter("sim", sim);
-        q.setParameter("id_grupo", idgrupo);
+        q.setParameter("idgrupo", idgrupo);
         Pertenece p = (Pertenece) q.uniqueResult();
         return p;
      }
