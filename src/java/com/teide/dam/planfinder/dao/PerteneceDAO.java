@@ -87,7 +87,7 @@ public class PerteneceDAO extends GenericDAO{
     
     public ArrayList<Pertenece> devolverPersonasGrupo (String idGrupo){
         Query q = getSession().createQuery(Queries.DEVOLVER_PERSONAS_GRUPO);
-        q.setParameter("idGrupo", idGrupo);
+        q.setParameter("idgrupo", idGrupo);
         return (ArrayList<Pertenece>) q.list();
     }
     
