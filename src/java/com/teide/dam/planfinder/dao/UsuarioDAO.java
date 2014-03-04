@@ -14,6 +14,7 @@ import com.teide.dam.planfinder.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,17 +34,13 @@ public class UsuarioDAO extends GenericDAO{
         super(session);
     }
     
-    public String insertarUsuario(String sim, String nombre, int radioRecepcion, double latitud, double longitud,String gcm ){
+    public Usuario insertarUsuario(String sim, String nombre, int radioRecepcion, double latitud, double longitud,String gcm ) throws HibernateException{
    
         GregorianCalendar gc = new GregorianCalendar();
         Date ultimaConexion = gc.getTime();
         Usuario u = new Usuario(sim, nombre, "visible", radioRecepcion, latitud, longitud, ultimaConexion,gcm);
-        try {
-            getSession().persist(u);
-            return "OK";
-        } catch (Exception e) {
-            return "NOK";
-        }        
+        getSession().persist(u);
+        return u;
     }
     
     public Usuario comprobarUsuario(String sim){
@@ -138,11 +135,11 @@ public class UsuarioDAO extends GenericDAO{
                     System.out.println("M: "+km);
                     if (km <= radioRecepcionU){
                         try {
-                        System.out.println("El creador esta en el radio del usuario");
+                            System.out.println("El creador esta en el radio del usuario");
                             PerteneceId pId = new PerteneceId(simU, g.getIdGrupo());
                             Pertenece p = new Pertenece(pId, g, usuario, Estados.ACEPTADO);
-                        sesion.persist(p);
-                        usuarios++;
+                            sesion.persist(p);
+                            usuarios++;
                             System.out.println("***************************Añadido :"+usuario.getNombre());
                         } catch (Exception e) {
                             System.out.println("NOK");

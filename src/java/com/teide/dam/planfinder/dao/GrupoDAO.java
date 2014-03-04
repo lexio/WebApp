@@ -33,7 +33,7 @@ public class GrupoDAO extends GenericDAO{
     /* comprobar que lo que devuelven los metodos es lo correcto, tendremos que devolver "Json" a los moviles
      * esta mario con ello.
     */
-    public static void altaGrupo (Grupo g){
+    public void altaGrupo (Grupo g){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         session.persist(g);
@@ -78,11 +78,11 @@ public class GrupoDAO extends GenericDAO{
 
     }
     
-    public String confirmarGrupo(int idGrupo, int numPersonas){
+    public String confirmarGrupo(int idgrupo, int numPersonas){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
-        q.setParameter("idGrupo", idGrupo);
+        q.setParameter("idgrupo", idgrupo);
         Grupo g = (Grupo)q.uniqueResult();
         g.setEstado(Estados.HABILITADO);
         session.persist(g);
@@ -98,7 +98,7 @@ public class GrupoDAO extends GenericDAO{
         
     public Grupo comprobarGrupo(String idGrupo){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
-        q.setParameter("idGrupo", idGrupo);
+        q.setParameter("idgrupo", idGrupo);
         return (Grupo)q.uniqueResult();
     }
     

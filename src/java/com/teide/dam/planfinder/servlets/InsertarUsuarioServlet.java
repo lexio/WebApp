@@ -35,28 +35,28 @@ public class InsertarUsuarioServlet extends HttpServlet {
         String claveGcm = req.getParameter("clavegcm");
         PrintWriter out = resp.getWriter();
         
-        System.out.println("Entro en el Service");
-        System.out.println(sim);
-        System.out.println(nombre);
-        System.out.println(radioRecepcionString);
-        System.out.println(latitudString);
-        System.out.println(longitudString);
-        System.out.println(claveGcm);
+//        System.out.println("Entro en el Service");
+//        System.out.println(sim);
+//        System.out.println(nombre);
+//        System.out.println(radioRecepcionString);
+//        System.out.println(latitudString);
+//        System.out.println(longitudString);
+//        System.out.println(claveGcm);
         
         
         if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null || !radioRecepcionString.trim().isEmpty() 
                 || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
             try {
-                System.out.println("Entro en el if");
+                //System.out.println("Entro en el if");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 int radioRecepcion = Integer.parseInt(radioRecepcionString);
                 double latitud = Double.parseDouble(latitudString);
                 double longitud = Double.parseDouble(longitudString);
-                out.println(uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm));
+                uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);
                 tx.commit();
-                
+                out.println("OK");
             } catch (HibernateException e) {
                 out.println("NOK");
             }

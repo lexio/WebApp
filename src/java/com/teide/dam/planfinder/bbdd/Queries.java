@@ -12,7 +12,7 @@ public class Queries {
     //Queries de grupo
     public static final String BUSCAR_GRUPO_NOMBRE = "from Grupo as g where g.nombre like :nombre";
     public static final String BUSCAR_GRUPO_TIPO = "from Grupo as g where g.tipo=:tipo";
-    public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idGrupo";
+    public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idgrupo";
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
     public static final String COGER_CREADOR = "from Grupo as g where g.usuario=:usuario";
     public static final String BUSCAR_GRUPOS_CREADOR = "from Grupo as g where g.usuario.sim=:usuariosim and g.estado=:estado";
@@ -22,7 +22,7 @@ public class Queries {
     
     //Queries pertenece
     public static final String COMPROBAR_USUARIO_GRUPO = "from Pertenece p where p.usuario=:sim and p.grupo=:idgrupo";
-    public static final String DEVOLVER_PERSONAS_GRUPO = "from Pertenece p where p.grupo=:idGrupo";
+    public static final String DEVOLVER_PERSONAS_GRUPO = "from Pertenece p where p.grupo=:idgrupo";
     
     //public static final String CAMBIAR_ESTADO_USUARIO_GRUPO = "from Pertenece p where p.usuario_sim=:usuario_sim and p.id_grupo=:id_grupo";
             
@@ -42,5 +42,5 @@ public class Queries {
     public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
     
     //Queries de mensaje 
-    public static final String BUSCAR_MENSAJES_GRUPO = "from Mensaje as m where m.grupo=:idGrupo";
+    public static final String BUSCAR_MENSAJES_GRUPO = "from Mensaje as m where m.grupo=:idgrupo";
 }
