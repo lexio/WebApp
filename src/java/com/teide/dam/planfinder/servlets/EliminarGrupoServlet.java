@@ -45,7 +45,7 @@ public class EliminarGrupoServlet extends HttpServlet {
                 //Es propietario
                 if (sim.equals(g.getUsuario().getSim())) {
                     for (Pertenece p : g.getPerteneces()) {
-                        p.setEstado(Estados.BANEADO);
+                        p.setEstado(Estados.NOSOLICITADO);
                         System.out.println("Entro para borrar el grupo entero");
                         //Enviar notificación GCM
                     }
@@ -54,7 +54,7 @@ public class EliminarGrupoServlet extends HttpServlet {
                     //Obtener el pertenece del usuario en ese grupo
                     //cambiar el estado a ESE pertenece
                     Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
-                    p.setEstado(Estados.BANEADO);
+                    p.setEstado(Estados.NOSOLICITADO);
                     System.out.println("cambio estado usuario");
                 }
                 tx.commit();

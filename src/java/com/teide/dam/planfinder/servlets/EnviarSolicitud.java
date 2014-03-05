@@ -11,6 +11,7 @@ import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Pertenece;
+import com.teide.dam.planfinder.pojos.PerteneceId;
 import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -38,18 +40,18 @@ public class EnviarSolicitud extends HttpServlet {
         if (usuarioSim != null || !usuarioSim.trim().isEmpty() || idGrupo != null || idGrupo.trim().isEmpty()) {
             try {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                session.beginTransaction();
+                Transaction tx=  session.beginTransaction();
                 PerteneceDAO pDAO = new PerteneceDAO(session);
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 GrupoDAO gDAO = new GrupoDAO(session);
                 Pertenece p = pDAO.comprobarEstadoUsuario(usuarioSim, idGrupo);
+                Usuario u = uDAO.comprobarUsuario(usuarioSim);
+                Grupo g = gDAO.comprobarGrupoyEstado(idGrupo,Estados.HABILITADO);
                 if(p!=null){
                     String estado = p.getEstado();
                     if (!estado.equals(Estados.BANEADO)) {
                         Gson json = new Gson();
-                        Usuario u = uDAO.comprobarUsuario(usuarioSim);
                         String nombreUsu = u.getNombre();
-                        Grupo g = gDAO.comprobarGrupo(idGrupo);
                         String nombreGru = g.getNombre();
                         String[] values = new String[4];
                         values[0] = usuarioSim;
@@ -59,7 +61,18 @@ public class EnviarSolicitud extends HttpServlet {
                         String valores = json.toJson(values);
                         out.println(valores);
                     }
-                  }else out.println("NOK");
+                } else{
+                    
+                    if (g!=null && u!=null) {
+                        int idgrupoInt = Integer.parseInt(idGrupo);
+                        PerteneceId pId = new PerteneceId(usuarioSim, idgrupoInt);
+                        p = new Pertenece(pId, g, u, Estados.SOLICITADO);
+                        session.persist(p);
+                        tx.commit();
+                        out.println("OK");
+                    }else out.println("NOK");
+                    
+                }
             } catch (HibernateException e) {
                 out.println("NOK");
             }

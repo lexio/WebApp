@@ -32,7 +32,7 @@ public class ComprobarSolicitud extends HttpServlet {
         String sim = req.getParameter("sim");
 
 
-        if (sim != null && !sim.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null || !estado.trim().isEmpty()) {
+        if (sim != null && !sim.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null && !estado.trim().isEmpty()) {
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
