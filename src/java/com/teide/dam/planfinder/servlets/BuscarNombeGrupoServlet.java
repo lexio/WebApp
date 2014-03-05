@@ -33,26 +33,31 @@ public class BuscarNombeGrupoServlet extends HttpServlet {
             out.println("NOK");
         }
         else{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            try{
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             GrupoDAO gDAO = new GrupoDAO(session);
             
             ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
             
-            session.evict(g);
-            
             for (Grupo grupo : g) {
+                session.evict(grupo);
                 grupo.setUbicacion(null);
                 grupo.setTipo(null);
                 grupo.setMensajes(null);
                 grupo.setUsuario(null);
                 grupo.setPerteneces(null);
             }
-            
+//                System.out.println(g);
 
             Gson json = new Gson();
             String resultado = json.toJson(g);
-            out.println(resultado);            
+            out.println(resultado);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+                        
         }
     }
 

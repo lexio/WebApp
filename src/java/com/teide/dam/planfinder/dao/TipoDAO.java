@@ -33,6 +33,7 @@ public class TipoDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.BUSCAR_TIPO_NOMBRE);
         q.setParameter("idtipo", idtipo);
         ArrayList<Tipo> tipos = (ArrayList<Tipo>)q.list();
+        
         return tipos;
     }
     

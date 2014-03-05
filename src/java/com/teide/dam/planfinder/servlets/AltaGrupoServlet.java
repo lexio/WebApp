@@ -58,12 +58,18 @@ public class AltaGrupoServlet extends HttpServlet {
         String fechaFinActividad = req.getParameter("fechafinactividad");
         String radioEmisionString = req.getParameter("radioemision");
         
-        if(usuario != null || !usuario.trim().isEmpty() ||
-                tipoString != null || !tipoString.trim().isEmpty() ||
-                nombre != null || !nombre.trim().isEmpty() ||
-                radioEmisionString != null || !radioEmisionString.trim().isEmpty() ){
+        if(usuario == null && usuario.trim().isEmpty() &&
+                tipoString == null && tipoString.trim().isEmpty() &&
+                nombre == null && nombre.trim().isEmpty() &&
+                radioEmisionString == null && radioEmisionString.trim().isEmpty() ){
             
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            out.println("NOK");
+            
+
+        }
+        else{
+            try{
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
             
             //RECIBIMOS LA SESION Y ALMACENAMOS UN USUARIO QUE SERÁ EL CREADOR
@@ -135,12 +141,14 @@ public class AltaGrupoServlet extends HttpServlet {
             }
             GrupoDAO gdao= new GrupoDAO(session);
             gdao.altaGrupo(grupo);
-            tx.commit();
+            //tx.commit();
             int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario);
             out.println(componentesGrupo+"/"+grupo.getIdGrupo());
+            }
             
-            
-            
+            catch(Exception e){
+                out.println("NOK "+e);
+            }
             
         }
     }
