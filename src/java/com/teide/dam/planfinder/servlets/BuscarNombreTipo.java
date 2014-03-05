@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 
-
 /**
  *
  * @author dam2
@@ -28,26 +27,42 @@ public class BuscarNombreTipo extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String idtipoString = req.getParameter("idtipo");
-        if (idtipoString != null || !idtipoString.trim().isEmpty()){
+        if (idtipoString == null || idtipoString.trim().isEmpty()) {
+        
+            out.println("NOK");
+        
+        }
+        else{
+            
             try {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
                 TipoDAO tdao = new TipoDAO(session);
+                
+                
+                
                 int idtipo = Integer.parseInt(idtipoString);
+                
+                
+                
+                
                 ArrayList<Tipo> t = tdao.BuscarNombreTipo(idtipo);
                 session.evict(t);
                 for (Tipo tipo : t) {
                     tipo.setGrupos(null);
-                }
-                Gson json = new Gson();
-                String resultado = json.toJson(t);
-                out.println(resultado);
-            } catch (Exception e) {
-                out.println("NOK");
-           }
-            
-        }
                     
-        }
-    }
+                }
+                
+                    Gson json = new Gson();
+                    String resultado = json.toJson(t);
+                    out.println(resultado);
+                
+                
+            } catch (NumberFormatException e) {
+                out.println("NOK");
+            }
 
+        } 
+
+    }
+}
