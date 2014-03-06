@@ -63,7 +63,7 @@ public class ComprobarUsuario extends HttpServlet {
             } else {
                 out.println("NOK");
             }
-        }
+        } else {out.println("NOK");}
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         GrupoDAO gDAO = new GrupoDAO(session);
         
