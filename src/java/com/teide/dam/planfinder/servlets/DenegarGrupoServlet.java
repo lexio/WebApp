@@ -45,8 +45,8 @@ public class DenegarGrupoServlet extends HttpServlet {
                             //System.out.println("Entro en el if...");
                             g.setEstado(Estados.NOHABILITADO);
                             session.persist(g);
-                            tx.commit();
                             session.flush();
+                            tx.commit();
                             out.println("OK");
                          }else out.println("NOK");   
                      }else out.println("NOK");        

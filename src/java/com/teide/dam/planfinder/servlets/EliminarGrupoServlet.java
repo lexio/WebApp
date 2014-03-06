@@ -58,8 +58,8 @@ public class EliminarGrupoServlet extends HttpServlet {
                         p.setEstado(Estados.NOSOLICITADO);
                         System.out.println("cambio estado usuario");
                     }
-                    tx.commit();
                     session.flush();
+                    tx.commit();
                     out.println("OK");
                 }else out.println("NOK");
             } catch (Exception e) {

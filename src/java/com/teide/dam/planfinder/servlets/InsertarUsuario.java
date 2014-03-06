@@ -55,8 +55,8 @@ public class InsertarUsuario extends HttpServlet {
                 double latitud = Double.parseDouble(latitudString);
                 double longitud = Double.parseDouble(longitudString);
                 uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);
-                tx.commit();
                 session.flush();
+                tx.commit();
                 out.println("OK");
             } catch (HibernateException | NumberFormatException e) {
                 out.println("NOK");

@@ -43,8 +43,8 @@ public class ComprobarSolicitud extends HttpServlet {
                 if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
                     respuesta.setEstado(Estados.ACEPTADO);
                     session.persist(respuesta);
-                    tx.commit();
                     session.flush();
+                    tx.commit();
                     out.println("OK");
                 } else {
                     out.println("NOK");

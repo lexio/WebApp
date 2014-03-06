@@ -69,8 +69,8 @@ public class EnviarSolicitud extends HttpServlet {
                         PerteneceId pId = new PerteneceId(usuarioSim, idgrupoInt);
                         p = new Pertenece(pId, g, u, Estados.SOLICITADO);
                         session.persist(p);
-                        tx.commit();
                         session.flush();
+                        tx.commit();
                         out.println("OK");
                     }else out.println("NOK");
                     

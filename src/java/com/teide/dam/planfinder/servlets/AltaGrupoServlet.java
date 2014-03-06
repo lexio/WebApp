@@ -148,8 +148,9 @@ public class AltaGrupoServlet extends HttpServlet {
                 GrupoDAO gdao= new GrupoDAO(session);
                 gdao.altaGrupo(grupo);
                 //tx.commit();
-                int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario, radioEmision);
                 session.flush();
+                int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario, radioEmision);
+                
                 out.println(componentesGrupo+"/"+grupo.getIdGrupo());
             }
             

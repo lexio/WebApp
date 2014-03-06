@@ -45,8 +45,8 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     Grupo grupos= gDAO.comprobarGrupo(idgrupo);
                     grupos.setEstado(Estados.HABILITADO);
                     session.persist(grupos);
-                    tx.commit();
                     session.flush();
+                    tx.commit();
                     out.println("OK");
                 }else {out.println("NOK");}
                 }   

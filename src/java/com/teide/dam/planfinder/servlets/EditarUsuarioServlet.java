@@ -48,8 +48,8 @@ public class EditarUsuarioServlet extends HttpServlet {
                     if(estado.equals(Estados.VISIBLE)||estado.equals(Estados.INVISIBLE)){
                         if (u!=null) {
                         uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
-                        tx.commit();
                         session.flush();
+                        tx.commit();
                         out.println("OK");
                         }else out.println("NOK");
                     }else out.println("NOK");

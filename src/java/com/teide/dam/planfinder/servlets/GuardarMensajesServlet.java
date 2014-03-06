@@ -57,8 +57,8 @@ public class GuardarMensajesServlet extends HttpServlet {
                         Mensaje m = new Mensaje(grupos, usuario, mensaje, new GregorianCalendar().getInstance().getTime(), "Enviado");
                         MensajeDAO.alta(m);
                         session.persist(m);
-                        tx.commit();
                         session.flush();
+                        tx.commit();
                         out.println("OK");}
                     else out.println("NOK");   
                }
