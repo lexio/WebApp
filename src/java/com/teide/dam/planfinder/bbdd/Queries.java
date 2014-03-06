@@ -11,7 +11,6 @@ package com.teide.dam.planfinder.bbdd;
 public class Queries {
     //Queries de grupo
     public static final String BUSCAR_GRUPO_NOMBRE = "from Grupo as g where g.nombre like :nombre";
-    public static final String BUSCAR_USUARIO_GRUPO = "from Pertenece as p where p.idGrupo=:grupo";
     public static final String BUSCAR_GRUPO_TIPO = "from Grupo as g where g.tipo=:tipo";
     public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idgrupo";
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";

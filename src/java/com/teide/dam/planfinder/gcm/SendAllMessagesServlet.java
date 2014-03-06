@@ -12,6 +12,8 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.teide.dam.planfinder.dao.PerteneceDAO;
 import com.teide.dam.planfinder.dao.UsuarioDAO;
+import com.teide.dam.planfinder.pojos.Pertenece;
+import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class SendAllMessagesServlet extends BaseServlet {
     Session session = HibernateUtil.getSessionFactory().getCurrentSession();
     session.beginTransaction();
     PerteneceDAO pDAO = new PerteneceDAO(session);
-    
+    pDAO.devolverPersonasGrupo(idGrupo);
     
     String status = "";
     status = status + "The message is: " + MESSAGE + " ";
