@@ -43,7 +43,7 @@ public class SendAllMessagesServlet extends BaseServlet {
       throws IOException, ServletException {
     System.out.println("Estoy en el doPost de enviar mensajes");
     ServletConfig config = getServletConfig();    
-    List<String> devices = Datastore.getDevices();
+    ArrayList<Usuario> devices = new ArrayList<>();
     String MESSAGE;
     if (req.getAttribute("msg")!=null) MESSAGE = req.getAttribute("msg").toString();
     else MESSAGE = (String)req.getParameter("messageToSend");
@@ -56,7 +56,11 @@ public class SendAllMessagesServlet extends BaseServlet {
     Session session = HibernateUtil.getSessionFactory().getCurrentSession();
     session.beginTransaction();
     PerteneceDAO pDAO = new PerteneceDAO(session);
-    pDAO.devolverPersonasGrupo(idGrupo);
+    ArrayList<Pertenece> usuarios = pDAO.devolverPersonasGrupo(idGrupo);
+      for (Pertenece pertenece : usuarios) {          
+          Usuario u = pertenece.getUsuario();          
+          devices.add(u);          
+      }
     
     String status = "";
     status = status + "The message is: " + MESSAGE + " ";
@@ -69,7 +73,7 @@ public class SendAllMessagesServlet extends BaseServlet {
       // could always send a multicast, even for just one recipient
       if (devices.size() == 1) {
         // send a single message using plain post
-        String registrationId = devices.get(0).toString();
+        String registrationId = devices.get(0).getClaveGcm();
           System.out.println(registrationId);
           System.out.println("Voy a mandarlo a :"+registrationId);
          Message.Builder builder = new Message.Builder();
@@ -90,10 +94,10 @@ public class SendAllMessagesServlet extends BaseServlet {
         List<String> partialDevices = new ArrayList<String>(total);
         int counter = 0;
         int tasks = 0;
-        for (String device : devices) {
+        for (Usuario device : devices) {
             System.out.println(device);
           counter++;
-          partialDevices.add(device);
+          partialDevices.add(device.getClaveGcm());
           int partialSize = partialDevices.size();
           if (partialSize == MULTICAST_SIZE || counter == total) {
             asyncSend(partialDevices,MESSAGE);
