@@ -23,7 +23,7 @@ import org.hibernate.Transaction;
  *
  * @author Mario
  */
-public class BuscarNombreGrupoServlet extends HttpServlet {
+public class BuscarNombeGrupoServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
