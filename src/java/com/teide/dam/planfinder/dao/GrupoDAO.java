@@ -111,12 +111,6 @@ public class GrupoDAO extends GenericDAO{
         return (Grupo)q.uniqueResult();
     }
     
-       public Grupo comprobarCreadorGrupo (String usuario, String idgrupo){
-        Query q = getSession().createQuery(Queries.COMPROBAR_CREADOR_GRUPO);
-        q.setParameter("usuario", usuario);
-        q.setParameter("idgrupo", idgrupo);
-        return (Grupo)q.uniqueResult();
-    }
     
     public ArrayList<Grupo> devolverGruposCreador(String sim){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_CREADOR);
@@ -127,7 +121,7 @@ public class GrupoDAO extends GenericDAO{
     }
     
     
-    public integer recogerSim (integer usuario_Sim){
+    public String recogerSim (String usuario_Sim){
         Query q = getSession().createQuery(Queries.COGER_SIM);
         q.setParameter("sim", usuario_Sim);
         if(q.uniqueResult()==true) return "OK";
