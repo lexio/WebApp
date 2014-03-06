@@ -49,7 +49,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     tx.commit();
                     req.setAttribute("msg", "Has sido dado de alta en un nuevo grupo");
                     System.out.println("Antes de salir");
-                    req.getServletContext().getRequestDispatcher("sendallmessagesservlet").include(req, resp);
+                    req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
                     System.out.println("Después de salir");
                     out.println("OK");
                 }else {out.println("NOK");}
@@ -57,6 +57,8 @@ public class ConfirmarGrupoServlet extends HttpServlet {
        }
        else{ out.println("NOK");}
        
-       }catch (Exception e){out.println("Error: "+e.getMessage());}
+       }catch (Exception e){
+           System.out.println("Error: "+e.getMessage());
+           out.println("Error: "+e.getMessage());}
     }
 }

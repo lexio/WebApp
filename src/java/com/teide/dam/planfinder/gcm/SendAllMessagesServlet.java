@@ -33,34 +33,12 @@ public class SendAllMessagesServlet extends BaseServlet {
   private Sender sender;
 
   private static final Executor threadPool = Executors.newFixedThreadPool(5);
-
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-      System.out.println("En el init");
-    super.init(config);
-    sender = newSender(config);
-  }
-
-  /**
-   * Creates the {@link Sender} based on the servlet settings.
-   */
-  protected Sender newSender(ServletConfig config) {
-      System.out.println("En el newSender");
-    String key = (String) config.getServletContext()
-        .getAttribute(ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
-      System.out.println("La key desde el apikeyinitializer:"+ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
-      System.out.println("Esta es la key: "+key);
-    return new Sender(ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
-  }
-
-  /**
-   * Processes the request to add a new message.
-   */
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws IOException, ServletException {
       System.out.println("Estoy en el doPost de enviar mensajes");
       ServletConfig config = getServletConfig();
+      System.out.println("Antes del init");
       init(config);
     List<String> devices = Datastore.getDevices();
     String MESSAGE;
@@ -120,7 +98,14 @@ public class SendAllMessagesServlet extends BaseServlet {
     req.setAttribute(HomeServlet.ATTRIBUTE_STATUS, status.toString()); //why are we dispatchign the request?  doesnt it automactially handle it or do we have to do it every time we ant to send a apramter between servelets?
     getServletContext().getRequestDispatcher("/home").forward(req, resp); //what is goign on with this by the way why is it sending this to home,is it sesnindg it toth ehome servelt?
   }
-
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+      System.out.println("En el init");
+    super.init(config);
+    System.out.println("La key desde el apikeyinitializer:"+ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
+    sender = new Sender(ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
+    
+  }
   private void asyncSend(List<String> partialDevices,final String MESSAGE) {
     // make a copy
     final List<String> devices = new ArrayList<String>(partialDevices);
