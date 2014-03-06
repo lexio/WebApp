@@ -124,7 +124,7 @@ public class GrupoDAO extends GenericDAO{
     public String recogerSim (String usuario_Sim){
         Query q = getSession().createQuery(Queries.COGER_SIM);
         q.setParameter("sim", usuario_Sim);
-        if(q.uniqueResult()==true) return "OK";
+        if(q.uniqueResult()!=null) return "OK";
         else return "NOK";
     }
     

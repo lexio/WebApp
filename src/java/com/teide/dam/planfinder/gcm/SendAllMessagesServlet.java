@@ -63,7 +63,9 @@ public class SendAllMessagesServlet extends BaseServlet {
       ServletConfig config = getServletConfig();
       init(config);
     List<String> devices = Datastore.getDevices();
-    String MESSAGE = (String)req.getParameter("messageToSend");
+    String MESSAGE;
+    if (req.getAttribute("msg")!=null) MESSAGE = req.getAttribute("msg").toString();
+    else MESSAGE = (String)req.getParameter("messageToSend");
     if (MESSAGE == null)
       MESSAGE="NULL";
     

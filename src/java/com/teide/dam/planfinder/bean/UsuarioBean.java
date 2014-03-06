@@ -12,8 +12,17 @@ import java.util.ArrayList;
  */
 public class UsuarioBean {
     
+    private String nombre;
     private int radioRecepcion;
     private String estado;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     private ArrayList<GrupoBean> grupos;
     private String claveGCM;
 
@@ -25,6 +34,7 @@ public class UsuarioBean {
         this.estado = estado;
         this.grupos = grupos;
         this.claveGCM = claveGCM;
+        this.nombre = nombre;
     }
 
     public int getRadioRecepcion() {

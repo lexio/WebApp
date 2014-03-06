@@ -42,6 +42,7 @@ public class ComprobarUsuario extends HttpServlet {
             if (u != null) {
                 UsuarioBean ub = new UsuarioBean();
                 Set<Pertenece> perteneces = u.getPerteneces();
+                ub.setNombre(u.getNombre());
                 ub.setClaveGCM(u.getClaveGcm());
                 ub.setEstado(u.getEstado());
                 ub.setRadioRecepcion(u.getRadioRecepcion());
