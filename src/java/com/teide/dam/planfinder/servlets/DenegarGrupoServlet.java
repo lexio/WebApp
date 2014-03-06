@@ -46,6 +46,7 @@ public class DenegarGrupoServlet extends HttpServlet {
                             g.setEstado(Estados.NOHABILITADO);
                             session.persist(g);
                             tx.commit();
+                            session.flush();
                             out.println("OK");
                          }else out.println("NOK");   
                      }else out.println("NOK");        

@@ -59,6 +59,7 @@ public class ComprobarUsuario extends HttpServlet {
                 
                 Gson json = new Gson();
                 String resultado = json.toJson(ub);
+                session.flush();
                 out.println(resultado);
             } else {
                 out.println("NOK");

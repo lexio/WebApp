@@ -39,6 +39,7 @@ public class ActualizarPosicionUsuarioServlet extends HttpServlet {
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 String respuesta = uDAO.actualizarPosicionUsuario(sim, latitud, longitud);
                 tx.commit();
+                session.flush();
                 out.println(respuesta);
             } catch (NumberFormatException | HibernateException e) {
                 out.println("NOK");

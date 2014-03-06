@@ -44,6 +44,7 @@ public class ComprobarSolicitud extends HttpServlet {
                     respuesta.setEstado(Estados.ACEPTADO);
                     session.persist(respuesta);
                     tx.commit();
+                    session.flush();
                     out.println("OK");
                 } else {
                     out.println("NOK");
@@ -56,17 +57,12 @@ public class ComprobarSolicitud extends HttpServlet {
                     respuesta.setEstado(Estados.BANEADO);
                     session.persist(respuesta);
                     tx.commit();
+                    session.flush();
                     out.println("OK");
                 } else {
                     out.println("NOK");
                 }
             }
-
-
-
-
-
-
 
         }
 

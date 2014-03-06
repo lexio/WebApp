@@ -46,6 +46,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     grupos.setEstado(Estados.HABILITADO);
                     session.persist(grupos);
                     tx.commit();
+                    session.flush();
                     out.println("OK");
                 }else {out.println("NOK");}
                 }   

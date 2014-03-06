@@ -56,6 +56,7 @@ public class BuscarNombreTipo extends HttpServlet {
                 
                     Gson json = new Gson();
                     String resultado = json.toJson(t);
+                    session.flush();
                     out.println(resultado);
                 
                 

@@ -58,6 +58,7 @@ public class GuardarMensajesServlet extends HttpServlet {
                         MensajeDAO.alta(m);
                         session.persist(m);
                         tx.commit();
+                        session.flush();
                         out.println("OK");}
                     else out.println("NOK");   
                }

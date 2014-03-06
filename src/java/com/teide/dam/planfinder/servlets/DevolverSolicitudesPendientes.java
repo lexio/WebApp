@@ -49,6 +49,7 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
                 }
                 
                 out.println(json.toJson(listado));   
+                session.flush();
             }else out.println("NOK");
     }
     

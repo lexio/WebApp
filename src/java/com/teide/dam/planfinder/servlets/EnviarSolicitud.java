@@ -59,6 +59,7 @@ public class EnviarSolicitud extends HttpServlet {
                         values[2] = idGrupo;
                         values[3] = nombreGru;
                         String valores = json.toJson(values);
+                        
                         out.println(valores);
                     }
                 } else{
@@ -69,6 +70,7 @@ public class EnviarSolicitud extends HttpServlet {
                         p = new Pertenece(pId, g, u, Estados.SOLICITADO);
                         session.persist(p);
                         tx.commit();
+                        session.flush();
                         out.println("OK");
                     }else out.println("NOK");
                     
