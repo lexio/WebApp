@@ -10,6 +10,7 @@ import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.Estados;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -98,4 +99,10 @@ public class PerteneceDAO extends GenericDAO{
         return (Pertenece) q.uniqueResult();
       
      }
+    
+    public ArrayList devolverUsuariosGrupo(String idgrupo){
+        Query q = getSession().createQuery(Queries.BUSCAR_USUARIO_GRUPO);
+        q.setParameter("idGrupo", idgrupo);
+        return (ArrayList<Usuario>) q.list();
+    }
 }

@@ -10,8 +10,10 @@ import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
+import com.teide.dam.planfinder.dao.PerteneceDAO;
+import com.teide.dam.planfinder.dao.UsuarioDAO;
+import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -22,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.classic.Session;
 
 /**
  *
@@ -36,16 +39,22 @@ public class SendAllMessagesServlet extends BaseServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws IOException, ServletException {
-      System.out.println("Estoy en el doPost de enviar mensajes");
-      ServletConfig config = getServletConfig();
-      System.out.println("Antes del init");
-      init(config);
+    System.out.println("Estoy en el doPost de enviar mensajes");
+    ServletConfig config = getServletConfig();    
     List<String> devices = Datastore.getDevices();
     String MESSAGE;
     if (req.getAttribute("msg")!=null) MESSAGE = req.getAttribute("msg").toString();
     else MESSAGE = (String)req.getParameter("messageToSend");
     if (MESSAGE == null)
       MESSAGE="NULL";
+    String idGrupo;
+    if (req.getAttribute("idGrupo")!=null) idGrupo= req.getAttribute("idGrupo").toString();
+    else idGrupo="";
+     
+    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+    session.beginTransaction();
+    PerteneceDAO pDAO = new PerteneceDAO(session);
+    
     
     String status = "";
     status = status + "The message is: " + MESSAGE + " ";
