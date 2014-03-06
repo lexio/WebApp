@@ -135,5 +135,6 @@ public class GrupoDAO extends GenericDAO{
         return gruposAlfab;
         
     }
+    public void prueba () {}
 
 }
