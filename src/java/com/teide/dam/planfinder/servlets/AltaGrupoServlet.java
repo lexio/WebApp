@@ -19,6 +19,7 @@ import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -42,6 +44,7 @@ public class AltaGrupoServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //req.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
         //String ubicacion = req.getParameter("ubicacion");
         String latitud = req.getParameter("latitud");
@@ -57,11 +60,11 @@ public class AltaGrupoServlet extends HttpServlet {
         String fechaInicioActividad = req.getParameter("fechainicioactividad");
         String fechaFinActividad = req.getParameter("fechafinactividad");
         String radioEmisionString = req.getParameter("radioemision");
-        
-        if(usuario == null && usuario.trim().isEmpty() &&
-                tipoString == null && tipoString.trim().isEmpty() &&
-                nombre == null && nombre.trim().isEmpty() &&
-                radioEmisionString == null && radioEmisionString.trim().isEmpty() ){
+        //System.out.println("Nombre1: "+nombre);
+        if(usuario == null || usuario.trim().isEmpty() ||
+                tipoString == null || tipoString.trim().isEmpty() ||
+                nombre == null || nombre.trim().isEmpty() ||
+                radioEmisionString == null || radioEmisionString.trim().isEmpty() ){
             
             out.println("NOK");
             
@@ -69,85 +72,89 @@ public class AltaGrupoServlet extends HttpServlet {
         }
         else{
             try{
+                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
+                //System.out.println("Nombre2: "+nombre);           
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            
-            //RECIBIMOS LA SESION Y ALMACENAMOS UN USUARIO QUE SERÁ EL CREADOR
-            
-            UsuarioDAO uDAO = new UsuarioDAO(session);
-            Usuario usu = uDAO.comprobarUsuario(usuario);
-            
-            //RECIBIMOS LOS DATOS DEL TIPO
-            
-            TipoDAO tDAO = new TipoDAO(session);
-            System.out.println(tipoString);
-            int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
-            System.out.println(idTipo);
-            Tipo tipo = tDAO.buscarNombreTipo(idTipo);
-            
-            int radioEmision = Integer.parseInt(radioEmisionString);
-            
-            Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
-            
-            if (latitud==null || latitud.trim().isEmpty() || latitud==""){}
-            else {
-                UbicacionDAO ubiDAO = new UbicacionDAO(session);
-                double lat = Double.parseDouble(latitud);
-                double lon = Double.parseDouble(longitud);
+                Transaction tx = session.beginTransaction();
                 
-                Ubicacion ubicacion = ubiDAO.altaUbicacion(idTipo, descripcionUbicacion, lat, lon);
-                grupo.setUbicacion(ubicacion);
-            }
-            
-            if (descripcion==null || descripcion.trim().isEmpty()){}
-            else {
-                grupo.setDescripcion(descripcion);
-            }
-            
-            if (fechaFinalizacion==null || fechaFinalizacion.trim().isEmpty()){}
-            else {
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fFinalizacion=null;
-                try {
-                    fFinalizacion = formatoDelTexto.parse(fechaFinalizacion);
-                }  catch (Exception e) {
-                    e.getMessage();
+                //RECIBIMOS LA SESION Y ALMACENAMOS UN USUARIO QUE SERÁ EL CREADOR
+
+                UsuarioDAO uDAO = new UsuarioDAO(session);
+                Usuario usu = uDAO.comprobarUsuario(usuario);
+
+                //RECIBIMOS LOS DATOS DEL TIPO
+
+                TipoDAO tDAO = new TipoDAO(session);
+                System.out.println(tipoString);
+                int idTipo= tDAO.buscaridtipo(tipoString).getIdTipo();
+                System.out.println(idTipo);
+                Tipo tipo = tDAO.buscarNombreTipo(idTipo);
+
+                int radioEmision = Integer.parseInt(radioEmisionString);
+
+                Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
+
+                if (latitud==null || latitud.trim().isEmpty() || latitud==""){}
+                else {
+                    UbicacionDAO ubiDAO = new UbicacionDAO(session);
+                    double lat = Double.parseDouble(latitud);
+                    double lon = Double.parseDouble(longitud);
+
+                    Ubicacion ubicacion = ubiDAO.altaUbicacion(idTipo, descripcionUbicacion, lat, lon);
+                    grupo.setUbicacion(ubicacion);
                 }
-                grupo.setFechaFinalizacion(fFinalizacion);
-            }
-            
-            if (fechaInicioActividad==null || fechaInicioActividad.trim().isEmpty()){}
-            else {
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fInicioActividad=null;
-                try {
-                    fInicioActividad = formatoDelTexto.parse(fechaInicioActividad);
-                }  catch (Exception e) {
-                    e.getMessage();
+
+                if (descripcion==null || descripcion.trim().isEmpty()){}
+                else {
+                    descripcion= new String(descripcion.getBytes("iso-8859-1"),"UTF-8");
+                    grupo.setDescripcion(descripcion);
                 }
-                grupo.setFechaInicioActividad(fInicioActividad);
-            }
-            
-            if (fechaFinActividad==null || fechaFinActividad.trim().isEmpty()){}
-            else {
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-                Date fFinActividad=null;
-                try {
-                    fFinActividad = formatoDelTexto.parse(fechaFinActividad);
-                }  catch (Exception e) {
-                    e.getMessage();
+
+                if (fechaFinalizacion==null || fechaFinalizacion.trim().isEmpty()){}
+                else {
+                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                    Date fFinalizacion=null;
+                    try {
+                        fFinalizacion = formatoDelTexto.parse(fechaFinalizacion);
+                    }  catch (Exception e) {
+                        e.getMessage();
+                    }
+                    grupo.setFechaFinalizacion(fFinalizacion);
                 }
-                grupo.setFechaFinActividad(fFinActividad);
-            }
-            GrupoDAO gdao= new GrupoDAO(session);
-            gdao.altaGrupo(grupo);
-            //tx.commit();
-            int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario);
-            out.println(componentesGrupo+"/"+grupo.getIdGrupo());
+
+                if (fechaInicioActividad==null || fechaInicioActividad.trim().isEmpty()){}
+                else {
+                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                    Date fInicioActividad=null;
+                    try {
+                        fInicioActividad = formatoDelTexto.parse(fechaInicioActividad);
+                    }  catch (Exception e) {
+                        e.getMessage();
+                    }
+                    grupo.setFechaInicioActividad(fInicioActividad);
+                }
+
+                if (fechaFinActividad==null || fechaFinActividad.trim().isEmpty()){}
+                else {
+                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                    Date fFinActividad=null;
+                    try {
+                        fFinActividad = formatoDelTexto.parse(fechaFinActividad);
+                    }  catch (Exception e) {
+                        e.getMessage();
+                    }
+                    grupo.setFechaFinActividad(fFinActividad);
+                }
+                GrupoDAO gdao= new GrupoDAO(session);
+                gdao.altaGrupo(grupo);
+                //tx.commit();
+                int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario);
+                out.println(componentesGrupo+"/"+grupo.getIdGrupo());
             }
             
             catch(Exception e){
-                out.println("NOK "+e);
+                out.println("NOK "+e.getMessage());
+                e.printStackTrace();
             }
             
         }

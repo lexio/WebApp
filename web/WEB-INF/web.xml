@@ -25,7 +25,7 @@
         <servlet-class>com.teide.dam.planfinder.servlets.EnviarMensajes</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BuscarNombeGrupoServlet</servlet-name>
+        <servlet-name>BuscarNombreGrupoServlet</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreGrupoServlet</servlet-class>
     </servlet>
     <servlet>
@@ -89,7 +89,7 @@
         <url-pattern>/enviarmensajes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BuscarNombeGrupoServlet</servlet-name>
+        <servlet-name>BuscarNombreGrupoServlet</servlet-name>
         <url-pattern>/buscarnombregrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

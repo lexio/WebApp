@@ -24,6 +24,7 @@ public class EditarUsuarioServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String sim = req.getParameter("sim");
         String nombre = req.getParameter("nombre");
         String estado = req.getParameter("estado");
@@ -39,6 +40,7 @@ public class EditarUsuarioServlet extends HttpServlet {
         if(sim != null && !sim.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
                 || nombre != null && !nombre.trim().isEmpty()){
             try {
+                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
                 System.out.println("Entro en el if");
                 int radioRecepcion = Integer.parseInt(radioRecepcionString);
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();

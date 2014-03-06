@@ -27,7 +27,7 @@ public class DenegarGrupoServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      PrintWriter out = resp.getWriter();
+       PrintWriter out = resp.getWriter();
        String idgrupo = req.getParameter("idgrupo");
        String sim = req.getParameter("sim");
        try {

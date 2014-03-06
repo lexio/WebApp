@@ -44,6 +44,7 @@ public class GuardarMensajesServlet extends HttpServlet {
 
        try {
                 if (sim != null || !sim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
+                    mensaje= new String(mensaje.getBytes("iso-8859-1"),"UTF-8");
                     Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                     Transaction tx = session.beginTransaction();
                     GrupoDAO gDAO=new GrupoDAO(session);

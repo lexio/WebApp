@@ -35,34 +35,36 @@ public class EliminarGrupoServlet extends HttpServlet {
         String sim = req.getParameter("sim");
         if (idGrupo != null || !idGrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()) {
 
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            GrupoDAO gDAO = new GrupoDAO(session);
-            PerteneceDAO pDAO = new PerteneceDAO(session);
+            try {
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                GrupoDAO gDAO = new GrupoDAO(session);
+                PerteneceDAO pDAO = new PerteneceDAO(session);
 
-            Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
-            if (g != null) {
-                //Es propietario
-                if (sim.equals(g.getUsuario().getSim())) {
-                    for (Pertenece p : g.getPerteneces()) {
+                Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
+                if (g != null) {
+                    //Es propietario
+                    if (sim.equals(g.getUsuario().getSim())) {
+                        for (Pertenece p : g.getPerteneces()) {
+                            p.setEstado(Estados.NOSOLICITADO);
+                            System.out.println("Entro para borrar el grupo entero");
+                            //Enviar notificación GCM
+                        }
+                        g.setEstado(Estados.NOHABILITADO);
+                    } else {
+                        //Obtener el pertenece del usuario en ese grupo
+                        //cambiar el estado a ESE pertenece
+                        Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
                         p.setEstado(Estados.NOSOLICITADO);
-                        System.out.println("Entro para borrar el grupo entero");
-                        //Enviar notificación GCM
+                        System.out.println("cambio estado usuario");
                     }
-                    g.setEstado(Estados.NOHABILITADO);
-                } else {
-                    //Obtener el pertenece del usuario en ese grupo
-                    //cambiar el estado a ESE pertenece
-                    Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
-                    p.setEstado(Estados.NOSOLICITADO);
-                    System.out.println("cambio estado usuario");
-                }
-                tx.commit();
-                out.println("OK");
+                    tx.commit();
+                    out.println("OK");
+                }else out.println("NOK");
+            } catch (Exception e) {
+                out.println("NOK");
             }
-            
-
-        }
+        }else out.println("NOK");
 
     }
 }

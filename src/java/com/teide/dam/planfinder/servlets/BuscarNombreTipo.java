@@ -25,6 +25,7 @@ public class BuscarNombreTipo extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
         PrintWriter out = resp.getWriter();
         String idtipoString = req.getParameter("idtipo");
         if (idtipoString == null || idtipoString.trim().isEmpty()) {

@@ -41,7 +41,7 @@ public class ActualizarPosicionUsuarioServlet extends HttpServlet {
             } catch (NumberFormatException | HibernateException e) {
                 out.println("NOK");
             }
-        }
+        } else out.println("NOK");
     }
     
 }
