@@ -154,8 +154,8 @@ public class AltaGrupoServlet extends HttpServlet {
             }
             
             catch(Exception e){
-                out.println("NOK "+e.getMessage());
-                e.printStackTrace();
+                out.println("NOK");
+                //e.printStackTrace();
             }
             
         }
