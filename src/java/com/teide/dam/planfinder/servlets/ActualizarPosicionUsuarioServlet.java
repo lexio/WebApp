@@ -28,6 +28,8 @@ public class ActualizarPosicionUsuarioServlet extends HttpServlet {
         String latitudString = req.getParameter("latitud");
         String longitudString = req.getParameter("longitud");
         PrintWriter out = resp.getWriter();
+        //.........
+        
         if(sim != null && !sim.trim().isEmpty() || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()){
             try {
                 double latitud = Double.parseDouble(latitudString);
