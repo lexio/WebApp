@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>BuscarNombreGrupoServlet</servlet-name>
-        <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombreGrupoServlet</servlet-class>
+        <servlet-class>com.teide.dam.planfinder.servlets.BuscarNombeGrupoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DevolverSolicitudesPendientes</servlet-name>
