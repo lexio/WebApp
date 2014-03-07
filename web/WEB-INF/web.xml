@@ -68,6 +68,10 @@
         <servlet-name>InsertarUsuario</servlet-name>
         <servlet-class>com.teide.dam.planfinder.servlets.InsertarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarInformacionGrupo</servlet-name>
+        <servlet-class>com.teide.dam.planfinder.servlets.BuscarInformacionGrupo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AltaGrupoServlet</servlet-name>
         <url-pattern>/altagrupo</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>InsertarUsuario</servlet-name>
         <url-pattern>/insertarusuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarInformacionGrupo</servlet-name>
+        <url-pattern>/buscarinformaciongrupo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

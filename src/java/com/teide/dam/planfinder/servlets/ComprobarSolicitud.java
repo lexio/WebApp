@@ -4,7 +4,9 @@
  */
 package com.teide.dam.planfinder.servlets;
 
+import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.dao.PerteneceDAO;
+import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
@@ -29,45 +31,47 @@ public class ComprobarSolicitud extends HttpServlet {
         String estado = req.getParameter("estado");
         String idgrupo = req.getParameter("idgrupo");
         //String creador = req.getParameter("creador");
-        String sim = req.getParameter("sim");
+        String simusuario = req.getParameter("simusuario");
+        String simcreador = req.getParameter("simcreador");
 
-
-        if (sim != null && !sim.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null && !estado.trim().isEmpty()) {
+        if (simusuario != null && !simusuario.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || simcreador != null && !simcreador.trim().isEmpty()) {
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
+            GrupoDAO gDAO = new GrupoDAO(session);
+            Grupo g = gDAO.comprobarCreadorGrupo(simcreador, idgrupo);
+            if (g != null) {
+                if ("true".equals(estado)) {
+                    PerteneceDAO pDAO = new PerteneceDAO(session);
+                    Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
+                    if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
+                        respuesta.setEstado(Estados.ACEPTADO);
+                        session.persist(respuesta);
+                        session.flush();
+                        tx.commit();
+                        out.println("OK");
+                    } else {
+                        out.println("NOK");
+                    }
 
-            if ("true".equals(estado)) {
-                PerteneceDAO pDAO = new PerteneceDAO(session);
-                Pertenece respuesta = pDAO.comprobarSolicitud(sim, idgrupo);
-                if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
-                    respuesta.setEstado(Estados.ACEPTADO);
-                    session.persist(respuesta);
-                    session.flush();
-                    tx.commit();
-                    out.println("OK");
                 } else {
-                    out.println("NOK");
+                    PerteneceDAO pDAO = new PerteneceDAO(session);
+                    Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
+                    if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
+                        respuesta.setEstado(Estados.BANEADO);
+                        session.persist(respuesta);
+                        session.flush();
+                        tx.commit();
+                        
+                        out.println("OK");
+                    } else {
+                        out.println("NOK");
+                    }
                 }
-
-            } else {
-                PerteneceDAO pDAO = new PerteneceDAO(session);
-                Pertenece respuesta = pDAO.comprobarSolicitud(sim, idgrupo);
-                if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
-                    respuesta.setEstado(Estados.BANEADO);
-                    session.persist(respuesta);
-                    tx.commit();
-                    session.flush();
-                    out.println("OK");
-                } else {
-                    out.println("NOK");
-                }
-            }
+            } else {out.println("NOK");}
 
         }
-
-
-
+        else {out.println("NOK");}
 
     }
 }
