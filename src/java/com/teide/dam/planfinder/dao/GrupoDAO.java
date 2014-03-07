@@ -80,14 +80,16 @@ public class GrupoDAO extends GenericDAO{
     
         
     public Grupo comprobarGrupo(String idGrupo){
+        int idgrupo = Integer.parseInt(idGrupo);
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
-        q.setParameter("idgrupo", idGrupo);
+        q.setParameter("idgrupo", idgrupo);
         return (Grupo)q.uniqueResult();
     }
     
     public Grupo comprobarGrupoyEstado(String idGrupo, String estado){
+        int idgrupo = Integer.parseInt(idGrupo);
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS);
-        q.setParameter("idgrupo", idGrupo);
+        q.setParameter("idgrupo", idgrupo);
         q.setParameter("estado", estado);
         return (Grupo)q.uniqueResult();
     }
@@ -105,9 +107,10 @@ public class GrupoDAO extends GenericDAO{
     }
     
        public Grupo comprobarCreadorGrupo (String usuario, String idgrupo){
+        int idGrupo = Integer.parseInt(idgrupo);
         Query q = getSession().createQuery(Queries.COMPROBAR_CREADOR_GRUPO);
         q.setParameter("usuario", usuario);
-        q.setParameter("idgrupo", idgrupo);
+        q.setParameter("idgrupo", idGrupo);
         return (Grupo)q.uniqueResult();
     }
     

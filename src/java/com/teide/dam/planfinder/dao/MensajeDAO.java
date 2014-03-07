@@ -37,9 +37,9 @@ public class MensajeDAO extends GenericDAO{
     }
     
       public ArrayList<Mensaje> devolverMensajes (String idGrupo) {
-        
+        int idgrupo = Integer.parseInt(idGrupo);
         Query q = getSession().createQuery(Queries.BUSCAR_MENSAJES_GRUPO);
-        q.setParameter("idGrupo", idGrupo);
+        q.setParameter("idGrupo", idgrupo);
         return (ArrayList<Mensaje>) q.list();
      
     }

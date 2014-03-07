@@ -37,17 +37,19 @@ public class PerteneceDAO extends GenericDAO{
      * si es baneado o solicitado, devuelve un false, si no es true
      * (pongo el return, para que no de error).
      */  
+        int idGrupo = Integer.parseInt(idgrupo);
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
         q.setParameter("sim", sim);
-        q.setParameter("idgrupo", idgrupo);
+        q.setParameter("idgrupo", idGrupo);
         Pertenece p = (Pertenece) q.uniqueResult();
         return p ;
     }
           
      public Pertenece devolverUsuario(String sim,String idgrupo){
+        int idGrupo = Integer.parseInt(idgrupo);
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
         q.setParameter("sim", sim);
-        q.setParameter("idgrupo", idgrupo);
+        q.setParameter("idgrupo", idGrupo);
         Pertenece p = (Pertenece) q.uniqueResult();
         return p;
      }
@@ -87,15 +89,17 @@ public class PerteneceDAO extends GenericDAO{
     }
     
     public ArrayList<Pertenece> devolverPersonasGrupo (String idGrupo){
+        int idgrupo = Integer.parseInt(idGrupo);
         Query q = getSession().createQuery(Queries.DEVOLVER_PERSONAS_GRUPO);
-        q.setParameter("idgrupo", idGrupo);
+        q.setParameter("idgrupo", idgrupo);
         return (ArrayList<Pertenece>) q.list();
     }
     
     public Pertenece comprobarSolicitud(String sim, String idgrupo){
+        int idGrupo = Integer.parseInt(idgrupo);
         Query q = getSession().createQuery(Queries.COMPROBAR_USUARIO_GRUPO);
         q.setParameter("sim", sim);
-        q.setParameter("idgrupo", idgrupo);
+        q.setParameter("idgrupo", idGrupo);
         return (Pertenece) q.uniqueResult();
       
      }
