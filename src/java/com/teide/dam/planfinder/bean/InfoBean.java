@@ -18,7 +18,7 @@ public class InfoBean {
     private String nombreGrupo, idGrupo, nombreTipo, descripcion, creador;
     private int radioEmision;
     private double lat, log;
-    private Date fechaCreacion, fechaFinalizacion, fechaInicioActividad, fechaFinActivididad;
+    private Date fechaCreacion, fechaFinalizacion, fechaInicioActividad, fechaFinActividad;
 
     public InfoBean() {
     }
@@ -33,7 +33,7 @@ public class InfoBean {
         this.fechaCreacion = fechaCreacion;
         this.fechaFinalizacion = fechaFinalizacion;
         this.fechaInicioActividad = fechaInicioActividad;
-        this.fechaFinActivididad = fechaFinActivididad;
+        this.fechaFinActividad = fechaFinActivididad;
     }
 
       
@@ -50,7 +50,7 @@ public class InfoBean {
         this.fechaCreacion = fechaCreacion;
         this.fechaFinalizacion = fechaFinalizacion;
         this.fechaInicioActividad = fechaInicioActividad;
-        this.fechaFinActivididad = fechaFinActivididad;
+        this.fechaFinActividad = fechaFinActivididad;
     }
 
     public String getNombreGrupo() {
@@ -134,11 +134,11 @@ public class InfoBean {
     }
 
     public Date getFechaFinActivididad() {
-        return fechaFinActivididad;
+        return fechaFinActividad;
     }
 
     public void setFechaFinActivididad(Date fechaFinActivididad) {
-        this.fechaFinActivididad = fechaFinActivididad;
+        this.fechaFinActividad = fechaFinActivididad;
     }
 
 }
