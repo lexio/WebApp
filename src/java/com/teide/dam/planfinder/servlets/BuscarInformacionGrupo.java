@@ -8,10 +8,10 @@ import com.google.gson.Gson;
 import com.teide.dam.planfinder.bean.InfoBean;
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
-import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,33 +31,68 @@ public class BuscarInformacionGrupo extends HttpServlet {
         if (idGrupo != null && !idGrupo.trim().isEmpty()) {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
+            Gson json = new Gson();
             GrupoDAO gDAO = new GrupoDAO(session);
             Grupo g = gDAO.comprobarGrupo(idGrupo);
             if (g != null) {
                 String nombreTipo = g.getTipo().getNombre();
-                String creador = g.getUsuario().getNombre();               
-                Gson json = new Gson();
+                String creador = g.getUsuario().getNombre();
+                String nombreGrupo = g.getNombre();
+                String descripcion = g.getDescripcion();
+                int radioEmision = g.getRadioEmision();
+               
+                    Date fechaCreacion = null;
                 try {
-                    Double lat = g.getUbicacion().getLatitud();
-                    Double lon = g.getUbicacion().getLongitud();
-                    InfoBean ib = new InfoBean(g.getNombre(), idGrupo, nombreTipo, g.getDescripcion(),creador, g.getRadioEmision(), lat, lon, g.getFechaCreacion(), g.getFechaFinalizacion(), g.getFechaInicioActividad(), g.getFechaFinActividad());
+                    fechaCreacion = g.getFechaCreacion();
+                } catch (Exception e) {
+                }
+               
+                    Date fechaFinalizacion = null;
+                try {
+                    fechaFinalizacion = g.getFechaFinalizacion();
+                } catch (Exception e) {
+                   
+                }
+                    Date fechaInicioActividad = null;
+                try {
+                    fechaInicioActividad = g.getFechaInicioActividad();
+                } catch (Exception e) {
+                   
+                }
+                    Date fechaFinActividad = null;
+                try {
+                    fechaFinActividad = g.getFechaFinActividad();
+                } catch (Exception e) {
+                   
+                }
+                    double lat = 0;
+                try {
+                     lat = g.getUbicacion().getLatitud();
+                } catch (Exception e) {
+                    
+                }
+                    double lon = 0;
+                try {
+                    lon = g.getUbicacion().getLongitud();
+                } catch (Exception e) {
+                   
+                }             
+               
+                System.out.println("FECHA INICIO ACTIVIDAD " + fechaInicioActividad);
+                System.out.println("FECHA FIN ACTIVIDAD " + fechaFinActividad);
+
+               
+                try {
+                    InfoBean ib = new InfoBean(nombreGrupo, idGrupo, nombreTipo, descripcion, creador, radioEmision, lat, lon, fechaCreacion, fechaFinalizacion, fechaInicioActividad, fechaFinActividad);
                     String resultado = json.toJson(ib);
                     session.flush();
                     out.println(resultado);
                 } catch (Exception e) {
-                    InfoBean ib = new InfoBean(g.getNombre(), idGrupo, nombreTipo, g.getDescripcion(),creador, g.getRadioEmision(),g.getFechaCreacion(), g.getFechaFinalizacion(), g.getFechaInicioActividad(), g.getFechaFinActividad());
-                    String resultado = json.toJson(ib);
-                    session.flush();
-                    out.println(resultado);
-                }
+                    out.println("NOK");
+                };
             }
-            else{
-                out.println("NOK");
-            }
+            else out.println("NOK");
         }
-        else{
-            out.println("NOK");
-        }
+        else out.println("NOK");
     }
 }
-

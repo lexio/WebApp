@@ -75,7 +75,7 @@ public class EnviarSolicitud extends HttpServlet {
                     }else out.println("NOK");
                     
                 }
-            } catch (HibernateException e) {
+            } catch (Exception e) {
                 out.println("NOK");
             }
         }
