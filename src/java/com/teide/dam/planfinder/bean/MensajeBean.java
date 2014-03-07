@@ -4,6 +4,8 @@
  */
 package com.teide.dam.planfinder.bean;
 
+import java.util.Date;
+
 /**
  *
  * @author dam2
@@ -14,8 +16,17 @@ public class MensajeBean {
     private String descripcion;
     private String mensaje;
     private String usuario;
+    private Date fecha;
 
     public MensajeBean() {
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public MensajeBean(String idGrupo, String nombreGrupo, String descripcion, String mensaje, String usuario) {

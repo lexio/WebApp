@@ -17,33 +17,32 @@ import org.hibernate.Transaction;
  *
  * @author dam2
  */
-public class MensajeDAO extends GenericDAO{
+public class MensajeDAO extends GenericDAO {
 
     /* enviar mensajes(gcm), devolver mensajes
           
      
      */
-    
-    
     public MensajeDAO(Session session) {
         super(session);
     }
-    
-    
-    public static void alta (Mensaje m) {
+
+    public static void alta(Mensaje m) {
         Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = sesion.beginTransaction();
-        
+
     }
-    
-      public ArrayList<Mensaje> devolverMensajes (String idGrupo) {
-        
-        Query q = getSession().createQuery(Queries.BUSCAR_MENSAJES_GRUPO);
-        q.setParameter("idGrupo", idGrupo);
-        return (ArrayList<Mensaje>) q.list();
-     
+
+    public ArrayList<Mensaje> devolverMensajes(String idGrupo) {
+        try {
+            int idgrupo = Integer.parseInt(idGrupo);
+            Query q = getSession().createQuery(Queries.BUSCAR_MENSAJES_GRUPO);
+            q.setParameter("idGrupo", idgrupo);
+            return (ArrayList<Mensaje>) q.list();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+
+
     }
-    
-      
-      
 }

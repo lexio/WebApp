@@ -75,21 +75,32 @@ public class GrupoDAO extends GenericDAO{
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS_USUARIO);
         q.setParameter("sim", usuario_sim);
         return (ArrayList<Grupo>) q.list();
-
     }
     
         
     public Grupo comprobarGrupo(String idGrupo){
-        Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
-        q.setParameter("idgrupo", idGrupo);
-        return (Grupo)q.uniqueResult();
+        try {
+            int idgrupo = Integer.parseInt(idGrupo);
+            Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
+            q.setParameter("idgrupo", idgrupo);
+            return (Grupo)q.uniqueResult();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+         
     }
     
     public Grupo comprobarGrupoyEstado(String idGrupo, String estado){
-        Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS);
-        q.setParameter("idgrupo", idGrupo);
-        q.setParameter("estado", estado);
-        return (Grupo)q.uniqueResult();
+        try {
+            int idgrupo = Integer.parseInt(idGrupo);
+            Query q = getSession().createQuery(Queries.BUSCAR_GRUPOS);
+            q.setParameter("idgrupo", idgrupo);
+            q.setParameter("estado", estado);
+            return (Grupo)q.uniqueResult();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        
     }
     public ArrayList<Grupo> devolverNombresGrupo (int tipo){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_POR_ID);
@@ -104,11 +115,17 @@ public class GrupoDAO extends GenericDAO{
         return (Usuario)q.uniqueResult();
     }
     
-       public Grupo comprobarCreadorGrupo (String usuario, String idgrupo){
-        Query q = getSession().createQuery(Queries.COMPROBAR_CREADOR_GRUPO);
-        q.setParameter("usuario", usuario);
-        q.setParameter("idgrupo", idgrupo);
-        return (Grupo)q.uniqueResult();
+    public Grupo comprobarCreadorGrupo (String usuario, String idgrupo){
+        try {
+             int idGrupo = Integer.parseInt(idgrupo);
+             Query q = getSession().createQuery(Queries.COMPROBAR_CREADOR_GRUPO);
+             q.setParameter("usuario", usuario);
+             q.setParameter("idgrupo", idGrupo);
+             return (Grupo)q.uniqueResult();
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        
     }
     
     
