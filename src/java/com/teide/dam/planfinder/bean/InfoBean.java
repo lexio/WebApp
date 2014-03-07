@@ -4,9 +4,6 @@
  */
 package com.teide.dam.planfinder.bean;
 
-import com.teide.dam.planfinder.pojos.Tipo;
-import com.teide.dam.planfinder.pojos.Ubicacion;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,22 +20,10 @@ public class InfoBean {
     public InfoBean() {
     }
 
-    public InfoBean(String nombreGrupo, String idGrupo, String nombreTipo, String descripcion, String creador, int radioEmision, Date fechaCreacion, Date fechaFinalizacion, Date fechaInicioActividad, Date fechaFinActivididad) {
-        this.nombreGrupo = nombreGrupo;
-        this.idGrupo = idGrupo;
-        this.nombreTipo = nombreTipo;
-        this.descripcion = descripcion;
-        this.creador = creador;
-        this.radioEmision = radioEmision;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaFinalizacion = fechaFinalizacion;
-        this.fechaInicioActividad = fechaInicioActividad;
-        this.fechaFinActividad = fechaFinActivididad;
-    }
 
-      
+    //BEAN CON TODO
    
-    public InfoBean(String nombreGrupo, String idGrupo, String nombreTipo, String creador, String descripcion, int radioEmision, double lat, double log, Date fechaCreacion, Date fechaFinalizacion, Date fechaInicioActividad, Date fechaFinActivididad) {
+    public InfoBean(String nombreGrupo, String idGrupo, String nombreTipo, String descripcion, String creador, int radioEmision, double lat, double log, Date fechaCreacion, Date fechaFinalizacion, Date fechaInicioActividad, Date fechaFinActivididad) {
         this.nombreGrupo = nombreGrupo;
         this.idGrupo = idGrupo;
         this.creador = creador;
@@ -141,4 +126,7 @@ public class InfoBean {
         this.fechaFinActividad = fechaFinActivididad;
     }
 
+     
+   
+   
 }
