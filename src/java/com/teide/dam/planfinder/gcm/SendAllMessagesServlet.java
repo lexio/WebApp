@@ -20,6 +20,7 @@ import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -102,7 +103,8 @@ public class SendAllMessagesServlet extends BaseServlet {
             if (mb.getDescripcion() == null) {
                 mb.setDescripcion("");
             }
-
+            GregorianCalendar fecha = new GregorianCalendar();
+            mb.setFecha(fecha.getTime());
             mb.setNombreGrupo(g.getNombre());
             mb.setUsuario(uc.getNombre());
             Gson json = new Gson();
