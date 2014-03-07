@@ -61,12 +61,13 @@ public class UsuarioDAO extends GenericDAO {
         return usu;
     }
 
-    public String editarUsuario(String sim, String nombre, String estado, int radioRecepcion) {
+    public String editarUsuario(String sim, String nombre, String estado, int radioRecepcion, String GCM) {
         Usuario u = comprobarUsuario(sim);
         if (u != null) {
             u.setEstado(estado);
             u.setNombre(nombre);
             u.setRadioRecepcion(radioRecepcion);
+            u.setClaveGcm(GCM);
             return "OK";
         } else {
             return "NOK";

@@ -31,6 +31,7 @@ public class EditarUsuarioServlet extends HttpServlet {
         String nombre = req.getParameter("nombre");
         String estado = req.getParameter("estado");
         String radioRecepcionString = req.getParameter("radiorecepcion");
+        String GCM = req.getParameter("GCM");
         PrintWriter out = resp.getWriter();
         if(sim != null && !sim.trim().isEmpty() && estado != null && !estado.trim().isEmpty() && radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
                 && nombre != null && !nombre.trim().isEmpty()){
@@ -47,7 +48,7 @@ public class EditarUsuarioServlet extends HttpServlet {
                     Usuario u = uDAO.comprobarUsuario(sim);
                     if(estado.equals(Estados.VISIBLE)||estado.equals(Estados.INVISIBLE)){
                         if (u!=null) {
-                        uDAO.editarUsuario(sim, nombre, estado, radioRecepcion);
+                        uDAO.editarUsuario(sim, nombre, estado, radioRecepcion, GCM);
                         session.flush();
                         tx.commit();
                         out.println("OK");

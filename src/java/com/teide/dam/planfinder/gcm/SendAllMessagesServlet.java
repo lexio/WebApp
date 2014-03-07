@@ -57,8 +57,12 @@ public class SendAllMessagesServlet extends BaseServlet {
     session.beginTransaction();
     PerteneceDAO pDAO = new PerteneceDAO(session);
     ArrayList<Pertenece> usuarios = pDAO.devolverPersonasGrupo(idGrupo);
-      for (Pertenece pertenece : usuarios) {          
-          Usuario u = pertenece.getUsuario();          
+      for (Pertenece pertenece : usuarios) {    
+          UsuarioDAO uDAO = new UsuarioDAO(session);
+          System.out.println("Esta es la sim:"+pertenece.getUsuario().getSim() + "hasta aqui");
+          Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());   
+          
+          System.out.println("Esta es la sim:"+u.getNombre() + "hasta aqui");
           devices.add(u);          
       }
     
@@ -95,7 +99,8 @@ public class SendAllMessagesServlet extends BaseServlet {
         int counter = 0;
         int tasks = 0;
         for (Usuario device : devices) {
-            System.out.println(device);
+            System.out.println("He dado una vuelta");
+            System.out.println(device.getClaveGcm());
           counter++;
           partialDevices.add(device.getClaveGcm());
           int partialSize = partialDevices.size();
