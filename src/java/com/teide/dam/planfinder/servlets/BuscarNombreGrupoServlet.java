@@ -33,10 +33,11 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
             out.println("NOK");
         }
         else{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
             try{
                 nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                Transaction tx = session.beginTransaction();
+                
                 GrupoDAO gDAO = new GrupoDAO(session);
 
                 ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
@@ -53,14 +54,17 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
 
                 Gson json = new Gson();
                 String resultado = json.toJson(g);
+//                session.flush();
                 out.println(resultado);
-                session.flush();
             }
             catch(Exception e){
                 e.printStackTrace();
             }
-                        
+            finally {
+                session.flush();
+            }
         }
+                      
     }
 
 }
