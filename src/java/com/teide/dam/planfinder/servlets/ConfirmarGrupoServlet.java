@@ -36,7 +36,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                 GrupoDAO gDAO=new GrupoDAO(session);
                 Grupo g= gDAO.comprobarGrupo(idgrupo);
                 Grupo gr=gDAO.comprobarCreadorGrupo(sim,idgrupo);
-                
+                System.out.println(gr);
                 if (gr ==null) {
                     out.println("NOK");
                 }
@@ -49,17 +49,23 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     tx.commit();
                     req.setAttribute("msg", "Has sido dado de alta en un nuevo grupo");
                     req.setAttribute("idGrupo", idgrupo);
-                    System.out.println("Antes de salir");
+                    req.setAttribute("sim", sim);
+                    System.out.println("Antes de salir");                    
                     req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
-                    System.out.println("Después de salir");
+                    System.out.println("Después de salir");   
                     out.println("OK");
-                }else {out.println("NOK");}
+                    System.out.println("OK");
+                }else {out.println("NOK");
+                    System.out.println("NOK");
+                }
                 }   
        }
        else{ out.println("NOK");}
        
        }catch (Exception e){
-           System.out.println("Error: "+e.getMessage());
-           out.println("Error: "+e.getMessage());}
+           System.out.println("**** Error: "+e.getMessage());
+           e.printStackTrace();
+           out.println("NOK");
+       }
     }
 }
