@@ -34,44 +34,52 @@ public class ComprobarSolicitud extends HttpServlet {
         String simusuario = req.getParameter("simusuario");
         String simcreador = req.getParameter("simcreador");
 
-        if (simusuario != null && !simusuario.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || simcreador != null && !simcreador.trim().isEmpty()) {
+        if (simusuario != null && !simusuario.trim().isEmpty() || idgrupo != null && !idgrupo.trim().isEmpty()
+                || estado != null && !estado.trim().isEmpty() || simcreador != null && !simcreador.trim().isEmpty()) {
+            try {
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Transaction tx = session.beginTransaction();
+                GrupoDAO gDAO = new GrupoDAO(session);
+                Grupo g = gDAO.comprobarCreadorGrupo(simcreador, idgrupo);
+                if (g != null) {
+                    if ("true".equals(estado)) {
+                        PerteneceDAO pDAO = new PerteneceDAO(session);
+                        Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
+                        if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
+                            respuesta.setEstado(Estados.ACEPTADO);
+                            session.persist(respuesta);
+                            session.flush();
+                            tx.commit();
+                            out.println("OK");
+                        } else {
+                            out.println("NOK");
+                        }
 
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            GrupoDAO gDAO = new GrupoDAO(session);
-            Grupo g = gDAO.comprobarCreadorGrupo(simcreador, idgrupo);
-            if (g != null) {
-                if ("true".equals(estado)) {
-                    PerteneceDAO pDAO = new PerteneceDAO(session);
-                    Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
-                    if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
-                        respuesta.setEstado(Estados.ACEPTADO);
-                        session.persist(respuesta);
-                        session.flush();
-                        tx.commit();
-                        out.println("OK");
                     } else {
-                        out.println("NOK");
-                    }
+                        PerteneceDAO pDAO = new PerteneceDAO(session);
+                        Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
+                        if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
+                            respuesta.setEstado(Estados.BANEADO);
+                            session.persist(respuesta);
+                            session.flush();
+                            tx.commit();
 
+                            out.println("OK");
+                        } else {
+                            out.println("NOK");
+                        }
+                    }
                 } else {
-                    PerteneceDAO pDAO = new PerteneceDAO(session);
-                    Pertenece respuesta = pDAO.comprobarSolicitud(simusuario, idgrupo);
-                    if (respuesta != null && respuesta.getEstado().equals(Estados.SOLICITADO)) {
-                        respuesta.setEstado(Estados.BANEADO);
-                        session.persist(respuesta);
-                        session.flush();
-                        tx.commit();
-                        
-                        out.println("OK");
-                    } else {
-                        out.println("NOK");
-                    }
+                    out.println("NOK");
                 }
-            } else {out.println("NOK");}
+            } catch (Exception e) {
+                out.println("NOK");
+            }
 
+
+        } else {
+            out.println("NOK");
         }
-        else {out.println("NOK");}
 
     }
 }
