@@ -53,7 +53,7 @@ public class GuardarMensajesServlet extends HttpServlet {
                     Usuario usuario= uDAO.comprobarUsuario(sim);
                     PerteneceDAO pDAO=new PerteneceDAO(session);
                     Pertenece p = pDAO.comprobarEstadoUsuario(sim, grupo);
-                    if(p.getEstado().equals("ACEPTADO")){
+                    if(p.getEstado().equals(Estados.ACEPTADO)){
                         Mensaje m = new Mensaje(grupos, usuario, mensaje, new GregorianCalendar().getInstance().getTime(), "Enviado");
                         MensajeDAO.alta(m);
                         session.persist(m);
