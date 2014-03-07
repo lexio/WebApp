@@ -58,7 +58,7 @@ public class InsertarUsuario extends HttpServlet {
                 session.flush();
                 tx.commit();
                 out.println("OK");
-            } catch (HibernateException | NumberFormatException e) {
+            } catch (Exception e) {
                 out.println("NOK");
             }
                 
