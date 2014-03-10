@@ -41,6 +41,7 @@ public class SendAllMessagesServlet extends BaseServlet {
     private static final int MULTICAST_SIZE = 1000;
     private Sender sender;
     private static final Executor threadPool = Executors.newFixedThreadPool(5);
+    private String eliminado = "NOK";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -51,7 +52,12 @@ public class SendAllMessagesServlet extends BaseServlet {
         String MESSAGE;
         if (req.getAttribute("msg") != null) {
             MESSAGE = req.getAttribute("msg").toString();
-        } else {
+        } 
+        else if (req.getAttribute("msgB") != null){
+            MESSAGE = req.getAttribute("msgB").toString();
+            eliminado = "OK";
+        }
+        else {
             MESSAGE = (String) req.getParameter("messageToSend");
         }
         if (MESSAGE == null) {
@@ -60,13 +66,22 @@ public class SendAllMessagesServlet extends BaseServlet {
         String idGrupo;
         if (req.getAttribute("idGrupoC") != null) {
             idGrupo = req.getAttribute("idGrupoC").toString();
-        } else {
+        }
+        else if (req.getAttribute("idGrupoB") != null){
+            idGrupo = req.getAttribute("idGrupoB").toString();
+            
+        }
+        else {
             idGrupo = req.getParameter("idGrupo").toString();
         }
         String sim;
         if (req.getAttribute("simC") != null) {
             sim = req.getAttribute("simC").toString();
-        } else {
+        }
+        else if (req.getAttribute("simB") != null){
+            sim = req.getAttribute("simB").toString();
+        }
+        else {
             sim = req.getParameter("sim").toString();
         }
         System.out.println("La sim es: "+sim+", el idGrupo es: "+idGrupo+", el mensaje es: "+MESSAGE);
@@ -101,6 +116,7 @@ public class SendAllMessagesServlet extends BaseServlet {
             mb.setIdGrupo(idGrupo);
             mb.setMensaje(MESSAGE);
             mb.setDescripcion(g.getDescripcion());
+            mb.setEliminado(eliminado);
             if (mb.getDescripcion() == null) {
                 mb.setDescripcion("");
             }
