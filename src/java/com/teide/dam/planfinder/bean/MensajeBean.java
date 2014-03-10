@@ -18,6 +18,15 @@ public class MensajeBean {
     private String usuario;
     private Date fecha;
 
+    public String getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(String eliminado) {
+        this.eliminado = eliminado;
+    }
+    private String eliminado;
+
     public MensajeBean() {
     }
 
