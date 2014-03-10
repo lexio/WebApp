@@ -36,23 +36,25 @@ public class BuscarNombreTipo extends HttpServlet {
         else{
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            try {      
+            try {
+                
                 TipoDAO tdao = new TipoDAO(session);
                 int idtipo = Integer.parseInt(idtipoString);
                 ArrayList<Tipo> t = tdao.BuscarNombreTipo(idtipo);
                 session.evict(t);
                 for (Tipo tipo : t) {
                     tipo.setGrupos(null);
+                    
                 }
                     Gson json = new Gson();
                     String resultado = json.toJson(t);
                     out.println(resultado);
                 
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 out.println("NOK");
             }
-            finally {
-                session.flush();
+            finally{
+                 session.flush();
             }
 
         } 
