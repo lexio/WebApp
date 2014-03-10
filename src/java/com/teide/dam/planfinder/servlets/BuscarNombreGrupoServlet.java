@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -29,18 +30,14 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String nombre = req.getParameter("nombre");
-        if (nombre == null || nombre.trim().isEmpty()){
-            out.println("NOK");
-        }
-        else{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            session.beginTransaction();
-            try{
-                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
-                
+        String sim = req.getParameter("sim");
+        try {
+            if (nombre != null && !nombre.trim().isEmpty() || sim != null && !sim.trim().isEmpty()) {
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session.beginTransaction();
+                nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
                 GrupoDAO gDAO = new GrupoDAO(session);
-
-                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
+                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre, sim);
 
                 for (Grupo grupo : g) {
                     session.evict(grupo);
@@ -49,25 +46,25 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
                     grupo.setMensajes(null);
                     grupo.setUsuario(null);
                     grupo.setPerteneces(null);
-                    if (grupo.getDescripcion()=="null") grupo.setDescripcion("");
+                    if (grupo.getDescripcion() == "null") {
+                        grupo.setDescripcion("");
+                    }
                 }
-    //                System.out.println(g);
+                //System.out.println(g);
 
                 Gson json = new Gson();
                 String resultado = json.toJson(g);
 //                session.flush();
-                System.out.println("Este es el resultado:"+resultado);
+                System.out.println("Este es el resultado:" + resultado);
                 out.println(resultado);
+
+            } else {
+                out.println("NOK");
             }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-            finally {
-                session.flush();
-            }
+
+        } catch (Exception e) {
+            out.println("NOK");
         }
-                      
+
     }
-
 }
-

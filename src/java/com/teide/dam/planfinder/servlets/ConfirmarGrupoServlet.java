@@ -30,7 +30,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
        String idgrupo = req.getParameter("idgrupo");
        String sim=req.getParameter("sim"); //sim del creador
        try {
-       if (idgrupo != null || !idgrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()){
+       if (idgrupo != null && !idgrupo.trim().isEmpty() || sim != null && !sim.trim().isEmpty()){
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 GrupoDAO gDAO=new GrupoDAO(session);
@@ -40,7 +40,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     out.println("NOK");
                 }
                 else {
-                if (g!=null){
+                if (g!=null || g.getEstado().equals(Estados.NOHABILITADO)){
                     Grupo grupos= gDAO.comprobarGrupo(idgrupo);
                     grupos.setEstado(Estados.HABILITADO);
                     session.persist(grupos);

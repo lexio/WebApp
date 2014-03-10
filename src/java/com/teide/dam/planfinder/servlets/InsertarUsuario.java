@@ -45,7 +45,7 @@ public class InsertarUsuario extends HttpServlet {
         
         
         if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty() 
-                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()|| claveGcm != null && !claveGcm.trim().isEmpty()){
+                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()&& claveGcm != null && !claveGcm.trim().isEmpty()){
             try {
                 nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -58,7 +58,7 @@ public class InsertarUsuario extends HttpServlet {
                 session.flush();
                 tx.commit();
                 out.println("OK");
-            } catch (Exception e) {
+            } catch (HibernateException | NumberFormatException e) {
                 out.println("NOK");
             }
                 
