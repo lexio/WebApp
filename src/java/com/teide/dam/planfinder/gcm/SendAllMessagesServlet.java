@@ -54,7 +54,9 @@ public class SendAllMessagesServlet extends BaseServlet {
             MESSAGE = req.getAttribute("msg").toString();
         } 
         else if (req.getAttribute("msgB") != null){
+            System.out.println("Entro aqui");
             MESSAGE = req.getAttribute("msgB").toString();
+            req.setAttribute("msgB", null);
             eliminado = "OK";
         }
         else {
