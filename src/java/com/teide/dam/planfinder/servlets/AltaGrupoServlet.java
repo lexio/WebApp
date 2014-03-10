@@ -104,7 +104,7 @@ public class AltaGrupoServlet extends HttpServlet {
                     grupo.setUbicacion(ubicacion);
                 }
 
-                if (descripcion==null || descripcion.trim().isEmpty()){}
+                if (descripcion==null || descripcion.trim().isEmpty()){grupo.setDescripcion("");}
                 else {
                     descripcion= new String(descripcion.getBytes("iso-8859-1"),"UTF-8");
                     grupo.setDescripcion(descripcion);

@@ -49,12 +49,14 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
                     grupo.setMensajes(null);
                     grupo.setUsuario(null);
                     grupo.setPerteneces(null);
+                    if (grupo.getDescripcion()=="null") grupo.setDescripcion("");
                 }
     //                System.out.println(g);
 
                 Gson json = new Gson();
                 String resultado = json.toJson(g);
 //                session.flush();
+                System.out.println("Este es el resultado:"+resultado);
                 out.println(resultado);
             }
             catch(Exception e){
