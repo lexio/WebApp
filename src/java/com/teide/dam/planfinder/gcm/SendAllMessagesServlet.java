@@ -58,17 +58,18 @@ public class SendAllMessagesServlet extends BaseServlet {
             MESSAGE = "NULL";
         }
         String idGrupo;
-        if (req.getAttribute("idGrupo") != null) {
-            idGrupo = req.getAttribute("idGrupo").toString();
+        if (req.getAttribute("idGrupoC") != null) {
+            idGrupo = req.getAttribute("idGrupoC").toString();
         } else {
-            idGrupo = "";
+            idGrupo = req.getParameter("idGrupo").toString();
         }
         String sim;
-        if (req.getAttribute("sim") != null) {
-            sim = req.getAttribute("sim").toString();
+        if (req.getAttribute("simC") != null) {
+            sim = req.getAttribute("simC").toString();
         } else {
-            sim = "";
+            sim = req.getParameter("sim").toString();
         }
+        System.out.println("La sim es: "+sim+", el idGrupo es: "+idGrupo+", el mensaje es: "+MESSAGE);
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();

@@ -36,7 +36,6 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                 GrupoDAO gDAO=new GrupoDAO(session);
                 Grupo g= gDAO.comprobarGrupo(idgrupo);
                 Grupo gr=gDAO.comprobarCreadorGrupo(sim,idgrupo);
-                System.out.println(gr);
                 if (gr ==null) {
                     out.println("NOK");
                 }
@@ -48,8 +47,8 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     session.flush();
                     tx.commit();
                     req.setAttribute("msg", "Has sido dado de alta en un nuevo grupo");
-                    req.setAttribute("idGrupo", idgrupo);
-                    req.setAttribute("sim", sim);
+                    req.setAttribute("idGrupoC", idgrupo);
+                    req.setAttribute("simC", sim);
                     System.out.println("Antes de salir");                    
                     req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
                     System.out.println("Después de salir");   
