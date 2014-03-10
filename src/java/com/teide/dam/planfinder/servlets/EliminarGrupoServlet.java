@@ -33,7 +33,7 @@ public class EliminarGrupoServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String idGrupo = req.getParameter("idgrupo");
         String sim = req.getParameter("sim");
-        if (idGrupo != null || !idGrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()) {
+        if (idGrupo != null && !idGrupo.trim().isEmpty() && sim != null && !sim.trim().isEmpty()) {
 
             try {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();

@@ -28,7 +28,7 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
             String usuarioSim = req.getParameter("sim");
             PrintWriter out = resp.getWriter();
             Gson json = new Gson();
-            if (usuarioSim != null || !usuarioSim.trim().isEmpty()){
+            if (usuarioSim != null && !usuarioSim.trim().isEmpty()){
                
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
