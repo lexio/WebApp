@@ -43,7 +43,7 @@ public class GuardarMensajesServlet extends HttpServlet {
        //Por ahora supondré que nos dan el nombre del grupo y no el id
 
        try {
-                if (sim != null || !sim.trim().isEmpty()|| grupo != null && !grupo.trim().isEmpty() || mensaje != null && !mensaje.trim().isEmpty()) {
+                if (sim != null && !sim.trim().isEmpty()&& grupo != null && !grupo.trim().isEmpty() && mensaje != null && !mensaje.trim().isEmpty()) {
                     mensaje= new String(mensaje.getBytes("iso-8859-1"),"UTF-8");
                     Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                     Transaction tx = session.beginTransaction();
@@ -65,9 +65,10 @@ public class GuardarMensajesServlet extends HttpServlet {
                 
          else {out.println("NOK"); }
       
-      }catch (Exception e){out.println("Error: "+e.getMessage()); {
-        
-    }}
+      }catch (Exception e){
+          out.println("Error"); 
+       
+      }
 
 
   }  
