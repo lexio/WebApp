@@ -30,7 +30,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
        String idgrupo = req.getParameter("idgrupo");
        String sim=req.getParameter("sim"); //sim del creador
        try {
-       if (idgrupo != null || !idgrupo.trim().isEmpty() || sim != null || !sim.trim().isEmpty()){
+       if (idgrupo != null && !idgrupo.trim().isEmpty() || sim != null && !sim.trim().isEmpty()){
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 GrupoDAO gDAO=new GrupoDAO(session);
@@ -40,7 +40,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     out.println("NOK");
                 }
                 else {
-                if (g!=null){
+                if (g!=null || g.getEstado().equals(Estados.NOHABILITADO)){
                     Grupo grupos= gDAO.comprobarGrupo(idgrupo);
                     grupos.setEstado(Estados.HABILITADO);
                     session.persist(grupos);
@@ -49,11 +49,11 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     req.setAttribute("msg", "Has sido dado de alta en un nuevo grupo");
                     req.setAttribute("idGrupoC", idgrupo);
                     req.setAttribute("simC", sim);
-                    System.out.println("Antes de salir");                    
+                    //System.out.println("Antes de salir");                    
                     req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
-                    System.out.println("Después de salir");   
+                    //System.out.println("Después de salir");   
                     out.println("OK");
-                    System.out.println("OK");
+                    //System.out.println("OK");
                 }else {out.println("NOK");
                     System.out.println("NOK");
                 }
@@ -62,7 +62,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
        else{ out.println("NOK");}
        
        }catch (Exception e){
-           System.out.println("**** Error: "+e.getMessage());
+           //System.out.println("**** Error: "+e.getMessage());
            e.printStackTrace();
            out.println("NOK");
        }
