@@ -13,12 +13,13 @@ public class GrupoBean {
     private int idGrupo;
     private String nombreGrupo, descripcion;
 
-    public GrupoBean(int idGrupo, String nombreGrupo, String descripcion) {
+    public GrupoBean(int idGrupo, String nombreGrupo, String descripcion, String estado) {
         this.idGrupo = idGrupo;
         this.nombreGrupo = nombreGrupo;
         this.descripcion = descripcion;
+        
     }
-
+//   
     public GrupoBean() {
     }
 

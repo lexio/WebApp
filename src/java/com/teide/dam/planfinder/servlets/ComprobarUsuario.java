@@ -12,6 +12,7 @@ import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,11 +50,14 @@ public class ComprobarUsuario extends HttpServlet {
                 ArrayList<GrupoBean> grupos = new ArrayList<>();
               
                 for (Pertenece pertenece : perteneces) {
-                    GrupoBean gb = new GrupoBean();
-                    gb.setDescripcion(pertenece.getGrupo().getDescripcion());
-                    gb.setNombreGrupo(pertenece.getGrupo().getNombre());
-                    gb.setIdGrupo(pertenece.getGrupo().getIdGrupo());
-                    grupos.add(gb);
+                    if (pertenece.getGrupo().getEstado().equals(Estados.HABILITADO)){
+                        GrupoBean gb = new GrupoBean();
+                        gb.setDescripcion(pertenece.getGrupo().getDescripcion());
+                        gb.setNombreGrupo(pertenece.getGrupo().getNombre());
+                        gb.setIdGrupo(pertenece.getGrupo().getIdGrupo());
+                        grupos.add(gb);
+                    }
+                    
                                     
                 }
                 ub.setGrupos(grupos);
@@ -66,8 +70,8 @@ public class ComprobarUsuario extends HttpServlet {
                 out.println("NOK");
             }
         } else {out.println("NOK");}
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        GrupoDAO gDAO = new GrupoDAO(session);
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        GrupoDAO gDAO = new GrupoDAO(session);
         
     }
 }
