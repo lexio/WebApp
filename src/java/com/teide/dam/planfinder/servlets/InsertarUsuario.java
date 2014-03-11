@@ -54,7 +54,7 @@ public class InsertarUsuario extends HttpServlet {
                     Transaction tx = session.beginTransaction();
                     UsuarioDAO uDAO = new UsuarioDAO(session);
                     int radioRecepcion = Integer.parseInt(radioRecepcionString);
-                    if (radioRecepcion >= 0) {
+                    if (radioRecepcion > 0) {
                         double latitud = Double.parseDouble(latitudString);
                         double longitud = Double.parseDouble(longitudString);
                         uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);

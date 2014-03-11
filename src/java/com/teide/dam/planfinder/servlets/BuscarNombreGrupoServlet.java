@@ -30,14 +30,15 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String nombre = req.getParameter("nombre");
-        String sim = req.getParameter("sim");
+        //String sim = req.getParameter("sim");
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         try {
-            if (nombre != null && !nombre.trim().isEmpty() || sim != null && !sim.trim().isEmpty()) {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                session.beginTransaction();
+            if (nombre != null && !nombre.trim().isEmpty()) {
+
                 nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
                 GrupoDAO gDAO = new GrupoDAO(session);
-                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre, sim);
+                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
 
                 for (Grupo grupo : g) {
                     session.evict(grupo);
@@ -54,7 +55,7 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
 
                 Gson json = new Gson();
                 String resultado = json.toJson(g);
-//                session.flush();
+                //session.flush();
                 //System.out.println("Este es el resultado:" + resultado);
                 out.println(resultado);
 
@@ -64,7 +65,8 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
 
         } catch (Exception e) {
             out.println("NOK");
+        } finally {
+            session.flush();
         }
-
     }
 }

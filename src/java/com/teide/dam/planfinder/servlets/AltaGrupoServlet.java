@@ -91,7 +91,7 @@ public class AltaGrupoServlet extends HttpServlet {
                 Tipo tipo = tDAO.buscarNombreTipo(idTipo);
 
                 int radioEmision = Integer.parseInt(radioEmisionString);
-
+                 if (radioEmision > 0) {
                 Grupo grupo = new Grupo(usu, tipo, nombre, new GregorianCalendar().getTime(), Estados.NOHABILITADO, radioEmision);
 
                 if (latitud==null || latitud.trim().isEmpty() || latitud==""){}
@@ -153,8 +153,8 @@ public class AltaGrupoServlet extends HttpServlet {
                 int componentesGrupo = uDAO.insertarUsuarioGrupo(grupo.getIdGrupo(), usuario, radioEmision);
                 
                 out.println(componentesGrupo+"/"+grupo.getIdGrupo());
+            } else out.println("NOK");
             }
-            
             catch(Exception e){
                 out.println("NOK");
                 //e.printStackTrace();

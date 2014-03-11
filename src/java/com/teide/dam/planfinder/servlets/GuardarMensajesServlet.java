@@ -66,7 +66,7 @@ public class GuardarMensajesServlet extends HttpServlet {
          else {out.println("NOK"); }
       
       }catch (Exception e){
-          out.println("Error"); 
+          out.println("NOK"); 
        
       }
 
