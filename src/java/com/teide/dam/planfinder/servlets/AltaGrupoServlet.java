@@ -99,6 +99,7 @@ public class AltaGrupoServlet extends HttpServlet {
                     UbicacionDAO ubiDAO = new UbicacionDAO(session);
                     double lat = Double.parseDouble(latitud);
                     double lon = Double.parseDouble(longitud);
+                    if (descripcionUbicacion==null || descripcionUbicacion.trim().isEmpty()) descripcionUbicacion="";
 
                     Ubicacion ubicacion = ubiDAO.altaUbicacion(descripcionUbicacion, lat, lon);
                     grupo.setUbicacion(ubicacion);
