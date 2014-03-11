@@ -26,41 +26,47 @@ public class EditarUsuarioServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         String sim = req.getParameter("sim");
         String nombre = req.getParameter("nombre");
         String estado = req.getParameter("estado");
         String radioRecepcionString = req.getParameter("radiorecepcion");
         String GCM = req.getParameter("GCM");
         PrintWriter out = resp.getWriter();
-        if(sim != null && !sim.trim().isEmpty() && estado != null && !estado.trim().isEmpty() && radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
-                && nombre != null && !nombre.trim().isEmpty() && GCM != null && !GCM.trim().isEmpty()){
-            try {
-                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
-                int radioRecepcion = Integer.parseInt(radioRecepcionString);
-                if(radioRecepcion<0){
+
+        if (GCM == null) {
+            out.println("NOK");
+        } else {
+            if (sim != null && !sim.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
+                    && nombre != null && !nombre.trim().isEmpty() || GCM != null && !GCM.trim().isEmpty()) {
+                try {
+                    nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
+                    int radioRecepcion = Integer.parseInt(radioRecepcionString);
+                    if (radioRecepcion < 0) {
+                        out.println("NOK");
+                    } else {
+                        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                        session.beginTransaction();
+                        Transaction tx = session.beginTransaction();
+                        UsuarioDAO uDAO = new UsuarioDAO(session);
+                        Usuario u = uDAO.comprobarUsuario(sim);
+                        if (estado.equals(Estados.VISIBLE) || estado.equals(Estados.INVISIBLE)) {
+                            if (u != null) {
+                                uDAO.editarUsuario(sim, nombre, estado, radioRecepcion, GCM);
+                                session.flush();
+                                tx.commit();
+                                out.println("OK");
+                            } else out.println("NOK");
+                            
+                        } else out.println("NOK");
+                    }
+                } catch (NumberFormatException | HibernateException e) {
                     out.println("NOK");
-                }else{
-                    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                    session.beginTransaction();
-                    Transaction tx = session.beginTransaction();
-                    UsuarioDAO uDAO = new UsuarioDAO(session);
-                    Usuario u = uDAO.comprobarUsuario(sim);
-                    if(estado.equals(Estados.VISIBLE)||estado.equals(Estados.INVISIBLE)){
-                        if (u!=null) {
-                        uDAO.editarUsuario(sim, nombre, estado, radioRecepcion, GCM);
-                        session.flush();
-                        tx.commit();
-                        out.println("OK");
-                        }else out.println("NOK");
-                    }else out.println("NOK");
-                    
                 }
-            } catch (NumberFormatException | HibernateException e) {
-                out.println("NOK");
-            }
-               
-        }else out.println("NOK");
+
+            } else out.println("NOK");
+            
+        }
+
     }
-    
 }
