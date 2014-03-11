@@ -100,7 +100,7 @@ public class AltaGrupoServlet extends HttpServlet {
                     double lat = Double.parseDouble(latitud);
                     double lon = Double.parseDouble(longitud);
 
-                    Ubicacion ubicacion = ubiDAO.altaUbicacion(idTipo, descripcionUbicacion, lat, lon);
+                    Ubicacion ubicacion = ubiDAO.altaUbicacion(descripcionUbicacion, lat, lon);
                     grupo.setUbicacion(ubicacion);
                 }
 

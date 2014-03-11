@@ -26,7 +26,7 @@ public class UbicacionDAO extends GenericDAO {
         super(session);
     }
     
-    public Ubicacion altaUbicacion(int idubicacion, String descripcion, double latitud, double longitud){
+    public Ubicacion altaUbicacion(String descripcion, double latitud, double longitud){
     
         Ubicacion ub = new Ubicacion(descripcion, latitud, longitud, null);
             getSession().persist(ub);

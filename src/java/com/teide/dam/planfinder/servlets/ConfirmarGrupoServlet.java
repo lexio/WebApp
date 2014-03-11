@@ -40,7 +40,7 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     out.println("NOK");
                 }
                 else {
-                if (g!=null){
+                if (g!=null || g.getEstado().equals(Estados.NOHABILITADO)){
                     Grupo grupos= gDAO.comprobarGrupo(idgrupo);
                     grupos.setEstado(Estados.HABILITADO);
                     session.persist(grupos);

@@ -42,6 +42,12 @@ public class Ubicacion  implements java.io.Serializable {
        this.longitud = longitud;
        this.grupos = grupos;
     }
+
+    public Ubicacion(Double latitud, Double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+    
    
      @Id @GeneratedValue(strategy=IDENTITY)
 

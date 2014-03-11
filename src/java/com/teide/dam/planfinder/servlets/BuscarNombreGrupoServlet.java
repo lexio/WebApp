@@ -29,7 +29,8 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String nombre = req.getParameter("nombre");
-        if (nombre == null || nombre.trim().isEmpty()){
+        String sim = req.getParameter("sim");
+        if (nombre == null || nombre.trim().isEmpty()|| sim == null || sim.trim().isEmpty()){
             out.println("NOK");
         }
         else{
@@ -40,7 +41,7 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
                 
                 GrupoDAO gDAO = new GrupoDAO(session);
 
-                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
+                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre, sim);
 
                 for (Grupo grupo : g) {
                     session.evict(grupo);
