@@ -47,7 +47,11 @@ public class EliminarGrupoServlet extends HttpServlet {
                     if (sim.equals(g.getUsuario().getSim())) {
                         for (Pertenece p : g.getPerteneces()) {
                             p.setEstado(Estados.NOSOLICITADO);
-                            System.out.println("Entro para borrar el grupo entero");
+                            req.setAttribute("msgB", "Grupo eliminado");
+                            req.setAttribute("idGrupoB", idGrupo);
+                            req.setAttribute("simB", sim);
+                            req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
+                           // System.out.println("Entro para borrar el grupo entero");
                             //Enviar notificación GCM
                         }
                         g.setEstado(Estados.NOHABILITADO);
@@ -56,7 +60,7 @@ public class EliminarGrupoServlet extends HttpServlet {
                         //cambiar el estado a ESE pertenece
                         Pertenece p = pDAO.comprobarEstadoUsuario(sim, idGrupo);
                         p.setEstado(Estados.NOSOLICITADO);
-                        System.out.println("cambio estado usuario");
+                        //System.out.println("cambio estado usuario");
                     }
                     session.flush();
                     tx.commit();

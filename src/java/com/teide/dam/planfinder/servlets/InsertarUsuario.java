@@ -35,30 +35,35 @@ public class InsertarUsuario extends HttpServlet {
         String claveGcm = req.getParameter("clavegcm");
         PrintWriter out = resp.getWriter();
         
-        System.out.println("Entro en el Service");
-        System.out.println(sim);
-        System.out.println(nombre);
-        System.out.println(radioRecepcionString);
-        System.out.println(latitudString);
-        System.out.println(longitudString);
-        System.out.println(claveGcm);
+//        System.out.println("Entro en el Service");
+//        System.out.println(sim);
+//        System.out.println(nombre);
+//        System.out.println(radioRecepcionString);
+//        System.out.println(latitudString);
+//        System.out.println(longitudString);
+//        System.out.println(claveGcm);
         
         
         if(sim != null && !sim.trim().isEmpty() || nombre != null && !nombre.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty() 
-                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()|| claveGcm != null && !claveGcm.trim().isEmpty()){
+                || latitudString != null && !latitudString.trim().isEmpty() || longitudString != null && !longitudString.trim().isEmpty()&& claveGcm != null && !claveGcm.trim().isEmpty()){
             try {
                 nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 int radioRecepcion = Integer.parseInt(radioRecepcionString);
-                double latitud = Double.parseDouble(latitudString);
-                double longitud = Double.parseDouble(longitudString);
-                uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);
-                session.flush();
-                tx.commit();
-                out.println("OK");
-            } catch (Exception e) {
+                if(radioRecepcion >=0){
+                    double latitud = Double.parseDouble(latitudString);
+                    double longitud = Double.parseDouble(longitudString);
+                    uDAO.insertarUsuario(sim, nombre, radioRecepcion, latitud, longitud, claveGcm);
+                    session.flush();
+                    tx.commit();
+                    out.println("OK");
+                }else{
+                   out.println("NOK");
+                }
+                
+            } catch (HibernateException | NumberFormatException e) {
                 out.println("NOK");
             }
                 
