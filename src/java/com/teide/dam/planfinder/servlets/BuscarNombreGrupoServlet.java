@@ -55,7 +55,7 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
                 Gson json = new Gson();
                 String resultado = json.toJson(g);
 //                session.flush();
-                System.out.println("Este es el resultado:" + resultado);
+                //System.out.println("Este es el resultado:" + resultado);
                 out.println(resultado);
 
             } else {

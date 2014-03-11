@@ -78,8 +78,8 @@ public class BuscarInformacionGrupo extends HttpServlet {
                    
                 }             
                
-                System.out.println("FECHA INICIO ACTIVIDAD " + fechaInicioActividad);
-                System.out.println("FECHA FIN ACTIVIDAD " + fechaFinActividad);
+                //System.out.println("FECHA INICIO ACTIVIDAD " + fechaInicioActividad);
+                //System.out.println("FECHA FIN ACTIVIDAD " + fechaFinActividad);
 
                
                 try {
