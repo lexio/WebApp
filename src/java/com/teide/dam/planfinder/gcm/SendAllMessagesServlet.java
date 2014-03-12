@@ -17,6 +17,7 @@ import com.teide.dam.planfinder.dao.UsuarioDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Pertenece;
 import com.teide.dam.planfinder.pojos.Usuario;
+import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -131,17 +132,17 @@ public class SendAllMessagesServlet extends BaseServlet {
             System.out.println(resultado);
             if (devices.size() == 1) {
                 // send a single message using plain post
-                String registrationId = devices.get(0).getClaveGcm();
-                System.out.println(registrationId);
-                System.out.println("Voy a mandarlo a :" + registrationId);
-                Message.Builder builder = new Message.Builder();
-                //Here we decide what message and data to send
-                builder.addData("message", MESSAGE);
-                //end messsage decisions
-                Message message = builder.build();
-                Result result = sender.send(message, registrationId, 5);
-                status = "Sent message to one device: " + result;
-                System.out.println(status);
+//                String registrationId = devices.get(0).getClaveGcm();
+//                System.out.println(registrationId);
+//                System.out.println("Voy a mandarlo a :" + registrationId);
+//                Message.Builder builder = new Message.Builder();
+//                //Here we decide what message and data to send
+//                builder.addData("message", MESSAGE);
+//                //end messsage decisions
+//                Message message = builder.build();
+//                Result result = sender.send(message, registrationId, 5);
+//                status = "Sent message to one device: " + result;
+//                System.out.println(status);
             } else {
                 System.out.println("Tengo más de un dispositivo");
                 // send a multicast message using JSON
@@ -156,7 +157,7 @@ public class SendAllMessagesServlet extends BaseServlet {
                     System.out.println("He dado una vuelta");
                     System.out.println(device.getClaveGcm());
                     counter++;
-                    if (!uc.getClaveGcm().equals(device.getClaveGcm())) {
+                    if (!uc.getClaveGcm().equals(device.getClaveGcm())||!uc.getEstado().equals(Estados.INVISIBLE)) {
                         partialDevices.add(device.getClaveGcm());
                     }
                     int partialSize = partialDevices.size();
