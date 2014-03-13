@@ -163,7 +163,10 @@ public class SendAllMessagesServlet extends BaseServlet {
                     System.out.println("He dado una vuelta");
                     System.out.println(device.getClaveGcm());
                     counter++;
-                    if (!uc.getClaveGcm().equals(device.getClaveGcm())||!uc.getEstado().equals(Estados.INVISIBLE)) {
+                    if (!uc.getClaveGcm().equals(device.getClaveGcm())) {
+                        partialDevices.add(device.getClaveGcm());
+                    }
+                    else if (!uc.getEstado().equals(Estados.INVISIBLE)){
                         partialDevices.add(device.getClaveGcm());
                     }
                     int partialSize = partialDevices.size();
