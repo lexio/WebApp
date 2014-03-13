@@ -37,8 +37,8 @@ public class EditarUsuarioServlet extends HttpServlet {
         if (GCM == null) {
             out.println("NOK");
         } else {
-            if (sim != null && !sim.trim().isEmpty() || estado != null && !estado.trim().isEmpty() || radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
-                    && nombre != null && !nombre.trim().isEmpty() || GCM != null && !GCM.trim().isEmpty()) {
+            if (sim != null && !sim.trim().isEmpty() && estado != null && !estado.trim().isEmpty() && radioRecepcionString != null && !radioRecepcionString.trim().isEmpty()
+                    && nombre != null && !nombre.trim().isEmpty() && GCM != null && !GCM.trim().isEmpty()) {
                 try {
                     nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
                     int radioRecepcion = Integer.parseInt(radioRecepcionString);
