@@ -37,10 +37,10 @@ public class EnviarSolicitud extends HttpServlet {
         String usuarioSim = req.getParameter("sim");
         String idGrupo = req.getParameter("idgrupo");
         PrintWriter out = resp.getWriter();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx=  session.beginTransaction();
         if (usuarioSim != null && !usuarioSim.trim().isEmpty() && idGrupo != null && !idGrupo.trim().isEmpty()) {
             try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                Transaction tx=  session.beginTransaction();
                 PerteneceDAO pDAO = new PerteneceDAO(session);
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 GrupoDAO gDAO = new GrupoDAO(session);
@@ -69,7 +69,7 @@ public class EnviarSolicitud extends HttpServlet {
                         p = new Pertenece(pId, g, u, Estados.SOLICITADO);
                         session.persist(p);
                         //session.flush();
-                        tx.commit();
+                        //tx.commit();
                         out.println("OK");
                     }else  out.println("NOK");
                     
@@ -77,6 +77,10 @@ public class EnviarSolicitud extends HttpServlet {
             } catch (Exception e) {
                 out.println("NOK");
             }
+            finally {
+                session.flush();
+            }
+            tx.commit();
         } else out.println("NOK");
     }
 }
