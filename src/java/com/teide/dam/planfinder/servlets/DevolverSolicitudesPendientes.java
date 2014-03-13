@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
  
 
 public class DevolverSolicitudesPendientes extends HttpServlet {
@@ -27,11 +28,12 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String usuarioSim = req.getParameter("sim");
             PrintWriter out = resp.getWriter();
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx= session.beginTransaction();
             Gson json = new Gson();
+            try {
             if (usuarioSim != null && !usuarioSim.trim().isEmpty()){
                
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-                session.beginTransaction();
                 GrupoDAO gDAO = new GrupoDAO(session);
                 ArrayList<GruposSolicitadosBean> listado = new ArrayList<>();
                 ArrayList<Grupo> grupos = gDAO.devolverGruposCreador(usuarioSim);
@@ -51,8 +53,11 @@ public class DevolverSolicitudesPendientes extends HttpServlet {
                 out.println(json.toJson(listado));   
                 //session.flush();
             }else out.println("NOK");
+			}catch (Exception e) {
+			}
+			finally{
+				session.flush();
+			}tx.commit();
     }
-    
-    
     
 }
