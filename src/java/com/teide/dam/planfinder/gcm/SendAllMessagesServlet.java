@@ -53,6 +53,7 @@ public class SendAllMessagesServlet extends BaseServlet {
         String MESSAGE;
         if (req.getAttribute("msg") != null) {
             MESSAGE = req.getAttribute("msg").toString();
+            req.setAttribute("msg", null);
         } 
         else if (req.getAttribute("msgB") != null){
             System.out.println("Entro aqui");
@@ -69,9 +70,11 @@ public class SendAllMessagesServlet extends BaseServlet {
         String idGrupo;
         if (req.getAttribute("idGrupoC") != null) {
             idGrupo = req.getAttribute("idGrupoC").toString();
+            req.setAttribute("idGrupoC", null);
         }
         else if (req.getAttribute("idGrupoB") != null){
             idGrupo = req.getAttribute("idGrupoB").toString();
+            req.setAttribute("idGrupoB", null);
             
         }
         else {
@@ -80,9 +83,11 @@ public class SendAllMessagesServlet extends BaseServlet {
         String sim;
         if (req.getAttribute("simC") != null) {
             sim = req.getAttribute("simC").toString();
+            req.setAttribute("simC", null);
         }
         else if (req.getAttribute("simB") != null){
             sim = req.getAttribute("simB").toString();
+            req.setAttribute("simB", null);
         }
         else {
             sim = req.getParameter("sim").toString();
@@ -100,10 +105,11 @@ public class SendAllMessagesServlet extends BaseServlet {
         Usuario uc = uDAO.comprobarUsuario(sim);
         for (Pertenece pertenece : usuarios) {
             System.out.println("Esta es la sim:" + pertenece.getUsuario().getSim() + "hasta aqui");
-            Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());
-
-            System.out.println("Esta es la sim:" + u.getNombre() + "hasta aqui");
-            devices.add(u);
+            if (pertenece.getEstado().equals(Estados.ACEPTADO)){
+                Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());
+                System.out.println("Esta es la sim:" + u.getNombre() + "hasta aqui");
+                devices.add(u);
+            }           
         }
 
         String status = "";
@@ -161,7 +167,7 @@ public class SendAllMessagesServlet extends BaseServlet {
                         partialDevices.add(device.getClaveGcm());
                     }
                     int partialSize = partialDevices.size();
-                    if (partialSize == MULTICAST_SIZE || counter == total) {
+                if (partialSize == MULTICAST_SIZE || counter == total) {
                         asyncSend(partialDevices, resultado);
                         partialDevices.clear();
                         tasks++;
