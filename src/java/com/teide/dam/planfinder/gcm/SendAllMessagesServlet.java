@@ -105,9 +105,12 @@ public class SendAllMessagesServlet extends BaseServlet {
         Usuario uc = uDAO.comprobarUsuario(sim);
         for (Pertenece pertenece : usuarios) {
             System.out.println("Esta es la sim:" + pertenece.getUsuario().getSim() + "hasta aqui");
-            if (pertenece.getEstado().equals(Estados.ACEPTADO)){
+            if (eliminado.equals("OK")){
                 Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());
-                System.out.println("Esta es la sim:" + u.getNombre() + "hasta aqui");
+                devices.add(u);
+            }
+            else if (pertenece.getEstado().equals(Estados.ACEPTADO)){
+                Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());
                 devices.add(u);
             }           
         }
@@ -115,7 +118,8 @@ public class SendAllMessagesServlet extends BaseServlet {
         String status = "";
         status = status + "The message is: " + MESSAGE + " ";
         System.out.println(status);
-        if (devices.isEmpty()) {
+        System.out.println("El tamaño de devices es :"+devices.size());
+        if (devices.isEmpty()||devices.size()==0) {
             status = "Message ignored as there is no device registered!";
             System.out.println(status);
         } else {
@@ -164,11 +168,11 @@ public class SendAllMessagesServlet extends BaseServlet {
                     System.out.println(device.getClaveGcm());
                     counter++;
                     if (!uc.getClaveGcm().equals(device.getClaveGcm())) {
-                        partialDevices.add(device.getClaveGcm());
+                        if (!uc.getEstado().equals(Estados.INVISIBLE)){ 
+                             partialDevices.add(device.getClaveGcm());
+                        }
                     }
-                    else if (!uc.getEstado().equals(Estados.INVISIBLE)){
-                        partialDevices.add(device.getClaveGcm());
-                    }
+                   
                     int partialSize = partialDevices.size();
                 if (partialSize == MULTICAST_SIZE || counter == total) {
                         asyncSend(partialDevices, resultado);
@@ -179,8 +183,10 @@ public class SendAllMessagesServlet extends BaseServlet {
                 status = "Asynchronously sending " + tasks + " multicast messages to "
                         + total + " devices";
                 System.out.println("Este es el status:" + status);
-            }
+            }            
+            eliminado = "NOK";
         }
+        
         req.setAttribute(HomeServlet.ATTRIBUTE_STATUS, status.toString()); //why are we dispatchign the request?  doesnt it automactially handle it or do we have to do it every time we ant to send a apramter between servelets?
 //        getServletContext().getRequestDispatcher("/home").forward(req, resp); //what is goign on with this by the way why is it sending this to home,is it sesnindg it toth ehome servelt?
     }
@@ -218,7 +224,7 @@ public class SendAllMessagesServlet extends BaseServlet {
                     String regId = devices.get(i);
                     Result result = results.get(i);
                     String messageId = result.getMessageId();
-                    if (messageId != null) {
+                    if (messageId != null) {                        
                         logger.fine("Succesfully sent message to device: " + regId
                                 + "; messageId = " + messageId);
                         String canonicalRegId = result.getCanonicalRegistrationId();

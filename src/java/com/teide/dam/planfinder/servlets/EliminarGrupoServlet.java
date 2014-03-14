@@ -43,18 +43,19 @@ public class EliminarGrupoServlet extends HttpServlet {
 
                 Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
                 if (g != null) {
+                    System.out.println("el grupo no es nul");
                     //Es propietario
                     if (sim.equals(g.getUsuario().getSim())) {
                         for (Pertenece p : g.getPerteneces()) {
                             p.setEstado(Estados.NOSOLICITADO);
-                            req.setAttribute("msgB", "Grupo eliminado");
-                            req.setAttribute("idGrupoB", idGrupo);
-                            req.setAttribute("simB", sim);
-                            req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);
                            // System.out.println("Entro para borrar el grupo entero");
                             //Enviar notificación GCM
                         }
                         g.setEstado(Estados.NOHABILITADO);
+                        req.setAttribute("msgB", "Grupo eliminado");
+                        req.setAttribute("idGrupoB", idGrupo);
+                        req.setAttribute("simB", sim);
+                        req.getServletContext().getRequestDispatcher("/sendallmessages").include(req, resp);                        
                     } else {
                         //Obtener el pertenece del usuario en ese grupo
                         //cambiar el estado a ESE pertenece
