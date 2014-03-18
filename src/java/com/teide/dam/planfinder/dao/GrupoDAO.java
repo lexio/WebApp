@@ -5,6 +5,7 @@
 package com.teide.dam.planfinder.dao;
 
 import com.teide.dam.planfinder.bbdd.Queries;
+import com.teide.dam.planfinder.bean.GrupoBean;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.pojos.Tipo;
 import com.teide.dam.planfinder.pojos.Usuario;
@@ -40,11 +41,12 @@ public class GrupoDAO extends GenericDAO{
         
     }
     
-    public ArrayList<Grupo> buscarGrupoNombre (String nombre){
+    public ArrayList<GrupoBean> buscarGrupoNombre (String nombre, String sim){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
         q.setParameter("nombre", "%"+nombre+"%");
-        //q.setParameter("sim",sim);
-        ArrayList<Grupo> grupos = (ArrayList<Grupo>) q.list();
+        q.setParameter("sim1",sim);
+        q.setParameter("sim2",sim);
+        ArrayList<GrupoBean> grupos = (ArrayList<GrupoBean>) q.list();
         return grupos;
     }
     

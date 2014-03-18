@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -6,6 +7,7 @@ package com.teide.dam.planfinder.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.teide.dam.planfinder.bean.GrupoBean;
 import com.teide.dam.planfinder.dao.GrupoDAO;
 import com.teide.dam.planfinder.pojos.Grupo;
 import com.teide.dam.planfinder.util.HibernateUtil;
@@ -30,27 +32,33 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String nombre = req.getParameter("nombre");
-        //String sim = req.getParameter("sim");
+        String sim = req.getParameter("sim");
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         try {
-            if (nombre != null && !nombre.trim().isEmpty()) {
+            if (nombre != null && !nombre.trim().isEmpty() && sim != null && !sim.trim().isEmpty()) {
 
                 nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
                 GrupoDAO gDAO = new GrupoDAO(session);
-                ArrayList<Grupo> g = gDAO.buscarGrupoNombre(nombre);
+                ArrayList<GrupoBean > g = gDAO.buscarGrupoNombre(nombre, sim);
+               
 
-                for (Grupo grupo : g) {
-                    session.evict(grupo);
-                    grupo.setUbicacion(null);
-                    grupo.setTipo(null);
-                    grupo.setMensajes(null);
-                    grupo.setUsuario(null);
-                    grupo.setPerteneces(null);
-                    if (grupo.getDescripcion() == "null") {
-                        grupo.setDescripcion("");
-                    }
-                }
+                //session.flush();
+                //System.out.println("Este es el resultado:" + resultado);
+              
+                System.out.println(g.size());
+
+//                for (Grupo grupo : g) {
+//                    session.evict(grupo);
+//                    grupo.setUbicacion(null);
+//                    grupo.setTipo(null);
+//                    grupo.setMensajes(null);
+//                    grupo.setUsuario(null);
+//                    grupo.setPerteneces(null);
+//                    if (grupo.getDescripcion() == "null") {
+//                        grupo.setDescripcion("");
+//                    }
+//                }
                 //System.out.println(g);
 
                 Gson json = new Gson();
@@ -60,13 +68,13 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
                 out.println(resultado);
 
             } else {
-                out.println("NOK");
+                out.println("NOK1");
             }
 
         } catch (Exception e) {
-            out.println("NOK");
+            out.println("NOK2"+e.getMessage());
         } finally {
-            session.flush();
+           session.flush();
         }
     }
 }
