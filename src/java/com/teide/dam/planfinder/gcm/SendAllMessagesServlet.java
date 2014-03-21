@@ -137,14 +137,13 @@ public class SendAllMessagesServlet extends BaseServlet {
             if (mb.getDescripcion() == null) {
                 mb.setDescripcion("");
             }
+            GregorianCalendar gc = new GregorianCalendar();
             GregorianCalendar fecha = new GregorianCalendar();
+            
             SimpleDateFormat formato = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-            try {
-                fecha.setTime(formato.parse(fecha.toString().trim()));
-            } catch (ParseException ex) {
-                Logger.getLogger(SendAllMessagesServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            mb.setFecha(fecha.getTime());
+                System.out.println("To String: " + gc.getTime());                
+            
+            mb.setFecha(formato.format(gc.getTime()));
             mb.setNombreGrupo(g.getNombre());
             mb.setUsuario(uc.getNombre());
             Gson json = new Gson();
