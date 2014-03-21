@@ -10,7 +10,7 @@ package com.teide.dam.planfinder.bbdd;
  */
 public class Queries {
     //Queries de grupo
-    public static final String BUSCAR_GRUPO_NOMBRE ="select g.idGrupo, g.nombre, g.descripcion from Grupo g, Pertenece  p where g.nombre like :nombre and g.estado = 'habilitado' and p.usuario<>:sim1 and g.usuario<>:sim2 group by g.idGrupo";
+    public static final String BUSCAR_GRUPO_NOMBRE ="select idGrupo, nombre, descripcion, estado from Grupo where nombre like :nombre";
     public static final String BUSCAR_GRUPO_TIPO = "from Grupo as g where g.tipo=:tipo";
     public static final String BUSCAR_GRUPO_POR_ID = "from Grupo as g where g.idGrupo=:idgrupo";
     public static final String BUSCAR_GRUPOS_USUARIO = " from Pertenece p, grupo g where p.usuario=:usuario_sim order by g.nombre";
@@ -38,7 +38,7 @@ public class Queries {
     public static final String BUSCAR_TODOS_LOS_USUARIOS = "from Usuario u where u.estado=:'VISIBLE'";
     public static final String BUSCAR_USUARIO_SIM = "from Usuario as u where u.sim=:sim";
     public static final String BUSCAR_ESTADO_USUARIO = "from Usuario as u where u.estado=:estado";
-    public static final String USUARIO_PERTENECE_GRUPO ="";
+    public static final String BUSCAR_PERTENECE ="select p.estado from Pertenece as p where p.usuario.sim=:sim";
     //Queries de ubicacion
     public static final String BUSCAR_UBICACION_ID = "from Ubicacion as ub where ub.idubicacion =:idubicacion";
     

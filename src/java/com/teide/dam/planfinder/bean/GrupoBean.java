@@ -11,13 +11,13 @@ package com.teide.dam.planfinder.bean;
 public class GrupoBean {
     
     private int idGrupo;
-    private String nombreGrupo, descripcion;
+    private String nombreGrupo, descripcion, estado;
 
     public GrupoBean(int idGrupo, String nombreGrupo, String descripcion, String estado) {
         this.idGrupo = idGrupo;
         this.nombreGrupo = nombreGrupo;
         this.descripcion = descripcion;
-        
+        this.estado = estado;
     }
 //   
     public GrupoBean() {
@@ -25,6 +25,14 @@ public class GrupoBean {
 
     public int getIdGrupo() {
         return idGrupo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setIdGrupo(int idGrupo) {

@@ -20,12 +20,15 @@ import com.teide.dam.planfinder.pojos.Usuario;
 import com.teide.dam.planfinder.util.Estados;
 import com.teide.dam.planfinder.util.HibernateUtil;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -67,6 +70,7 @@ public class SendAllMessagesServlet extends BaseServlet {
         if (MESSAGE == null) {
             MESSAGE = "NULL";
         }
+        MESSAGE = new String(MESSAGE.getBytes("iso-8859-1"),"UTF-8");
         String idGrupo;
         if (req.getAttribute("idGrupoC") != null) {
             idGrupo = req.getAttribute("idGrupoC").toString();
@@ -134,6 +138,12 @@ public class SendAllMessagesServlet extends BaseServlet {
                 mb.setDescripcion("");
             }
             GregorianCalendar fecha = new GregorianCalendar();
+            SimpleDateFormat formato = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+            try {
+                fecha.setTime(formato.parse(fecha.toString().trim()));
+            } catch (ParseException ex) {
+                Logger.getLogger(SendAllMessagesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mb.setFecha(fecha.getTime());
             mb.setNombreGrupo(g.getNombre());
             mb.setUsuario(uc.getNombre());
@@ -168,7 +178,7 @@ public class SendAllMessagesServlet extends BaseServlet {
                     System.out.println(device.getClaveGcm());
                     counter++;
                     if (!uc.getClaveGcm().equals(device.getClaveGcm())) {
-                        if (!uc.getEstado().equals(Estados.INVISIBLE)){ 
+                        if (!device.getEstado().equals(Estados.INVISIBLE)){ 
                              partialDevices.add(device.getClaveGcm());
                         }
                     }

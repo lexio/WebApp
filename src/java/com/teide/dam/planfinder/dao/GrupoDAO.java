@@ -41,11 +41,9 @@ public class GrupoDAO extends GenericDAO{
         
     }
     
-    public ArrayList<GrupoBean> buscarGrupoNombre (String nombre, String sim){
+    public ArrayList<GrupoBean> buscarGrupoNombre (String nombre){
         Query q = getSession().createQuery(Queries.BUSCAR_GRUPO_NOMBRE);
         q.setParameter("nombre", "%"+nombre+"%");
-        q.setParameter("sim1",sim);
-        q.setParameter("sim2",sim);
         ArrayList<GrupoBean> grupos = (ArrayList<GrupoBean>) q.list();
         return grupos;
     }

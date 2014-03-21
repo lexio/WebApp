@@ -123,4 +123,10 @@ public class PerteneceDAO extends GenericDAO{
         
       
      }
+    
+    public ArrayList<Pertenece> buscarPertenece(String sim){
+        Query q = getSession().createQuery(Queries.BUSCAR_PERTENECE);
+        q.setParameter("sim", sim);
+        return (ArrayList<Pertenece>) q.list();
+    }
 }

@@ -41,6 +41,7 @@ public class EnviarSolicitud extends HttpServlet {
         Transaction tx=  session.beginTransaction();
         if (usuarioSim != null && !usuarioSim.trim().isEmpty() && idGrupo != null && !idGrupo.trim().isEmpty()) {
             try {
+                System.out.println("Estoy en el try de enviarsolocitud");
                 PerteneceDAO pDAO = new PerteneceDAO(session);
                 UsuarioDAO uDAO = new UsuarioDAO(session);
                 GrupoDAO gDAO = new GrupoDAO(session);
@@ -50,6 +51,7 @@ public class EnviarSolicitud extends HttpServlet {
                 if(p!=null){
                     String estado = p.getEstado();
                     if (!estado.equals(Estados.BANEADO)) {
+                        System.out.println("Estoy baneado");
                         Gson json = new Gson();
                         String nombreUsu = u.getNombre();
                         String nombreGru = g.getNombre();
@@ -62,6 +64,7 @@ public class EnviarSolicitud extends HttpServlet {
                         out.println(valores);
                     }
                 } else{
+                    System.out.println("No estoy baneado");
                     
                     if (g!=null && u!=null) {
                         int idgrupoInt = Integer.parseInt(idGrupo);
@@ -75,6 +78,7 @@ public class EnviarSolicitud extends HttpServlet {
                     
                 }
             } catch (Exception e) {
+                System.out.println("ERROR:"+e.getMessage());
                 out.println("NOK");
             }
             finally {
