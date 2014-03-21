@@ -48,20 +48,22 @@ public class ComprobarUsuario extends HttpServlet {
                 ub.setEstado(u.getEstado());
                 ub.setRadioRecepcion(u.getRadioRecepcion());
                 ArrayList<GrupoBean> grupos = new ArrayList<>();
-              
+             
                 for (Pertenece pertenece : perteneces) {
                     if (pertenece.getGrupo().getEstado().equals(Estados.HABILITADO)){
+                        //if(pertenece.getEstado()==Estados.ACEPTADO){
                         GrupoBean gb = new GrupoBean();
                         gb.setDescripcion(pertenece.getGrupo().getDescripcion());
                         gb.setNombreGrupo(pertenece.getGrupo().getNombre());
                         gb.setIdGrupo(pertenece.getGrupo().getIdGrupo());
-                        grupos.add(gb);
-                    }
-                    
-                                    
+                        //if(pertenece.getEstado().equals(Estados.HABILITADO)){
+                        if(pertenece.getEstado().equals(Estados.ACEPTADO)){
+                            grupos.add(gb);
+                        }
+                        else ;
+                        }    
                 }
                 ub.setGrupos(grupos);
-                
                 Gson json = new Gson();
                 String resultado = json.toJson(ub);
                 session.flush();
@@ -70,8 +72,5 @@ public class ComprobarUsuario extends HttpServlet {
                 out.println("NOK");
             }
         } else {out.println("NOK");}
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//        GrupoDAO gDAO = new GrupoDAO(session);
-        
     }
 }
