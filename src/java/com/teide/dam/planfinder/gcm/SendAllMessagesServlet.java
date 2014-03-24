@@ -50,7 +50,6 @@ public class SendAllMessagesServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        System.out.println("Estoy en el doPost de enviar mensajes");
         ServletConfig config = getServletConfig();
         ArrayList<Usuario> devices = new ArrayList<>();
         String MESSAGE;
@@ -59,7 +58,6 @@ public class SendAllMessagesServlet extends BaseServlet {
             req.setAttribute("msg", null);
         } 
         else if (req.getAttribute("msgB") != null){
-            System.out.println("Entro aqui");
             MESSAGE = req.getAttribute("msgB").toString();
             req.setAttribute("msgB", null);
             eliminado = "OK";
@@ -96,7 +94,6 @@ public class SendAllMessagesServlet extends BaseServlet {
         else {
             sim = req.getParameter("sim").toString();
         }
-        System.out.println("La sim es: "+sim+", el idGrupo es: "+idGrupo+", el mensaje es: "+MESSAGE);
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -108,7 +105,6 @@ public class SendAllMessagesServlet extends BaseServlet {
 
         Usuario uc = uDAO.comprobarUsuario(sim);
         for (Pertenece pertenece : usuarios) {
-            System.out.println("Esta es la sim:" + pertenece.getUsuario().getSim() + "hasta aqui");
             if (eliminado.equals("OK")){
                 Usuario u = uDAO.comprobarUsuario(pertenece.getUsuario().getSim());
                 devices.add(u);
@@ -121,11 +117,8 @@ public class SendAllMessagesServlet extends BaseServlet {
 
         String status = "";
         status = status + "The message is: " + MESSAGE + " ";
-        System.out.println(status);
-        System.out.println("El tamaño de devices es :"+devices.size());
         if (devices.isEmpty()||devices.size()==0) {
             status = "Message ignored as there is no device registered!";
-            System.out.println(status);
         } else {
             // NOTE: check below is for demonstration purposes; a real application
             // could always send a multicast, even for just one recipient
@@ -140,20 +133,16 @@ public class SendAllMessagesServlet extends BaseServlet {
             GregorianCalendar gc = new GregorianCalendar();
             GregorianCalendar fecha = new GregorianCalendar();
             
-            SimpleDateFormat formato = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-                System.out.println("To String: " + gc.getTime());                
+            SimpleDateFormat formato = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");         
             
             mb.setFecha(formato.format(gc.getTime()));
             mb.setNombreGrupo(g.getNombre());
             mb.setUsuario(uc.getNombre());
             Gson json = new Gson();
             String resultado = json.toJson(mb);
-            System.out.println(resultado);
             if (devices.size() == 1) {
                 // send a single message using plain post
 //                String registrationId = devices.get(0).getClaveGcm();
-//                System.out.println(registrationId);
-//                System.out.println("Voy a mandarlo a :" + registrationId);
 //                Message.Builder builder = new Message.Builder();
 //                //Here we decide what message and data to send
 //                builder.addData("message", MESSAGE);
@@ -161,20 +150,14 @@ public class SendAllMessagesServlet extends BaseServlet {
 //                Message message = builder.build();
 //                Result result = sender.send(message, registrationId, 5);
 //                status = "Sent message to one device: " + result;
-//                System.out.println(status);
             } else {
-                System.out.println("Tengo más de un dispositivo");
                 // send a multicast message using JSON
                 // must split in chunks of 1000 devices (GCM limit)
-                System.out.println("Antes de antes");
                 int total = devices.size();
-                System.out.println("El total es: " + total);
                 List<String> partialDevices = new ArrayList<String>(total);
                 int counter = 0;
                 int tasks = 0;
                 for (Usuario device : devices) {
-                    System.out.println("He dado una vuelta");
-                    System.out.println(device.getClaveGcm());
                     counter++;
                     if (!uc.getClaveGcm().equals(device.getClaveGcm())) {
                         if (!device.getEstado().equals(Estados.INVISIBLE)){ 
@@ -191,7 +174,6 @@ public class SendAllMessagesServlet extends BaseServlet {
                 }
                 status = "Asynchronously sending " + tasks + " multicast messages to "
                         + total + " devices";
-                System.out.println("Este es el status:" + status);
             }            
             eliminado = "NOK";
         }
@@ -202,9 +184,7 @@ public class SendAllMessagesServlet extends BaseServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        System.out.println("En el init");
         super.init(config);
-        System.out.println("La key desde el apikeyinitializer:" + ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
         sender = new Sender(ApiKeyInitializer.ATTRIBUTE_ACCESS_KEY);
 
     }

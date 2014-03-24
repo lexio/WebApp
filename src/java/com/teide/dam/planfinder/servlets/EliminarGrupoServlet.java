@@ -36,7 +36,6 @@ public class EliminarGrupoServlet extends HttpServlet {
         if (idGrupo != null && !idGrupo.trim().isEmpty() && sim != null && !sim.trim().isEmpty()) {
 
             try {
-                System.out.println("Acabo de iniciar el try");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 GrupoDAO gDAO = new GrupoDAO(session);
@@ -44,7 +43,6 @@ public class EliminarGrupoServlet extends HttpServlet {
 
                 Grupo g = gDAO.comprobarGrupoyEstado(idGrupo, Estados.HABILITADO);
                 if (g != null) {
-                    System.out.println("el grupo no es nul");
                     //Es propietario
                     if (sim.equals(g.getUsuario().getSim())) {
                         for (Pertenece p : g.getPerteneces()) {
@@ -53,7 +51,6 @@ public class EliminarGrupoServlet extends HttpServlet {
                             //Enviar notificación GCM
                         }
                         g.setEstado(Estados.NOHABILITADO);
-                        System.out.println("He hecho el no habilitado");
                         req.setAttribute("msgB", "Grupo eliminado");
                         req.setAttribute("idGrupoB", idGrupo);
                         req.setAttribute("simB", sim);
@@ -70,7 +67,6 @@ public class EliminarGrupoServlet extends HttpServlet {
                     out.println("OK");
                 }else out.println("NOK");
             } catch (Exception e) {
-                System.out.println("ERROR:"+e.getMessage());
                 out.println("NOK");
             }
         }else out.println("NOK");

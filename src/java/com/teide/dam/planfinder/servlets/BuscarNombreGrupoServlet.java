@@ -38,60 +38,53 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
         String sim = req.getParameter("sim");
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
-        if (nombre != null && !nombre.trim().isEmpty() && sim != null && !sim.trim().isEmpty()) {
-
-            nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
-            GrupoDAO gDAO = new GrupoDAO(session);
-            ArrayList<Grupo> gd = gDAO.buscarGrupoNombre(nombre);
-            ArrayList<GrupoBean> g = new ArrayList<>();
-            for (Grupo grupo : gd) {
-                GrupoBean gb = new GrupoBean();
-                gb.setIdGrupo(grupo.getIdGrupo());
-                gb.setNombreGrupo(grupo.getNombre());
-                gb.setDescripcion(grupo.getDescripcion());
-                gb.setEstado(grupo.getEstado());
-                g.add(gb);
-            }
-            PerteneceDAO pDAO = new PerteneceDAO(session);
-            ArrayList<Pertenece> p = pDAO.buscarPertenece(sim);
-            ArrayList<GrupoBean> ga = new ArrayList<>();
-            System.out.println("tamaño del grupo bean " + g.size());
-            System.out.println("tamaño del pertenece " + p.size());
-            int contador = 0;
-            int existe = 0;
-
-            for (GrupoBean grupoBean : g) {
-                System.out.println("Este es el id del grupo: " + grupoBean.getIdGrupo());
-                existe = 0;
-                contador = 0;
-                for (Pertenece pertenece : p) {
-                    System.out.println("Este es el id del grupo en pertenece : " + pertenece.getGrupo().getIdGrupo());
-                    if (grupoBean.getIdGrupo() == pertenece.getGrupo().getIdGrupo()) {
-                        existe = 1;
-                        System.out.println("Coinciden");
-                    }
-                    if (contador == p.size()-1 && existe == 0) {                        
-                        ga.add(grupoBean);
-                    }
-                    contador++;
-
+        try {
+            if (nombre != null && !nombre.trim().isEmpty() && sim != null && !sim.trim().isEmpty()) {
+                nombre = new String(nombre.getBytes("iso-8859-1"), "UTF-8");
+                GrupoDAO gDAO = new GrupoDAO(session);
+                ArrayList<Grupo> gd = gDAO.buscarGrupoNombre(nombre);
+                ArrayList<GrupoBean> g = new ArrayList<>();
+                for (Grupo grupo : gd) {
+                    GrupoBean gb = new GrupoBean();
+                    gb.setIdGrupo(grupo.getIdGrupo());
+                    gb.setNombreGrupo(grupo.getNombre());
+                    gb.setDescripcion(grupo.getDescripcion());
+                    gb.setEstado(grupo.getEstado());
+                    g.add(gb);
                 }
-            }
+                PerteneceDAO pDAO = new PerteneceDAO(session);
+                ArrayList<Pertenece> p = pDAO.buscarPertenece(sim);
+                ArrayList<GrupoBean> ga = new ArrayList<>();
+                int contador = 0;
+                int existe = 0;
 
+                for (GrupoBean grupoBean : g) {
+                    existe = 0;
+                    contador = 0;
+                    for (Pertenece pertenece : p) {
+                        if (grupoBean.getIdGrupo() == pertenece.getGrupo().getIdGrupo()) {
+                            existe = 1;
+                        }
+                        if (contador == p.size() - 1 && existe == 0) {
+                            ga.add(grupoBean);
+                        }
+                        contador++;
 
-            ArrayList<GrupoBean> gfinal = new ArrayList<>();
-
-            for (GrupoBean grupoBean : ga) {
-                if (grupoBean.getEstado().equals(Estados.HABILITADO)) {
-                    gfinal.add(grupoBean);
+                    }
                 }
-            }
 
-            //session.flush();
-            //System.out.println("Este es el resultado:" + resultado);
 
-            System.out.println(gfinal.size());
+                ArrayList<GrupoBean> gfinal = new ArrayList<>();
+
+                for (GrupoBean grupoBean : ga) {
+                    if (grupoBean.getEstado().equals(Estados.HABILITADO)) {
+                        gfinal.add(grupoBean);
+                    }
+                }
+
+                //session.flush();
+                //System.out.println("Este es el resultado:" + resultado);
+
 
 //                for (Grupo grupo : g) {
 //                    session.evict(grupo);
@@ -104,19 +97,24 @@ public class BuscarNombreGrupoServlet extends HttpServlet {
 //                        grupo.setDescripcion("");
 //                    }
 //                }
-            //System.out.println(g);
+                //System.out.println(g);
 
-            Gson json = new Gson();
-            String resultado = json.toJson(gfinal);
-            //session.flush();
-            //System.out.println("Este es el resultado:" + resultado);
-            out.println(resultado);
+                Gson json = new Gson();
+                String resultado = json.toJson(gfinal);
+                //session.flush();
+                //System.out.println("Este es el resultado:" + resultado);
+                out.println(resultado);
 
-        } else {
+            } else {
+                out.println("NOK");
+            }
+        } catch (Exception e) {
             out.println("NOK");
+        } finally {
+            session.flush();
         }
 
 
         //System.out.println("ERROR:"+e.getMessage());
-     }
+    }
 }

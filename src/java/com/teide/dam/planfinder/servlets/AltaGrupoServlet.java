@@ -60,7 +60,6 @@ public class AltaGrupoServlet extends HttpServlet {
         String fechaInicioActividad = req.getParameter("fechainicioactividad");
         String fechaFinActividad = req.getParameter("fechafinactividad");
         String radioEmisionString = req.getParameter("radioemision");
-        //System.out.println("Nombre1: "+nombre);
         if(usuario == null || usuario.trim().isEmpty() ||
                 tipoString == null || tipoString.trim().isEmpty() ||
                 nombre == null || nombre.trim().isEmpty() ||
@@ -72,8 +71,7 @@ public class AltaGrupoServlet extends HttpServlet {
         }
         else{
             try{
-                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");
-                //System.out.println("Nombre2: "+nombre);           
+                nombre= new String(nombre.getBytes("iso-8859-1"),"UTF-8");   
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 Transaction tx = session.beginTransaction();
                 

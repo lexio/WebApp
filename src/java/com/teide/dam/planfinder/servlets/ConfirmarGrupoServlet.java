@@ -55,7 +55,6 @@ public class ConfirmarGrupoServlet extends HttpServlet {
                     out.println("OK");
                     //System.out.println("OK");
                 }else {out.println("NOK");
-                    System.out.println("NOK");
                 }
                 }   
        }
